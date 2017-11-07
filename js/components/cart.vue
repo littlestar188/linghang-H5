@@ -26,7 +26,7 @@
 								<p class="txt-con">数亿用户都在用，安全可托付</p>
 							</div>
 						</div>
-						<div class="right-con"  v-bind:class="classObject"></div>
+						<div class="right-con" v-bind:class="[isActive?selectedClass :unselectedClass]" v-on:click="select()"></div>
 					</li>
 					<li class="weixin payment-item">
 						<div class="left-con">
@@ -36,7 +36,7 @@
 								<p class="txt-con">微信安全支付</p>
 							</div>
 						</div>
-						<div class="right-con"  v-bind:class="classObject"></div>
+						<div class="right-con" v-bind:class="[!isActive?selectedClass :unselectedClass]" v-on:click="select()"></div>
 					</li>
 				</ul>
 			</div>	
@@ -52,24 +52,23 @@
 		data:function(){
 			return {
 				isActive:true,
-				
-				
-				
-                 error: null
-
+				selectedClass:"selected",
+				unselectedClass:"unselected"
 			}
-		},
-		computed:{
-		    classObject:function(){
-		        return {
-                  active: this.isActive && !this.error,
-                  'unselectd': this.error && this.error.type === 'fatal'
-                }
-		    }
 		},
 		methods:{
 			
-			
+			select:function(index){
+                console.log(this.isActive)
+
+                if(this.isActive){
+                    this.isActive = false;
+
+                }else{
+                    this.isActive = true;
+                }
+
+            }
 			
 			
 		},
@@ -179,7 +178,7 @@
 		background: url(/vue-demo/img/selected.png) no-repeat center;
 		background-size: 60%;
 	}
-	#cart .payment-item .right-con.unselected{	
+	#cart .payment-item .right-con.unselected{
 		background: url(/vue-demo/img/unselected.png) no-repeat center;
 		background-size: 60%;
 	}

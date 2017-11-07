@@ -82,7 +82,7 @@
 					this.pageCode++;
 				})
 			},
-			select(index,type){
+			select:function(index,type){
 
 			    this.isActive = true;
 				this.activeButton[this.preNum].smallActive = false;

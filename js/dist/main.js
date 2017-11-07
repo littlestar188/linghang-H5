@@ -23190,7 +23190,7 @@ exports = module.exports = __webpack_require__(1)();
 
 
 // module
-exports.push([module.i, "\n#pay{\n\t\ttext-align:center;\n\t\tbackground-color:#D8232A;\n}\n#cart .cart-title{\n\t\tbackground-color:#fff;\n\t\tpadding:0.5rem 0;\n\t\ttext-align:center;\n}\n#cart .cart-title h3{\n\t\tdisplay:inline;\n}\n#cart .content{\n\t\tpadding-top:0;\n\t\tpadding-bottom:1rem;\n}\n#cart .content .triangle{\n\t\tposition: relative;\n\t    top: 0rem;\n\t    height: 0.47rem;\n\t    background: #F4F4F4 url(/vue-demo/img/triangle.png);\n\t    /* background-size: 50%; */\n}\n#cart .content .order-content{\n\t\tbackground-color:#fff;\n\t\tborder-top:1px solid #eee;\n\t\tpadding: 0.6rem 0.8rem;\n}\n#cart .content .order-content .con-item{\n\t\tpadding: 0.2rem 0;\n}\n#cart .content .order-content .con-item label{\n\t\tmargin-right:0.2rem;\n}\n#cart .content .order-content .order-spec{\n\t\tcolor:#999;\n}\n#cart .payment{\n\t\t-margin-top: 0.5rem;\n\t\tbackground-color:#fff;\n}\n#cart .payment-tip{\n\t\theight: 1.5rem;\n\t    line-height: 1.5rem;\t\t\n\t\tcolor:#666;\n\t\ttext-align:left;\n\t\tpadding:0.2rem 0.6rem;\n\t\tbackground-color: #F4F4F4;\n}\n#cart .payment-item{\n\t\tdisplay:flex;\n\t\tpadding: 0.4rem;\n}\n#cart .payment-item .left-con{\n\t\tdisplay:flex;\n\t\tflex:7;\n}\n#cart .payment-item .left-con .left-con-img{\n\t\tflex:1;\n\t    height: 2.4rem;\n}\n#cart .payment-item .left-con .left-con-img.zhifubao{\n\t\tbackground: url(/vue-demo/img/zhifubao.png) no-repeat center; \n\t\tbackground-size: 100%;\n}\n#cart .payment-item .left-con .left-con-img.weixin{\n\t\tbackground: url(/vue-demo/img/weixin.png) no-repeat center;\n\t\tbackground-size: 100%;\n}\n#cart .payment-item .left-con .left-con-txt{\n\t\tflex:5;\n\t\tmargin-left:0.4rem;\n}\n#cart .payment-item .left-con .left-con-txt p{\n    \tpadding: 0.1rem;\n}\n#cart .payment-item .left-con .left-con-txt .txt-title{\n\t\tfont-size:0.6rem;\n}\n#cart .payment-item .left-con .left-con-txt .txt-con{\n\t\tfont-size: 0.5rem;\n    \tcolor: #999;\n}\n#cart .payment-item .right-con{\n\t\tflex:1;\t\n\t\theight:2rem;\n}\n#cart .payment-item .right-con.selected{\n\t\tbackground: url(/vue-demo/img/selected.png) no-repeat center;\n\t\tbackground-size: 60%;\n}\n#cart .payment-item .right-con.unselected{\t\n\t\tbackground: url(/vue-demo/img/unselected.png) no-repeat center;\n\t\tbackground-size: 60%;\n}\n", ""]);
+exports.push([module.i, "\n#pay{\n\t\ttext-align:center;\n\t\tbackground-color:#D8232A;\n}\n#cart .cart-title{\n\t\tbackground-color:#fff;\n\t\tpadding:0.5rem 0;\n\t\ttext-align:center;\n}\n#cart .cart-title h3{\n\t\tdisplay:inline;\n}\n#cart .content{\n\t\tpadding-top:0;\n\t\tpadding-bottom:1rem;\n}\n#cart .content .triangle{\n\t\tposition: relative;\n\t    top: 0rem;\n\t    height: 0.47rem;\n\t    background: #F4F4F4 url(/vue-demo/img/triangle.png);\n\t    /* background-size: 50%; */\n}\n#cart .content .order-content{\n\t\tbackground-color:#fff;\n\t\tborder-top:1px solid #eee;\n\t\tpadding: 0.6rem 0.8rem;\n}\n#cart .content .order-content .con-item{\n\t\tpadding: 0.2rem 0;\n}\n#cart .content .order-content .con-item label{\n\t\tmargin-right:0.2rem;\n}\n#cart .content .order-content .order-spec{\n\t\tcolor:#999;\n}\n#cart .payment{\n\t\t-margin-top: 0.5rem;\n\t\tbackground-color:#fff;\n}\n#cart .payment-tip{\n\t\theight: 1.5rem;\n\t    line-height: 1.5rem;\t\t\n\t\tcolor:#666;\n\t\ttext-align:left;\n\t\tpadding:0.2rem 0.6rem;\n\t\tbackground-color: #F4F4F4;\n}\n#cart .payment-item{\n\t\tdisplay:flex;\n\t\tpadding: 0.4rem;\n}\n#cart .payment-item .left-con{\n\t\tdisplay:flex;\n\t\tflex:7;\n}\n#cart .payment-item .left-con .left-con-img{\n\t\tflex:1;\n\t    height: 2.4rem;\n}\n#cart .payment-item .left-con .left-con-img.zhifubao{\n\t\tbackground: url(/vue-demo/img/zhifubao.png) no-repeat center; \n\t\tbackground-size: 100%;\n}\n#cart .payment-item .left-con .left-con-img.weixin{\n\t\tbackground: url(/vue-demo/img/weixin.png) no-repeat center;\n\t\tbackground-size: 100%;\n}\n#cart .payment-item .left-con .left-con-txt{\n\t\tflex:5;\n\t\tmargin-left:0.4rem;\n}\n#cart .payment-item .left-con .left-con-txt p{\n    \tpadding: 0.1rem;\n}\n#cart .payment-item .left-con .left-con-txt .txt-title{\n\t\tfont-size:0.6rem;\n}\n#cart .payment-item .left-con .left-con-txt .txt-con{\n\t\tfont-size: 0.5rem;\n    \tcolor: #999;\n}\n#cart .payment-item .right-con{\n\t\tflex:1;\t\n\t\theight:2rem;\n}\n#cart .payment-item .right-con.selected{\n\t\tbackground: url(/vue-demo/img/selected.png) no-repeat center;\n\t\tbackground-size: 60%;\n}\n#cart .payment-item .right-con.unselected{\n\t\tbackground: url(/vue-demo/img/unselected.png) no-repeat center;\n\t\tbackground-size: 60%;\n}\n", ""]);
 
 // exports
 
@@ -24727,24 +24727,23 @@ return vueLazyload;
 		data:function(){
 			return {
 				isActive:true,
-				
-				
-				
-                 error: null
-
+				selectedClass:"selected",
+				unselectedClass:"unselected"
 			}
-		},
-		computed:{
-		    classObject:function(){
-		        return {
-                  active: this.isActive && !this.error,
-                  'unselectd': this.error && this.error.type === 'fatal'
-                }
-		    }
 		},
 		methods:{
 			
-			
+			select:function(index){
+                console.log(this.isActive)
+
+                if(this.isActive){
+                    this.isActive = false;
+
+                }else{
+                    this.isActive = true;
+                }
+
+            }
 			
 			
 		},
@@ -24850,7 +24849,7 @@ return vueLazyload;
 					this.pageCode++;
 				})
 			},
-			select(index,type){
+			select:function(index,type){
 
 			    this.isActive = true;
 				this.activeButton[this.preNum].smallActive = false;
@@ -25021,12 +25020,22 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     staticClass: "ali payment-item"
   }, [_vm._m(2), _vm._v(" "), _c('div', {
     staticClass: "right-con",
-    class: _vm.classObject
+    class: [_vm.isActive ? _vm.selectedClass : _vm.unselectedClass],
+    on: {
+      "click": function($event) {
+        _vm.select()
+      }
+    }
   })]), _vm._v(" "), _c('li', {
     staticClass: "weixin payment-item"
   }, [_vm._m(3), _vm._v(" "), _c('div', {
     staticClass: "right-con",
-    class: _vm.classObject
+    class: [!_vm.isActive ? _vm.selectedClass : _vm.unselectedClass],
+    on: {
+      "click": function($event) {
+        _vm.select()
+      }
+    }
   })])])])]), _vm._v(" "), _vm._m(4)])
 },staticRenderFns: [function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('header', {
