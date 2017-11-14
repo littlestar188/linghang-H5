@@ -2,8 +2,8 @@
 
 	<div id="home" class="modal-bg">
 		<div class="deviceBaseInfo">
-		    <div class="info-header"><span>设备基础信息<span><i class="drop-down" v-on:click="show = !show"></i></div>
-		    <transition name="fade">
+		    <div class="info-header"><span>设备基础信息<span><i v-bind:class="[show? dropUpClass:dropDownClass]" @click="show = !show"></i></div>
+		    <transition name="slide">
                 <ul v-if="show" class="info-content">
                     <li>
                         <span class="tle">SN码</span>
@@ -19,31 +19,33 @@
 		</div>
 		<div class="content">
 			
-			<mt-loadmore :bottom-method="loadMore" :top-method="refresh" topPullText="" topDropText="↓" bottomPullText="" bottomDropText="↑" bottomLoadingText="加载中..." topLoadingText="加载中..." class="goodsCon">
-				<div class="tip">请选择您的饮料</div>	
+			<!--<mt-loadmore :bottom-method="loadMore" :top-method="refresh" topPullText="" topDropText="↓" bottomPullText="" bottomDropText="↑" bottomLoadingText="加载中..." topLoadingText="加载中..." class="goodsCon">-->
+			<div class="goodsCon">
+				<div class="tip">请选择您的饮料</div>
 				<ul>
 					<li v-for="(o,index) in goods" class="goods-item">
-						<img v-bind:src="o.goodsListImg" class="goods-picture"/>
+						<!--<img v-bind:src="o.goodsListImg" class="goods-picture"/>-->
+						<img src="http://192.168.1.98/vue-demo/img/coffe.png" class="goods-picture">
 						<div class="goods-desc">
-							<h3 class="goods-name">{{o.goodsName}}</h3>
-							<div class="goods-price money">
-								<span><i class="price-flag">￥</i><span class="single-price">{{o.price}}<span></span>
+							<h3 class="goods-name">{{o.drinkName}}</h3>
+							<div class="goods-price money" v-for="d in drinkCups">
+								<span><i class="price-flag">￥</i><span class="single-price">{{d.price}}<span></span>
 							</div>
 							<div class="goods-spec">
-								<button class="spec-item spec-big" v-bind:class="{active:activeButton[index].smallActive}" @click="select(index,'small')">小杯</button>
-								<button class="spec-item spec-small" v-bind:class="{active:activeButton[index].bigActive}" @click="select(index,'big')">大杯</button>
+								<!--<button type="button" class="spec-item spec-big" v-bind:class="{active:activeButton[index].smallActive}" @click="select(index,'small')">{{d.name}}</button>-->
+								<!--<button type="button" class="spec-item spec-small" v-bind:class="{active:activeButton[eq].bigActive}" @click="select(eq,'big')">大杯</button>-->
 							</div>
 						</div>
 						<div class="clear"></div>
 
 					</li>
 				</ul>
-
-			</mt-loadmore>
+            </div>
+			<!--</mt-loadmore>-->
 		</div>
 		<div id="buy" v-bind:class="{active:isActive}">
 			<div class="totalPrice"><i class="price-flag">￥</i>{{totalPriceNum | priceJudge}}</div>
-			<a href="#/cart" class="cart">确认购买</a>
+			<a v-bind:href="url" class="cart" >确认购买</a>
 		</div>
 	</div>
 
@@ -52,39 +54,63 @@
 	module.exports = {
 		data:function(){
 			return {
-				show:true,
+				show:false,
 				isActive:false,
+				url:"javascript:void(0)",
+				dropDownClass:"drop-down",
+                dropUpClass:"drop-up",
 				totalPriceNum:0,
 				pageCode:0,
-				banners:{},
+                sn:"ff556yyuidde",
 				goods:{},
+                drinkCups:[],
+				drinkList:{},
 				activeButton:[],
-				preNum:0
+				preNum:0,
+
 			}
 		},
 		methods:{
 			getDataGood:function() {
-				this.$http.jsonp("http://datainfo.duapp.com/shopdata/getGoods.php",{
-					'pageCode':this.pageCode,
-					'linenumber':5
-				}).then(function(e){
+               this.$http.get("/capital-controller/api/device/getDeviceDrinkList?sn="+this.sn
+               ).then(function(response){
+                   console.log(response.data);
+                   this.goods = response.data.data;
+                    console.log(this.goods)
+
+                   var self = this;
+                   this.drinkCups = [];
+
+                   this.goods.forEach(function(item){
+                        self.drinkCups = JSON.parse(item.cups)
+                        console.log(self.drinkCups)
+
+                    })
+             })
+
+				//this.$http.get("http://datainfo.duapp.com/shopdata/getGoods.php",{
+					//'pageCode':this.pageCode,
+					//'linenumber':5
+				//}).then(function(e){
 					//console.log(e.data);
-					this.goods = e.data;
+					//this.goods = e.data;
+
 					//构建按钮高亮数组
-					this.activeButton = [];
-					var self= this;
-					this.goods.forEach(function(item){
-						self.activeButton.push({
-							smallActive:false,
-							bigActive:false
-						})
-					})
-					this.pageCode++;
-				})
+					//this.activeButton = [];
+					//var self= this;
+					//this.goods.forEach(function(item){
+						//self.activeButton.push({
+						//	smallActive:false,
+						//	bigActive:false
+						//})
+				//	})
+					//this.pageCode++;
+				//})
 			},
 			select:function(index,type){
 
 			    this.isActive = true;
+
 				this.activeButton[this.preNum].smallActive = false;
 				this.activeButton[this.preNum].bigActive = false;
 				if(type == 'small'){
@@ -95,24 +121,25 @@
 					this.activeButton[index].bigActive = true;
 				}
 				this.preNum = index;
+				this.url = "#/cart";
 			},
-			loadMore:function(){
-				this.$http.jsonp("http://datainfo.duapp.com/shopdata/getGoods.php",{
-					'pageCode':this.pageCode,
-					'linenumber':5
-				}).then(function(e){
+			//loadMore:function(){
+				//this.$http.jsonp("http://datainfo.duapp.com/shopdata/getGoods.php",{
+					//'pageCode':this.pageCode,
+					//'linenumber':5
+				//}).then(function(e){
 					//console.log(e.data);
 					//for(var i=0;i<e.data.length;i++){
 					//	this.goods.push(e.data[i]);
 					//}
 					//console.log(this.goods.concat(e.data),123);
-					this.goods = this.goods.concat(e.data);
+					//this.goods = this.goods.concat(e.data);
 					//console.log(this.goods)
 					//console.log(this.pageCode)
 					
-					this.pageCode++;
-				})
-			},
+					//this.pageCode++;
+				//})
+			//},
 			refresh:function(){
 				location.reload();
 			}
@@ -126,7 +153,7 @@
                 }else{
                     //value = 2
                 }
-            },
+            }
 		},
 		created:function(){
 			//在实例创建之后同步调用Ajax
@@ -144,7 +171,7 @@
         z-index:99;
         height:100%;
         width:100%;
-        background-color:#000;
+       - background-color:#000;
         -opacity:0.8;
     }
 	.deviceBaseInfo {
@@ -189,9 +216,18 @@
 	    right: 1rem;
 	    width: 0.8rem;
 	    height: 0.8rem;
-	    background: url(/vue-demo/img/icon_spinner.png) no-repeat center;
+	    background: url(/vue-demo/img/drop_down.png) no-repeat center;
 	    background-size: 100% 100%;
 	}
+	.deviceBaseInfo .drop-up{
+    		position: absolute;
+    	    top: 0.5rem;
+    	    right: 1rem;
+    	    width: 0.8rem;
+    	    height: 0.8rem;
+    	    background: url(/vue-demo/img/drop_up.png) no-repeat center;
+    	    background-size: 100% 100%;
+    	}
 	.content{
 		padding-top: 2.5rem;
     	-background-color: #eee;
@@ -300,10 +336,5 @@
     #buy.active a.cart{
         background-color:#D8232A
     }
-	.fade-enter-active, .fade-leave-active {
-      transition: opacity .5s
-    }
-    .fade-enter, .fade-leave-to /* .fade-leave-active in below version 2.1.8 */ {
-      opacity: 0
-    }
+
 </style>

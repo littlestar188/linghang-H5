@@ -20,19 +20,21 @@ Vue.component("mt-loadMore", Loadmore);
 var homeIndex = require ("../js/components/homeIndex.vue");
 var result = require ("../js/components/result.vue");
 var cart = require ("../js/components/cart.vue");
+var order = require ("../js/components/orderList.vue");
 
 /*创建路由*/
 var router = new VueRouter({
   routes:[
   	{path:'/',component:homeIndex},
   	{path:'/result',component:result},
-  	{path:'/cart',component:cart}
+  	{path:'/cart',component:cart},
+    {path:'/order',component:order}
   ]
 })
 
 new Vue({
   router
-}).$mount('#app')
+}).$mount('#app');
 
 
 

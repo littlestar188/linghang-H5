@@ -63,7 +63,7 @@
 /******/ 	__webpack_require__.p = "";
 
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 31);
+/******/ 	return __webpack_require__(__webpack_require__.s = 36);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -10045,19 +10045,19 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
 /* 198 */
 /***/ function(module, exports) {
 
-module.exports = __webpack_require__(12);
+module.exports = __webpack_require__(13);
 
 /***/ },
 /* 199 */
 /***/ function(module, exports) {
 
-module.exports = __webpack_require__(17);
+module.exports = __webpack_require__(19);
 
 /***/ },
 /* 200 */
 /***/ function(module, exports) {
 
-module.exports = __webpack_require__(18);
+module.exports = __webpack_require__(20);
 
 /***/ },
 /* 201 */
@@ -10198,7 +10198,7 @@ if (typeof DEBUG !== 'undefined' && DEBUG) {
   ) }
 }
 
-var listToStyles = __webpack_require__(28)
+var listToStyles = __webpack_require__(33)
 
 /*
 type StyleObject = {
@@ -19208,13 +19208,13 @@ module.exports = g;
 
 
 /* styles */
-__webpack_require__(26)
+__webpack_require__(31)
 
 var Component = __webpack_require__(2)(
   /* script */
-  __webpack_require__(19),
+  __webpack_require__(21),
   /* template */
-  __webpack_require__(23),
+  __webpack_require__(27),
   /* scopeId */
   null,
   /* cssModules */
@@ -19246,13 +19246,13 @@ module.exports = Component.exports
 
 
 /* styles */
-__webpack_require__(27)
+__webpack_require__(32)
 
 var Component = __webpack_require__(2)(
   /* script */
-  __webpack_require__(20),
+  __webpack_require__(22),
   /* template */
-  __webpack_require__(24),
+  __webpack_require__(28),
   /* scopeId */
   null,
   /* cssModules */
@@ -19284,13 +19284,51 @@ module.exports = Component.exports
 
 
 /* styles */
-__webpack_require__(25)
+__webpack_require__(29)
 
 var Component = __webpack_require__(2)(
   /* script */
-  __webpack_require__(21),
+  __webpack_require__(23),
   /* template */
-  __webpack_require__(22),
+  __webpack_require__(25),
+  /* scopeId */
+  null,
+  /* cssModules */
+  null
+)
+Component.options.__file = "F:\\wamp\\www\\vue-demo\\js\\components\\orderList.vue"
+if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
+if (Component.options.functional) {console.error("[vue-loader] orderList.vue: functional components are not supported with templates, they should use render functions.")}
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-1eac3ea2", Component.options)
+  } else {
+    hotAPI.reload("data-v-1eac3ea2", Component.options)
+  }
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 10 */
+/***/ (function(module, exports, __webpack_require__) {
+
+
+/* styles */
+__webpack_require__(30)
+
+var Component = __webpack_require__(2)(
+  /* script */
+  __webpack_require__(24),
+  /* template */
+  __webpack_require__(26),
   /* scopeId */
   null,
   /* cssModules */
@@ -19317,7 +19355,7 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 10 */
+/* 11 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -20395,7 +20433,7 @@ var xhrClient = function (request) {
 
 var nodeClient = function (request) {
 
-    var client = __webpack_require__(30);
+    var client = __webpack_require__(35);
 
     return new PromiseObj(function (resolve) {
 
@@ -20849,7 +20887,7 @@ module.exports = plugin;
 
 
 /***/ }),
-/* 11 */
+/* 12 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -23136,7 +23174,7 @@ module.exports = VueRouter;
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(5)))
 
 /***/ }),
-/* 12 */
+/* 13 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -23168,20 +23206,6 @@ module.exports = function (arr, predicate, ctx) {
 
 
 /***/ }),
-/* 13 */
-/***/ (function(module, exports, __webpack_require__) {
-
-exports = module.exports = __webpack_require__(1)();
-// imports
-
-
-// module
-exports.push([module.i, "\n#result{\n\t\ttext-align:center;\n}\n#result .result-title{\n\t\theight:1rem;\n\t\tbackground-color:#fff;\n\t\tpadding:0.5rem 0;\n\t\ttext-align:center;\n}\n#result .result-title h3{\n\t\tdisplay:inline;\n}\n#result .result-title .result-finish{\n\t\tcolor:#0E8DE9;\n\t\tposition: absolute;\n    \tright: 0.7rem;\n    \ttop: 0.5rem;\n}\n#result .success-img{\n\t\theight:4.5rem;\n}\n#result .success,#result .success-tip{\n\t\tletter-spacing:0.04rem;\n}\n#result .success{\n\t\tfont-size: 0.8rem;\n\t\tfont-weight:bold;\n\t\tcolor:#000;\n\t\tpadding-bottom: 0.6rem;\n}\n#result .success-tip{\n\t\twidth: 68%;\n\t\tcolor:#666;\n    \tmargin: 0 auto;\n}\n#version{\n\t\tposition: fixed;\n\t    bottom: 0.5rem;\n\t    width: 100%;\n\t    z-index: 10;\n}\n#version p{\n\t\tposition:relative;\n\t\tpadding:0.1rem 0;\n\t\ttext-align:center;\n\t\tfont-size:0.5rem;\n\t\tcolor:#999;\n}\n\t\n", ""]);
-
-// exports
-
-
-/***/ }),
 /* 14 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -23204,13 +23228,41 @@ exports = module.exports = __webpack_require__(1)();
 
 
 // module
-exports.push([module.i, "\n.modal-bg{\n        position:absolute;\n        top:0;\n        z-index:99;\n        height:100%;\n        width:100%;\n        background-color:#000;\n        -opacity:0.8;\n}\n.deviceBaseInfo {\n\t\tposition:fixed;\n\t\tz-index:9999;\n\t\ttop:0;\n\t\twidth: 100%;\n\t    -height:7rem;\n\t    padding:0 1rem;\n\t    font-weight: lighter;\n\t    text-align: left;\n\t    background: rgb(71,71,71);   \n\t    color: #fff;\n\t    box-sizing: border-box;\n}\n.deviceBaseInfo .info-header{\n\t    height: 1.95rem;\n        line-height: 1.95rem;\n}\n.deviceBaseInfo .info-content{\n        overflow:hidden;\n\t   - height:6rem;\n\t    font-size:0.6rem;\n\t    padding-bottom:0.5rem;\n}\n.deviceBaseInfo .info-content li{\n\t    width: 100%;\n\t    overflow: hidden;\n        margin-right: 1rem;\n        padding:0.3rem 0;\n}\n.deviceBaseInfo .info-content .tle{\n\t    float:left;\n}\n.deviceBaseInfo .info-content .con{\n        float:right;\n}\n.deviceBaseInfo .drop-down{\n\t\tposition: absolute;\n\t    top: 0.5rem;\n\t    right: 1rem;\n\t    width: 0.8rem;\n\t    height: 0.8rem;\n\t    background: url(/vue-demo/img/icon_spinner.png) no-repeat center;\n\t    background-size: 100% 100%;\n}\n.content{\n\t\tpadding-top: 2.5rem;\n    \t-background-color: #eee;\n}\n.tip{\n\t\theight: 1.5rem;\n    \tline-height: 1.5rem;\n    \tpadding:0.2rem 0;\n    \tcolor:#444;\n\t\ttext-align:center;\n\t\tbackground-color: #fff;\n\t\tborder-top: 1px solid #eee; \n\t\tborder-bottom: 1px solid #eee;\n}\n.goodsCon {\n\t\ttext-align:center;\n\t\tpadding-bottom:2.5rem;\n\t\tbackground-color: #fff;\n}\n.goods-item {\t\t\n\t\tborder-bottom: 1px solid #eee;\n\t    padding: 0 0.75rem;\n\t    display: flex;\n}\n.goods-item .goods-picture {\n\t\tfloat: left;\n\t    width: 2.8rem;\n\t    height: 2.8rem;\n\t    margin: 0.55rem 0.75rem 0.55rem 0;\n\t    flex: 1;\n}\n.goods-item .goods-desc{\n\t\tfloat: left;\n\t    height: 100%;\n\t    padding-top: 0.2rem;\n\t    flex: 4;\n\t    position: relative;\n}\n.goods-item .goods-desc .goods-name {\n\t\tfont-size: 0.685rem;   \n    \tfont-weight: normal;\n\t\t-line-height:1.1rem;\n\t\ttext-align: left;\n\t\tpadding:0.55rem 0;\n        width: 10.8rem;\n        white-space: nowrap;\n        text-overflow: ellipsis;\n        overflow: hidden;\n}\n.goods-item .goods-desc .goods-price{\n\t\tdisplay:flex;\n\t\tjustify-content: space-between;\n\t\t-color: #D8232A;\n    \t-font-size: 0.75rem;\n}\n.goods-item .goods-desc .goods-price .price-flag{\n\t\t-font-size:0.5rem;\n}\n.goods-item .goods-desc .goods-spec{\n\t\tposition: absolute;\n\t    top: 2rem;\n\t    right: 0;\n}\n.goods-item .goods-desc .goods-spec .spec-item{\n\t\tfont-size: 0.55rem;\n\t    background-color: #fff;\n\t    border: 1px solid #ddd;\n\t    border-radius: 2px;\n\t    display: inline-block;\n\t    padding: 0.25rem 0.65rem;\n}\n.goods-item .goods-desc .goods-spec .spec-item:active{\n\t\t-background-color:#eee;\n\t\t-color:#fff;\n}\n\t/*.goods-item .goods-desc .goods-spec .spec-item:hover,*/\n.goods-item .goods-desc .goods-spec .spec-item.active{\n\t\tbackground-color:#D8232A;\n\t\tcolor:#fff;\n}\n#buy .totalPrice{\n        justify-content: space-between;\n        color: /* #D8232A */#000;\n        font-size: 0.85rem;\n        width: 18%;\n        float: left;\n        height: 2.2rem;\n        line-height: 2.2rem;\n        margin-left: 0.3rem;\n}\n#buy.active .totalPrice{\n        color:#D8232A;\n}\n#buy a.cart{\n    \tfloat: right;\n        width: 4.25rem;\n        height: 2.2rem;\n        line-height: 2.2rem;\n        padding: 0 0.2rem;\n        text-align: center;\n        text-decoration: none;\n        color: #fff;\n        background-color: #ccc;\n}\n#buy.active a.cart{\n        background-color:#D8232A\n}\n.fade-enter-active, .fade-leave-active {\n      transition: opacity .5s\n}\n.fade-enter, .fade-leave-to /* .fade-leave-active in below version 2.1.8 */ {\n      opacity: 0\n}\n", ""]);
+exports.push([module.i, "\n#result{\n\t\ttext-align:center;\n}\n#result .result-title{\n\t\theight:1rem;\n\t\tbackground-color:#fff;\n\t\tpadding:0.5rem 0;\n\t\ttext-align:center;\n}\n#result .result-title h3{\n\t\tdisplay:inline;\n}\n#result .result-title .result-finish{\n\t\tcolor:#0E8DE9;\n\t\tposition: absolute;\n    \tright: 0.7rem;\n    \ttop: 0.5rem;\n}\n#result .success-img{\n\t\theight:4.5rem;\n}\n#result .success,#result .success-tip{\n\t\tletter-spacing:0.04rem;\n}\n#result .success{\n\t\tfont-size: 0.8rem;\n\t\tfont-weight:bold;\n\t\tcolor:#000;\n\t\tpadding-bottom: 0.6rem;\n}\n#result .success-tip{\n\t\twidth: 68%;\n\t\tcolor:#666;\n    \tmargin: 0 auto;\n}\n#version{\n\t\tposition: fixed;\n\t    bottom: 0.5rem;\n\t    width: 100%;\n\t    z-index: 10;\n}\n#version p{\n\t\tposition:relative;\n\t\tpadding:0.1rem 0;\n\t\ttext-align:center;\n\t\tfont-size:0.5rem;\n\t\tcolor:#999;\n}\n\t\n", ""]);
 
 // exports
 
 
 /***/ }),
 /* 16 */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(1)();
+// imports
+
+
+// module
+exports.push([module.i, "\n#pay{\n\t\ttext-align:center;\n\t\tbackground-color:#D8232A;\n}\n#cart .cart-title{\n\t\tbackground-color:#fff;\n\t\tpadding:0.5rem 0;\n\t\ttext-align:center;\n}\n#cart .cart-title h3{\n\t\tdisplay:inline;\n}\n#cart .content{\n\t\tpadding-top:0;\n\t\tpadding-bottom:1rem;\n}\n#cart .content .triangle{\n\t\tposition: relative;\n\t    top: 0rem;\n\t    height: 0.47rem;\n\t    background: #F4F4F4 url(/vue-demo/img/triangle.png);\n\t    /* background-size: 50%; */\n}\n#cart .content .order-content{\n\t\tbackground-color:#fff;\n\t\tborder-top:1px solid #eee;\n\t\tpadding: 0.6rem 0.8rem;\n}\n#cart .content .order-content .con-item{\n\t\tpadding: 0.2rem 0;\n}\n#cart .content .order-content .con-item label{\n\t\tmargin-right:0.2rem;\n}\n#cart .content .order-content .order-spec{\n\t\tcolor:#999;\n}\n#cart .payment{\n\t\t-margin-top: 0.5rem;\n\t\tbackground-color:#fff;\n}\n#cart .payment-tip{\n\t\theight: 1.5rem;\n\t    line-height: 1.5rem;\t\t\n\t\tcolor:#666;\n\t\ttext-align:left;\n\t\tpadding:0.2rem 0.6rem;\n\t\tbackground-color: #F4F4F4;\n}\n#cart .payment-item{\n\t\tdisplay:flex;\n\t\tpadding: 0.4rem;\n}\n#cart .payment-item .left-con{\n\t\tdisplay:flex;\n\t\tflex:7;\n}\n#cart .payment-item .left-con .left-con-img{\n\t\tflex:1;\n\t    height: 2.4rem;\n}\n#cart .payment-item .left-con .left-con-img.zhifubao{\n\t\tbackground: url(/vue-demo/img/zhifubao.png) no-repeat center; \n\t\tbackground-size: 100%;\n}\n#cart .payment-item .left-con .left-con-img.weixin{\n\t\tbackground: url(/vue-demo/img/weixin.png) no-repeat center;\n\t\tbackground-size: 100%;\n}\n#cart .payment-item .left-con .left-con-txt{\n\t\tflex:5;\n\t\tmargin-left:0.4rem;\n}\n#cart .payment-item .left-con .left-con-txt p{\n    \tpadding: 0.1rem;\n}\n#cart .payment-item .left-con .left-con-txt .txt-title{\n\t\tfont-size:0.6rem;\n}\n#cart .payment-item .left-con .left-con-txt .txt-con{\n\t\tfont-size: 0.5rem;\n    \tcolor: #999;\n}\n#cart .payment-item .right-con{\n\t\tflex:1;\t\n\t\theight:2rem;\n}\n#cart .payment-item .right-con.selected{\n\t\tbackground: url(/vue-demo/img/selected.png) no-repeat center;\n\t\tbackground-size: 60%;\n}\n#cart .payment-item .right-con.unselected{\n\t\tbackground: url(/vue-demo/img/unselected.png) no-repeat center;\n\t\tbackground-size: 60%;\n}\n", ""]);
+
+// exports
+
+
+/***/ }),
+/* 17 */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(1)();
+// imports
+
+
+// module
+exports.push([module.i, "\n.modal-bg{\n        position:absolute;\n        top:0;\n        z-index:99;\n        height:100%;\n        width:100%;\n       - background-color:#000;\n        -opacity:0.8;\n}\n.deviceBaseInfo {\n\t\tposition:fixed;\n\t\tz-index:9999;\n\t\ttop:0;\n\t\twidth: 100%;\n\t    -height:7rem;\n\t    padding:0 1rem;\n\t    font-weight: lighter;\n\t    text-align: left;\n\t    background: rgb(71,71,71);   \n\t    color: #fff;\n\t    box-sizing: border-box;\n}\n.deviceBaseInfo .info-header{\n\t    height: 1.95rem;\n        line-height: 1.95rem;\n}\n.deviceBaseInfo .info-content{\n        overflow:hidden;\n\t   - height:6rem;\n\t    font-size:0.6rem;\n\t    padding-bottom:0.5rem;\n}\n.deviceBaseInfo .info-content li{\n\t    width: 100%;\n\t    overflow: hidden;\n        margin-right: 1rem;\n        padding:0.3rem 0;\n}\n.deviceBaseInfo .info-content .tle{\n\t    float:left;\n}\n.deviceBaseInfo .info-content .con{\n        float:right;\n}\n.deviceBaseInfo .drop-down{\n\t\tposition: absolute;\n\t    top: 0.5rem;\n\t    right: 1rem;\n\t    width: 0.8rem;\n\t    height: 0.8rem;\n\t    background: url(/vue-demo/img/drop_down.png) no-repeat center;\n\t    background-size: 100% 100%;\n}\n.deviceBaseInfo .drop-up{\n    \t\tposition: absolute;\n    \t    top: 0.5rem;\n    \t    right: 1rem;\n    \t    width: 0.8rem;\n    \t    height: 0.8rem;\n    \t    background: url(/vue-demo/img/drop_up.png) no-repeat center;\n    \t    background-size: 100% 100%;\n}\n.content{\n\t\tpadding-top: 2.5rem;\n    \t-background-color: #eee;\n}\n.tip{\n\t\theight: 1.5rem;\n    \tline-height: 1.5rem;\n    \tpadding:0.2rem 0;\n    \tcolor:#444;\n\t\ttext-align:center;\n\t\tbackground-color: #fff;\n\t\tborder-top: 1px solid #eee; \n\t\tborder-bottom: 1px solid #eee;\n}\n.goodsCon {\n\t\ttext-align:center;\n\t\tpadding-bottom:2.5rem;\n\t\tbackground-color: #fff;\n}\n.goods-item {\t\t\n\t\tborder-bottom: 1px solid #eee;\n\t    padding: 0 0.75rem;\n\t    display: flex;\n}\n.goods-item .goods-picture {\n\t\tfloat: left;\n\t    width: 2.8rem;\n\t    height: 2.8rem;\n\t    margin: 0.55rem 0.75rem 0.55rem 0;\n\t    flex: 1;\n}\n.goods-item .goods-desc{\n\t\tfloat: left;\n\t    height: 100%;\n\t    padding-top: 0.2rem;\n\t    flex: 4;\n\t    position: relative;\n}\n.goods-item .goods-desc .goods-name {\n\t\tfont-size: 0.685rem;   \n    \tfont-weight: normal;\n\t\t-line-height:1.1rem;\n\t\ttext-align: left;\n\t\tpadding:0.55rem 0;\n        width: 10.8rem;\n        white-space: nowrap;\n        text-overflow: ellipsis;\n        overflow: hidden;\n}\n.goods-item .goods-desc .goods-price{\n\t\tdisplay:flex;\n\t\tjustify-content: space-between;\n\t\t-color: #D8232A;\n    \t-font-size: 0.75rem;\n}\n.goods-item .goods-desc .goods-price .price-flag{\n\t\t-font-size:0.5rem;\n}\n.goods-item .goods-desc .goods-spec{\n\t\tposition: absolute;\n\t    top: 2rem;\n\t    right: 0;\n}\n.goods-item .goods-desc .goods-spec .spec-item{\n\t\tfont-size: 0.55rem;\n\t    background-color: #fff;\n\t    border: 1px solid #ddd;\n\t    border-radius: 2px;\n\t    display: inline-block;\n\t    padding: 0.25rem 0.65rem;\n}\n.goods-item .goods-desc .goods-spec .spec-item:active{\n\t\t-background-color:#eee;\n\t\t-color:#fff;\n}\n\t/*.goods-item .goods-desc .goods-spec .spec-item:hover,*/\n.goods-item .goods-desc .goods-spec .spec-item.active{\n\t\tbackground-color:#D8232A;\n\t\tcolor:#fff;\n}\n#buy .totalPrice{\n        justify-content: space-between;\n        color: /* #D8232A */#000;\n        font-size: 0.85rem;\n        width: 18%;\n        float: left;\n        height: 2.2rem;\n        line-height: 2.2rem;\n        margin-left: 0.3rem;\n}\n#buy.active .totalPrice{\n        color:#D8232A;\n}\n#buy a.cart{\n    \tfloat: right;\n        width: 4.25rem;\n        height: 2.2rem;\n        line-height: 2.2rem;\n        padding: 0 0.2rem;\n        text-align: center;\n        text-decoration: none;\n        color: #fff;\n        background-color: #ccc;\n}\n#buy.active a.cart{\n        background-color:#D8232A\n}\n\n", ""]);
+
+// exports
+
+
+/***/ }),
+/* 18 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function(process, global) {var require;/*!
@@ -23345,7 +23397,7 @@ function flush() {
 function attemptVertx() {
   try {
     var r = require;
-    var vertx = __webpack_require__(29);
+    var vertx = __webpack_require__(34);
     vertxNext = vertx.runOnLoop || vertx.runOnContext;
     return useVertxTimer();
   } catch (e) {
@@ -24370,7 +24422,7 @@ return Promise;
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(5), __webpack_require__(6)))
 
 /***/ }),
-/* 17 */
+/* 19 */
 /***/ (function(module, exports) {
 
 /*
@@ -24417,7 +24469,7 @@ return Promise;
 
 
 /***/ }),
-/* 18 */
+/* 20 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /*!
@@ -24431,7 +24483,7 @@ return Promise;
     (global.install = factory());
 }(this, (function () { 'use strict';
 
-var Promise = __webpack_require__(16).Promise;
+var Promise = __webpack_require__(18).Promise;
 var inBrowser = typeof window !== 'undefined';
 
 if (!Array.prototype.$remove) {
@@ -24670,7 +24722,7 @@ return vueLazyload;
 })));
 
 /***/ }),
-/* 19 */
+/* 21 */
 /***/ (function(module, exports) {
 
 //
@@ -24762,9 +24814,11 @@ return vueLazyload;
 
 
 /***/ }),
-/* 20 */
+/* 22 */
 /***/ (function(module, exports) {
 
+//
+//
 //
 //
 //
@@ -24819,39 +24873,63 @@ return vueLazyload;
 	module.exports = {
 		data:function(){
 			return {
-				show:true,
+				show:false,
 				isActive:false,
+				url:"javascript:void(0)",
+				dropDownClass:"drop-down",
+                dropUpClass:"drop-up",
 				totalPriceNum:0,
 				pageCode:0,
-				banners:{},
+                sn:"ff556yyuidde",
 				goods:{},
+                drinkCups:[],
+				drinkList:{},
 				activeButton:[],
-				preNum:0
+				preNum:0,
+
 			}
 		},
 		methods:{
 			getDataGood:function() {
-				this.$http.jsonp("http://datainfo.duapp.com/shopdata/getGoods.php",{
-					'pageCode':this.pageCode,
-					'linenumber':5
-				}).then(function(e){
+               this.$http.get("/capital-controller/api/device/getDeviceDrinkList?sn="+this.sn
+               ).then(function(response){
+                   console.log(response.data);
+                   this.goods = response.data.data;
+                    console.log(this.goods)
+
+                   var self = this;
+                   this.drinkCups = [];
+
+                   this.goods.forEach(function(item){
+                        self.drinkCups = JSON.parse(item.cups)
+                        console.log(self.drinkCups)
+
+                    })
+             })
+
+				//this.$http.get("http://datainfo.duapp.com/shopdata/getGoods.php",{
+					//'pageCode':this.pageCode,
+					//'linenumber':5
+				//}).then(function(e){
 					//console.log(e.data);
-					this.goods = e.data;
+					//this.goods = e.data;
+
 					//构建按钮高亮数组
-					this.activeButton = [];
-					var self= this;
-					this.goods.forEach(function(item){
-						self.activeButton.push({
-							smallActive:false,
-							bigActive:false
-						})
-					})
-					this.pageCode++;
-				})
+					//this.activeButton = [];
+					//var self= this;
+					//this.goods.forEach(function(item){
+						//self.activeButton.push({
+						//	smallActive:false,
+						//	bigActive:false
+						//})
+				//	})
+					//this.pageCode++;
+				//})
 			},
 			select:function(index,type){
 
 			    this.isActive = true;
+
 				this.activeButton[this.preNum].smallActive = false;
 				this.activeButton[this.preNum].bigActive = false;
 				if(type == 'small'){
@@ -24862,24 +24940,25 @@ return vueLazyload;
 					this.activeButton[index].bigActive = true;
 				}
 				this.preNum = index;
+				this.url = "#/cart";
 			},
-			loadMore:function(){
-				this.$http.jsonp("http://datainfo.duapp.com/shopdata/getGoods.php",{
-					'pageCode':this.pageCode,
-					'linenumber':5
-				}).then(function(e){
+			//loadMore:function(){
+				//this.$http.jsonp("http://datainfo.duapp.com/shopdata/getGoods.php",{
+					//'pageCode':this.pageCode,
+					//'linenumber':5
+				//}).then(function(e){
 					//console.log(e.data);
 					//for(var i=0;i<e.data.length;i++){
 					//	this.goods.push(e.data[i]);
 					//}
 					//console.log(this.goods.concat(e.data),123);
-					this.goods = this.goods.concat(e.data);
+					//this.goods = this.goods.concat(e.data);
 					//console.log(this.goods)
 					//console.log(this.pageCode)
 					
-					this.pageCode++;
-				})
-			},
+					//this.pageCode++;
+				//})
+			//},
 			refresh:function(){
 				location.reload();
 			}
@@ -24893,7 +24972,7 @@ return vueLazyload;
                 }else{
                     //value = 2
                 }
-            },
+            }
 		},
 		created:function(){
 			//在实例创建之后同步调用Ajax
@@ -24905,7 +24984,81 @@ return vueLazyload;
 
 
 /***/ }),
-/* 21 */
+/* 23 */
+/***/ (function(module, exports) {
+
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+	module.exports = {
+		data:function(){
+			return {
+				isActive:true,
+				selectedClass:"selected",
+				unselectedClass:"unselected"
+			}
+		},
+		methods:{
+			
+			select:function(index){
+                console.log(this.isActive)
+
+                if(this.isActive){
+                    this.isActive = false;
+
+                }else{
+                    this.isActive = true;
+                }
+
+            }
+			
+			
+		},
+		filters:{
+			//过滤器
+			
+		},
+		created:function(){
+			//在实例创建之后同步调用Ajax
+			
+			
+		}
+	}
+	
+	
+
+
+/***/ }),
+/* 24 */
 /***/ (function(module, exports) {
 
 //
@@ -24957,7 +25110,56 @@ module.exports = {
 
 
 /***/ }),
-/* 22 */
+/* 25 */
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _vm._m(0)
+},staticRenderFns: [function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('div', {
+    attrs: {
+      "id": "cart"
+    }
+  }, [_c('header', {
+    staticClass: "cart-title"
+  }, [_c('h3', [_vm._v("支付列表")])]), _vm._v(" "), _c('div', [_c('ul', {
+    staticClass: "order-tab"
+  })]), _vm._v(" "), _c('div', {
+    staticClass: "content"
+  }, [_c('ul', {
+    staticClass: "order-content"
+  }, [_c('li', {
+    staticClass: "con-item"
+  }, [_c('label', [_vm._v("订单名称:")]), _vm._v(" "), _c('span', [_vm._v("意式浓缩咖啡 "), _c('i', {
+    staticClass: "order-spec"
+  }, [_vm._v("(大杯)")])])]), _vm._v(" "), _c('li', {
+    staticClass: "con-item"
+  }, [_c('label', [_vm._v("订单金额:")]), _vm._v(" "), _c('span', {
+    staticClass: "money"
+  }, [_c('span', [_c('i', {
+    staticClass: "price-flag"
+  }, [_vm._v("￥")]), _vm._v("12.00")])])]), _vm._v(" "), _c('li', {
+    staticClass: "order-option-btns"
+  }, [_c('button', {
+    staticClass: "option-btn"
+  }, [_c('a', {
+    attrs: {
+      "href": "#/cart"
+    }
+  }, [_vm._v("确认支付")])]), _vm._v(" "), _c('button', {
+    staticClass: "option-btn"
+  }, [_vm._v("取消订单")])])])])])
+}]}
+module.exports.render._withStripped = true
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+     require("vue-hot-reload-api").rerender("data-v-1eac3ea2", module.exports)
+  }
+}
+
+/***/ }),
+/* 26 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
@@ -25000,7 +25202,7 @@ if (false) {
 }
 
 /***/ }),
-/* 23 */
+/* 27 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
@@ -25099,7 +25301,7 @@ if (false) {
 }
 
 /***/ }),
-/* 24 */
+/* 28 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
@@ -25113,7 +25315,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
   }, [_c('div', {
     staticClass: "info-header"
   }, [_c('span', [_vm._v("设备基础信息"), _c('span', [_c('i', {
-    staticClass: "drop-down",
+    class: [_vm.show ? _vm.dropUpClass : _vm.dropDownClass],
     on: {
       "click": function($event) {
         _vm.show = !_vm.show
@@ -25121,7 +25323,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     }
   })])])]), _vm._v(" "), _c('transition', {
     attrs: {
-      "name": "fade"
+      "name": "slide"
     }
   }, [(_vm.show) ? _c('ul', {
     staticClass: "info-content"
@@ -25137,18 +25339,8 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     staticClass: "clear"
   })], 1), _vm._v(" "), _c('div', {
     staticClass: "content"
-  }, [_c('mt-loadmore', {
-    staticClass: "goodsCon",
-    attrs: {
-      "bottom-method": _vm.loadMore,
-      "top-method": _vm.refresh,
-      "topPullText": "",
-      "topDropText": "↓",
-      "bottomPullText": "",
-      "bottomDropText": "↑",
-      "bottomLoadingText": "加载中...",
-      "topLoadingText": "加载中..."
-    }
+  }, [_c('div', {
+    staticClass: "goodsCon"
   }, [_c('div', {
     staticClass: "tip"
   }, [_vm._v("请选择您的饮料")]), _vm._v(" "), _c('ul', _vm._l((_vm.goods), function(o, index) {
@@ -25157,44 +25349,26 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     }, [_c('img', {
       staticClass: "goods-picture",
       attrs: {
-        "src": o.goodsListImg
+        "src": "http://192.168.1.98/vue-demo/img/coffe.png"
       }
     }), _vm._v(" "), _c('div', {
       staticClass: "goods-desc"
     }, [_c('h3', {
       staticClass: "goods-name"
-    }, [_vm._v(_vm._s(o.goodsName))]), _vm._v(" "), _c('div', {
-      staticClass: "goods-price money"
-    }, [_c('span', [_c('i', {
-      staticClass: "price-flag"
-    }, [_vm._v("￥")]), _c('span', {
-      staticClass: "single-price"
-    }, [_vm._v(_vm._s(o.price)), _c('span')])])]), _vm._v(" "), _c('div', {
+    }, [_vm._v(_vm._s(o.drinkName))]), _vm._v(" "), _vm._l((_vm.drinkCups), function(d) {
+      return _c('div', {
+        staticClass: "goods-price money"
+      }, [_c('span', [_c('i', {
+        staticClass: "price-flag"
+      }, [_vm._v("￥")]), _c('span', {
+        staticClass: "single-price"
+      }, [_vm._v(_vm._s(d.price)), _c('span')])])])
+    }), _vm._v(" "), _c('div', {
       staticClass: "goods-spec"
-    }, [_c('button', {
-      staticClass: "spec-item spec-big",
-      class: {
-        active: _vm.activeButton[index].smallActive
-      },
-      on: {
-        "click": function($event) {
-          _vm.select(index, 'small')
-        }
-      }
-    }, [_vm._v("小杯")]), _vm._v(" "), _c('button', {
-      staticClass: "spec-item spec-small",
-      class: {
-        active: _vm.activeButton[index].bigActive
-      },
-      on: {
-        "click": function($event) {
-          _vm.select(index, 'big')
-        }
-      }
-    }, [_vm._v("大杯")])])]), _vm._v(" "), _c('div', {
+    })], 2), _vm._v(" "), _c('div', {
       staticClass: "clear"
     })])
-  }))])], 1), _vm._v(" "), _c('div', {
+  }))])]), _vm._v(" "), _c('div', {
     class: {
       active: _vm.isActive
     },
@@ -25208,7 +25382,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
   }, [_vm._v("￥")]), _vm._v(_vm._s(_vm._f("priceJudge")(_vm.totalPriceNum)))]), _vm._v(" "), _c('a', {
     staticClass: "cart",
     attrs: {
-      "href": "#/cart"
+      "href": _vm.url
     }
   }, [_vm._v("确认购买")])])])
 },staticRenderFns: []}
@@ -25221,13 +25395,39 @@ if (false) {
 }
 
 /***/ }),
-/* 25 */
+/* 29 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(13);
+var content = __webpack_require__(14);
+if(typeof content === 'string') content = [[module.i, content, '']];
+if(content.locals) module.exports = content.locals;
+// add the styles to the DOM
+var update = __webpack_require__(3)("11ecf9f2", content, false);
+// Hot Module Replacement
+if(false) {
+ // When the styles change, update the <style> tags
+ if(!content.locals) {
+   module.hot.accept("!!./../../node_modules/css-loader/index.js!./../../node_modules/vue-loader/lib/style-rewriter.js?id=data-v-1eac3ea2!./../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./orderList.vue", function() {
+     var newContent = require("!!./../../node_modules/css-loader/index.js!./../../node_modules/vue-loader/lib/style-rewriter.js?id=data-v-1eac3ea2!./../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./orderList.vue");
+     if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+     update(newContent);
+   });
+ }
+ // When the module is disposed, remove the <style> tags
+ module.hot.dispose(function() { update(); });
+}
+
+/***/ }),
+/* 30 */
+/***/ (function(module, exports, __webpack_require__) {
+
+// style-loader: Adds some css to the DOM by adding a <style> tag
+
+// load the styles
+var content = __webpack_require__(15);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
@@ -25247,13 +25447,13 @@ if(false) {
 }
 
 /***/ }),
-/* 26 */
+/* 31 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(14);
+var content = __webpack_require__(16);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
@@ -25273,13 +25473,13 @@ if(false) {
 }
 
 /***/ }),
-/* 27 */
+/* 32 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(15);
+var content = __webpack_require__(17);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
@@ -25299,7 +25499,7 @@ if(false) {
 }
 
 /***/ }),
-/* 28 */
+/* 33 */
 /***/ (function(module, exports) {
 
 /**
@@ -25332,19 +25532,19 @@ module.exports = function listToStyles (parentId, list) {
 
 
 /***/ }),
-/* 29 */
+/* 34 */
 /***/ (function(module, exports) {
 
 /* (ignored) */
 
 /***/ }),
-/* 30 */
+/* 35 */
 /***/ (function(module, exports) {
 
 /* (ignored) */
 
 /***/ }),
-/* 31 */
+/* 36 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -25352,9 +25552,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_mint_ui__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_mint_ui___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_mint_ui__);
 var Vue = __webpack_require__ (4);
-var VueRouter = __webpack_require__ (11);
+var VueRouter = __webpack_require__ (12);
 var Mint = __webpack_require__(0);
-var Resource = __webpack_require__(10);
+var Resource = __webpack_require__(11);
 
 //声明引用插件
 Vue.use(VueRouter);
@@ -25371,21 +25571,23 @@ Vue.component("mt-loadMore", __WEBPACK_IMPORTED_MODULE_0_mint_ui__["Loadmore"]);
 
 //引用组件
 var homeIndex = __webpack_require__ (8);
-var result = __webpack_require__ (9);
+var result = __webpack_require__ (10);
 var cart = __webpack_require__ (7);
+var order = __webpack_require__ (9);
 
 /*创建路由*/
 var router = new VueRouter({
   routes:[
   	{path:'/',component:homeIndex},
   	{path:'/result',component:result},
-  	{path:'/cart',component:cart}
+  	{path:'/cart',component:cart},
+    {path:'/order',component:order}
   ]
 })
 
 new Vue({
   router
-}).$mount('#app')
+}).$mount('#app');
 
 
 
