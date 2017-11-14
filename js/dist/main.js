@@ -24869,6 +24869,7 @@ return vueLazyload;
 //
 //
 //
+//
 
 	module.exports = {
 		data:function(){
@@ -24878,14 +24879,18 @@ return vueLazyload;
 				url:"javascript:void(0)",
 				dropDownClass:"drop-down",
                 dropUpClass:"drop-up",
-				totalPriceNum:0,
-				pageCode:0,
+
                 sn:"ff556yyuidde",
 				goods:{},
-                drinkCups:[],
 				drinkList:{},
+                drinkCups:[],
+                cupSpecFlag:"",
+                cupSpecActiveFlag:"",
+                cupSpecIs:"spec-small",
 				activeButton:[],
+
 				preNum:0,
+				totalPriceNum:0
 
 			}
 		},
@@ -24899,32 +24904,20 @@ return vueLazyload;
 
                    var self = this;
                    this.drinkCups = [];
-
+                   this.activeButton = [];
                    this.goods.forEach(function(item){
                         self.drinkCups = JSON.parse(item.cups)
                         console.log(self.drinkCups)
-
+                        self.activeButton.push({
+                        	smallActive:false,
+                        	bigActive:false
+                        })
                     })
+                    console.log(this.activeButton)
              })
-
-				//this.$http.get("http://datainfo.duapp.com/shopdata/getGoods.php",{
-					//'pageCode':this.pageCode,
-					//'linenumber':5
-				//}).then(function(e){
-					//console.log(e.data);
-					//this.goods = e.data;
-
-					//构建按钮高亮数组
-					//this.activeButton = [];
-					//var self= this;
-					//this.goods.forEach(function(item){
-						//self.activeButton.push({
-						//	smallActive:false,
-						//	bigActive:false
-						//})
-				//	})
-					//this.pageCode++;
-				//})
+			},
+			initClass:function(){
+                console.log('cupSpecFlag---'+this.cupSpecFlag)
 			},
 			select:function(index,type){
 
@@ -24942,23 +24935,7 @@ return vueLazyload;
 				this.preNum = index;
 				this.url = "#/cart";
 			},
-			//loadMore:function(){
-				//this.$http.jsonp("http://datainfo.duapp.com/shopdata/getGoods.php",{
-					//'pageCode':this.pageCode,
-					//'linenumber':5
-				//}).then(function(e){
-					//console.log(e.data);
-					//for(var i=0;i<e.data.length;i++){
-					//	this.goods.push(e.data[i]);
-					//}
-					//console.log(this.goods.concat(e.data),123);
-					//this.goods = this.goods.concat(e.data);
-					//console.log(this.goods)
-					//console.log(this.pageCode)
-					
-					//this.pageCode++;
-				//})
-			//},
+
 			refresh:function(){
 				location.reload();
 			}
@@ -24969,14 +24946,33 @@ return vueLazyload;
 			priceJudge:function(value){
                 if(!value){
                     return parseFloat(0).toFixed(2);
-                }else{
-                    //value = 2
                 }
+            },
+            smallCupFilter:function(value){
+
+                var cupSpecFlag = "";
+                var cupSpecActiveFlag ="";
+
+                var self = this;
+                if(value == "小"){
+                    self.cupSpecActiveFlag = "smallActive";
+                    self.cupSpecFlag = 'small';
+                    return "小杯";
+                }
+
+                if(value == "大"){
+                    self.cupSpecActiveFlag = "bigActive";
+                    self.cupSpecFlag = 'big';
+                    return "大杯";
+                }
+                self.cupSpecIs = "spec-"+cupSpecFlag;
+
             }
 		},
 		created:function(){
 			//在实例创建之后同步调用Ajax
 			this.getDataGood();
+			this.initClass();
 		}
 	}
 	
@@ -25355,17 +25351,39 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       staticClass: "goods-desc"
     }, [_c('h3', {
       staticClass: "goods-name"
-    }, [_vm._v(_vm._s(o.drinkName))]), _vm._v(" "), _vm._l((_vm.drinkCups), function(d) {
-      return _c('div', {
-        staticClass: "goods-price money"
-      }, [_c('span', [_c('i', {
+    }, [_vm._v(_vm._s(o.drinkName))]), _vm._v(" "), _c('div', {
+      staticClass: "goods-price money"
+    }, _vm._l((_vm.drinkCups), function(d) {
+      return _c('span', {
+        directives: [{
+          name: "show",
+          rawName: "v-show",
+          value: (d.name == '小'),
+          expression: "d.name =='小'"
+        }]
+      }, [_c('i', {
         staticClass: "price-flag"
       }, [_vm._v("￥")]), _c('span', {
         staticClass: "single-price"
-      }, [_vm._v(_vm._s(d.price)), _c('span')])])])
-    }), _vm._v(" "), _c('div', {
+      }, [_vm._v(_vm._s(d.price)), _c('span')])])
+    })), _vm._v(" "), _c('div', {
       staticClass: "goods-spec"
-    })], 2), _vm._v(" "), _c('div', {
+    }, _vm._l((_vm.drinkCups), function(d) {
+      return _c('button', {
+        staticClass: "spec-item",
+        class: [_vm.cupSpecIs, {
+          active: _vm.activeButton[index][_vm.cupSpecActiveFlag]
+        }],
+        attrs: {
+          "type": "button"
+        },
+        on: {
+          "click": function($event) {
+            _vm.select(index, _vm.cupSpecFlag)
+          }
+        }
+      }, [_vm._v(_vm._s(_vm._f("smallCupFilter")(d.name)))])
+    }))]), _vm._v(" "), _c('div', {
       staticClass: "clear"
     })])
   }))])]), _vm._v(" "), _c('div', {

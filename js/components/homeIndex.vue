@@ -28,12 +28,13 @@
 						<img src="http://192.168.1.98/vue-demo/img/coffe.png" class="goods-picture">
 						<div class="goods-desc">
 							<h3 class="goods-name">{{o.drinkName}}</h3>
-							<div class="goods-price money" v-for="d in drinkCups">
-								<span><i class="price-flag">￥</i><span class="single-price">{{d.price}}<span></span>
+							<div class="goods-price money">
+								<span v-for="d in drinkCups" v-show="d.name =='小'"><i class="price-flag">￥</i><span class="single-price">{{d.price}}<span></span>
+
 							</div>
 							<div class="goods-spec">
-								<!--<button type="button" class="spec-item spec-big" v-bind:class="{active:activeButton[index].smallActive}" @click="select(index,'small')">{{d.name}}</button>-->
-								<!--<button type="button" class="spec-item spec-small" v-bind:class="{active:activeButton[eq].bigActive}" @click="select(eq,'big')">大杯</button>-->
+								<button v-for="d in drinkCups" type="button" class="spec-item" v-bind:class="[cupSpecIs,{active:activeButton[index][cupSpecActiveFlag]}]" @click="select(index,cupSpecFlag)">{{d.name | smallCupFilter}}</button>
+								<!--<button type="button" class="spec-item spec-small" v-bind:class="{active:activeButton[index].bigActive}" @click="select(index,'big')">{{d.name | bigCupFilter}}</button>-->
 							</div>
 						</div>
 						<div class="clear"></div>
@@ -59,14 +60,18 @@
 				url:"javascript:void(0)",
 				dropDownClass:"drop-down",
                 dropUpClass:"drop-up",
-				totalPriceNum:0,
-				pageCode:0,
+
                 sn:"ff556yyuidde",
 				goods:{},
-                drinkCups:[],
 				drinkList:{},
+                drinkCups:[],
+                cupSpecFlag:"",
+                cupSpecActiveFlag:"",
+                cupSpecIs:"spec-small",
 				activeButton:[],
+
 				preNum:0,
+				totalPriceNum:0
 
 			}
 		},
@@ -80,32 +85,20 @@
 
                    var self = this;
                    this.drinkCups = [];
-
+                   this.activeButton = [];
                    this.goods.forEach(function(item){
                         self.drinkCups = JSON.parse(item.cups)
                         console.log(self.drinkCups)
-
+                        self.activeButton.push({
+                        	smallActive:false,
+                        	bigActive:false
+                        })
                     })
+                    console.log(this.activeButton)
              })
-
-				//this.$http.get("http://datainfo.duapp.com/shopdata/getGoods.php",{
-					//'pageCode':this.pageCode,
-					//'linenumber':5
-				//}).then(function(e){
-					//console.log(e.data);
-					//this.goods = e.data;
-
-					//构建按钮高亮数组
-					//this.activeButton = [];
-					//var self= this;
-					//this.goods.forEach(function(item){
-						//self.activeButton.push({
-						//	smallActive:false,
-						//	bigActive:false
-						//})
-				//	})
-					//this.pageCode++;
-				//})
+			},
+			initClass:function(){
+                console.log('cupSpecFlag---'+this.cupSpecFlag)
 			},
 			select:function(index,type){
 
@@ -123,23 +116,7 @@
 				this.preNum = index;
 				this.url = "#/cart";
 			},
-			//loadMore:function(){
-				//this.$http.jsonp("http://datainfo.duapp.com/shopdata/getGoods.php",{
-					//'pageCode':this.pageCode,
-					//'linenumber':5
-				//}).then(function(e){
-					//console.log(e.data);
-					//for(var i=0;i<e.data.length;i++){
-					//	this.goods.push(e.data[i]);
-					//}
-					//console.log(this.goods.concat(e.data),123);
-					//this.goods = this.goods.concat(e.data);
-					//console.log(this.goods)
-					//console.log(this.pageCode)
-					
-					//this.pageCode++;
-				//})
-			//},
+
 			refresh:function(){
 				location.reload();
 			}
@@ -150,14 +127,33 @@
 			priceJudge:function(value){
                 if(!value){
                     return parseFloat(0).toFixed(2);
-                }else{
-                    //value = 2
                 }
+            },
+            smallCupFilter:function(value){
+
+                var cupSpecFlag = "";
+                var cupSpecActiveFlag ="";
+
+                var self = this;
+                if(value == "小"){
+                    self.cupSpecActiveFlag = "smallActive";
+                    self.cupSpecFlag = 'small';
+                    return "小杯";
+                }
+
+                if(value == "大"){
+                    self.cupSpecActiveFlag = "bigActive";
+                    self.cupSpecFlag = 'big';
+                    return "大杯";
+                }
+                self.cupSpecIs = "spec-"+cupSpecFlag;
+
             }
 		},
 		created:function(){
 			//在实例创建之后同步调用Ajax
 			this.getDataGood();
+			this.initClass();
 		}
 	}
 	
