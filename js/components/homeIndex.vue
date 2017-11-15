@@ -29,12 +29,12 @@
 						<div class="goods-desc">
 							<h3 class="goods-name">{{o.drinkName}}</h3>
 							<div class="goods-price money">
-								<span v-for="d in drinkCups" v-show="d.name =='小'"><i class="price-flag">￥</i><span class="single-price">{{d.price}}<span></span>
+								<span v-for="d in JSON.parse(o.cups)" v-show="d.name =='小'"><i class="price-flag">￥</i><span class="single-price">{{d.price}}<span></span>
 
 							</div>
 							<div class="goods-spec">
-								<button v-for="d in drinkCups" type="button" class="spec-item" v-bind:class="[cupSpecIs,{active:activeButton[index][cupSpecActiveFlag]}]" @click="select(index,cupSpecFlag)">{{d.name | smallCupFilter}}</button>
-								<!--<button type="button" class="spec-item spec-small" v-bind:class="{active:activeButton[index].bigActive}" @click="select(index,'big')">{{d.name | bigCupFilter}}</button>-->
+								<button v-for="(d,eq) in JSON.parse(o.cups)" type="button" class="spec-item" v-bind:class="[{active:activeButton[index][cupSpecActiveFlag]}]" @click="select(index,eq,d.name)">{{d.name | smallCupFilter}}</button>
+								<!--<button type="button" class="spec-item spec-big" v-bind:class="{active:activeButton[index].bigActive}" @click="select(index,'big')">{{d.name | bigCupFilter}}</button>-->
 							</div>
 						</div>
 						<div class="clear"></div>
@@ -46,7 +46,10 @@
 		</div>
 		<div id="buy" v-bind:class="{active:isActive}">
 			<div class="totalPrice"><i class="price-flag">￥</i>{{totalPriceNum | priceJudge}}</div>
-			<a v-bind:href="url" class="cart" >确认购买</a>
+			<!--<router-link v-bind:to="{name:'router1',params:{deviceUId:uId}}">
+
+			</router-link>-->
+			<a class="cart" @click="createUID(isActive)">确认购买</a><!-- v-bind:href="url"
 		</div>
 	</div>
 
@@ -54,6 +57,7 @@
 <script type="text/javascript">
 	module.exports = {
 		data:function(){
+
 			return {
 				show:false,
 				isActive:false,
@@ -67,25 +71,31 @@
                 drinkCups:[],
                 cupSpecFlag:"",
                 cupSpecActiveFlag:"",
-                cupSpecIs:"spec-small",
-				activeButton:[],
 
+				activeButton:[],
 				preNum:0,
-				totalPriceNum:0
+
+				totalPriceNum:0,
+
+               deviceUId:string
 
 			}
 		},
 		methods:{
 			getDataGood:function() {
-               this.$http.get("/capital-controller/api/device/getDeviceDrinkList?sn="+this.sn
+               this.$http.post("/capital-controller/api/device/getDeviceDrinkList",{"sn":this.sn}
                ).then(function(response){
                    console.log(response.data);
                    this.goods = response.data.data;
-                    console.log(this.goods)
+                   // console.log(this.goods)
 
                    var self = this;
+
                    this.drinkCups = [];
                    this.activeButton = [];
+                   this.cupSpecIs =[];
+                   this.cupSpecActiveFlag="";
+
                    this.goods.forEach(function(item){
                         self.drinkCups = JSON.parse(item.cups)
                         console.log(self.drinkCups)
@@ -93,15 +103,35 @@
                         	smallActive:false,
                         	bigActive:false
                         })
+                        //饮品规格初始化定义class
+
+
+
+                        self.cupSpecFlag ="";
+                        self.drinkCups.forEach(function(cupItem){
+                            if(cupItem.name == "小"){
+                                self.cupSpecActiveFlag = "smallActive";
+                                self.cupSpecFlag = 'small';
+                            }
+                            if(cupItem.name == "大"){
+                                 self.cupSpecActiveFlag = "bigActive";
+                                 self.cupSpecFlag = 'big';
+                            }
+
+
+                           // console.log(self.cupSpecActiveFlag, self.cupSpecIs)
+                        })
+
                     })
-                    console.log(this.activeButton)
+                   // console.log( "cupSpec")
+                  // console.log(self.cupSpecIs)
+                   console.log('cupSpecFlag')
+                   console.log(self.cupSpecFlag)
              })
 			},
-			initClass:function(){
-                console.log('cupSpecFlag---'+this.cupSpecFlag)
-			},
-			select:function(index,type){
-
+			select:function(index,eq,type){
+                //console.log(type)
+                console.log(index,eq)
 			    this.isActive = true;
 
 				this.activeButton[this.preNum].smallActive = false;
@@ -116,9 +146,21 @@
 				this.preNum = index;
 				this.url = "#/cart";
 			},
+            createUID:function(isActive){
 
+                if(isActive){
+
+                 this.$http.get("/drinkOrder-controller/api/drinkOrder/generateCode")
+                    .then(function(response){
+                     //this.deviceUId = response.data.data;
+                     this.$route.push(name:'router1',params:{deviceUId:response.data.data}) ;
+                 })
+
+
+                }
+            },
 			refresh:function(){
-				location.reload();
+				//location.reload();
 			}
 			
 		},
@@ -130,30 +172,23 @@
                 }
             },
             smallCupFilter:function(value){
-
-                var cupSpecFlag = "";
-                var cupSpecActiveFlag ="";
-
-                var self = this;
                 if(value == "小"){
-                    self.cupSpecActiveFlag = "smallActive";
-                    self.cupSpecFlag = 'small';
                     return "小杯";
+                };
+                if(value == "大"){
+                    return "大杯";
+                };
+                if(value =="中"){
+                    return "中杯";
                 }
 
-                if(value == "大"){
-                    self.cupSpecActiveFlag = "bigActive";
-                    self.cupSpecFlag = 'big';
-                    return "大杯";
-                }
-                self.cupSpecIs = "spec-"+cupSpecFlag;
 
             }
 		},
 		created:function(){
 			//在实例创建之后同步调用Ajax
 			this.getDataGood();
-			this.initClass();
+
 		}
 	}
 	
@@ -295,6 +330,7 @@
 	    border-radius: 2px;
 	    display: inline-block;
 	    padding: 0.25rem 0.65rem;
+	    margin:0 0.1rem;
 	}
 	.goods-item .goods-desc .goods-spec .spec-item:active{
 		-background-color:#eee;

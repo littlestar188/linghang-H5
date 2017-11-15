@@ -23256,7 +23256,7 @@ exports = module.exports = __webpack_require__(1)();
 
 
 // module
-exports.push([module.i, "\n.modal-bg{\n        position:absolute;\n        top:0;\n        z-index:99;\n        height:100%;\n        width:100%;\n       - background-color:#000;\n        -opacity:0.8;\n}\n.deviceBaseInfo {\n\t\tposition:fixed;\n\t\tz-index:9999;\n\t\ttop:0;\n\t\twidth: 100%;\n\t    -height:7rem;\n\t    padding:0 1rem;\n\t    font-weight: lighter;\n\t    text-align: left;\n\t    background: rgb(71,71,71);   \n\t    color: #fff;\n\t    box-sizing: border-box;\n}\n.deviceBaseInfo .info-header{\n\t    height: 1.95rem;\n        line-height: 1.95rem;\n}\n.deviceBaseInfo .info-content{\n        overflow:hidden;\n\t   - height:6rem;\n\t    font-size:0.6rem;\n\t    padding-bottom:0.5rem;\n}\n.deviceBaseInfo .info-content li{\n\t    width: 100%;\n\t    overflow: hidden;\n        margin-right: 1rem;\n        padding:0.3rem 0;\n}\n.deviceBaseInfo .info-content .tle{\n\t    float:left;\n}\n.deviceBaseInfo .info-content .con{\n        float:right;\n}\n.deviceBaseInfo .drop-down{\n\t\tposition: absolute;\n\t    top: 0.5rem;\n\t    right: 1rem;\n\t    width: 0.8rem;\n\t    height: 0.8rem;\n\t    background: url(/vue-demo/img/drop_down.png) no-repeat center;\n\t    background-size: 100% 100%;\n}\n.deviceBaseInfo .drop-up{\n    \t\tposition: absolute;\n    \t    top: 0.5rem;\n    \t    right: 1rem;\n    \t    width: 0.8rem;\n    \t    height: 0.8rem;\n    \t    background: url(/vue-demo/img/drop_up.png) no-repeat center;\n    \t    background-size: 100% 100%;\n}\n.content{\n\t\tpadding-top: 2.5rem;\n    \t-background-color: #eee;\n}\n.tip{\n\t\theight: 1.5rem;\n    \tline-height: 1.5rem;\n    \tpadding:0.2rem 0;\n    \tcolor:#444;\n\t\ttext-align:center;\n\t\tbackground-color: #fff;\n\t\tborder-top: 1px solid #eee; \n\t\tborder-bottom: 1px solid #eee;\n}\n.goodsCon {\n\t\ttext-align:center;\n\t\tpadding-bottom:2.5rem;\n\t\tbackground-color: #fff;\n}\n.goods-item {\t\t\n\t\tborder-bottom: 1px solid #eee;\n\t    padding: 0 0.75rem;\n\t    display: flex;\n}\n.goods-item .goods-picture {\n\t\tfloat: left;\n\t    width: 2.8rem;\n\t    height: 2.8rem;\n\t    margin: 0.55rem 0.75rem 0.55rem 0;\n\t    flex: 1;\n}\n.goods-item .goods-desc{\n\t\tfloat: left;\n\t    height: 100%;\n\t    padding-top: 0.2rem;\n\t    flex: 4;\n\t    position: relative;\n}\n.goods-item .goods-desc .goods-name {\n\t\tfont-size: 0.685rem;   \n    \tfont-weight: normal;\n\t\t-line-height:1.1rem;\n\t\ttext-align: left;\n\t\tpadding:0.55rem 0;\n        width: 10.8rem;\n        white-space: nowrap;\n        text-overflow: ellipsis;\n        overflow: hidden;\n}\n.goods-item .goods-desc .goods-price{\n\t\tdisplay:flex;\n\t\tjustify-content: space-between;\n\t\t-color: #D8232A;\n    \t-font-size: 0.75rem;\n}\n.goods-item .goods-desc .goods-price .price-flag{\n\t\t-font-size:0.5rem;\n}\n.goods-item .goods-desc .goods-spec{\n\t\tposition: absolute;\n\t    top: 2rem;\n\t    right: 0;\n}\n.goods-item .goods-desc .goods-spec .spec-item{\n\t\tfont-size: 0.55rem;\n\t    background-color: #fff;\n\t    border: 1px solid #ddd;\n\t    border-radius: 2px;\n\t    display: inline-block;\n\t    padding: 0.25rem 0.65rem;\n}\n.goods-item .goods-desc .goods-spec .spec-item:active{\n\t\t-background-color:#eee;\n\t\t-color:#fff;\n}\n\t/*.goods-item .goods-desc .goods-spec .spec-item:hover,*/\n.goods-item .goods-desc .goods-spec .spec-item.active{\n\t\tbackground-color:#D8232A;\n\t\tcolor:#fff;\n}\n#buy .totalPrice{\n        justify-content: space-between;\n        color: /* #D8232A */#000;\n        font-size: 0.85rem;\n        width: 18%;\n        float: left;\n        height: 2.2rem;\n        line-height: 2.2rem;\n        margin-left: 0.3rem;\n}\n#buy.active .totalPrice{\n        color:#D8232A;\n}\n#buy a.cart{\n    \tfloat: right;\n        width: 4.25rem;\n        height: 2.2rem;\n        line-height: 2.2rem;\n        padding: 0 0.2rem;\n        text-align: center;\n        text-decoration: none;\n        color: #fff;\n        background-color: #ccc;\n}\n#buy.active a.cart{\n        background-color:#D8232A\n}\n\n", ""]);
+exports.push([module.i, "\n.modal-bg{\n        position:absolute;\n        top:0;\n        z-index:99;\n        height:100%;\n        width:100%;\n       - background-color:#000;\n        -opacity:0.8;\n}\n.deviceBaseInfo {\n\t\tposition:fixed;\n\t\tz-index:9999;\n\t\ttop:0;\n\t\twidth: 100%;\n\t    -height:7rem;\n\t    padding:0 1rem;\n\t    font-weight: lighter;\n\t    text-align: left;\n\t    background: rgb(71,71,71);   \n\t    color: #fff;\n\t    box-sizing: border-box;\n}\n.deviceBaseInfo .info-header{\n\t    height: 1.95rem;\n        line-height: 1.95rem;\n}\n.deviceBaseInfo .info-content{\n        overflow:hidden;\n\t   - height:6rem;\n\t    font-size:0.6rem;\n\t    padding-bottom:0.5rem;\n}\n.deviceBaseInfo .info-content li{\n\t    width: 100%;\n\t    overflow: hidden;\n        margin-right: 1rem;\n        padding:0.3rem 0;\n}\n.deviceBaseInfo .info-content .tle{\n\t    float:left;\n}\n.deviceBaseInfo .info-content .con{\n        float:right;\n}\n.deviceBaseInfo .drop-down{\n\t\tposition: absolute;\n\t    top: 0.5rem;\n\t    right: 1rem;\n\t    width: 0.8rem;\n\t    height: 0.8rem;\n\t    background: url(/vue-demo/img/drop_down.png) no-repeat center;\n\t    background-size: 100% 100%;\n}\n.deviceBaseInfo .drop-up{\n    \t\tposition: absolute;\n    \t    top: 0.5rem;\n    \t    right: 1rem;\n    \t    width: 0.8rem;\n    \t    height: 0.8rem;\n    \t    background: url(/vue-demo/img/drop_up.png) no-repeat center;\n    \t    background-size: 100% 100%;\n}\n.content{\n\t\tpadding-top: 2.5rem;\n    \t-background-color: #eee;\n}\n.tip{\n\t\theight: 1.5rem;\n    \tline-height: 1.5rem;\n    \tpadding:0.2rem 0;\n    \tcolor:#444;\n\t\ttext-align:center;\n\t\tbackground-color: #fff;\n\t\tborder-top: 1px solid #eee; \n\t\tborder-bottom: 1px solid #eee;\n}\n.goodsCon {\n\t\ttext-align:center;\n\t\tpadding-bottom:2.5rem;\n\t\tbackground-color: #fff;\n}\n.goods-item {\t\t\n\t\tborder-bottom: 1px solid #eee;\n\t    padding: 0 0.75rem;\n\t    display: flex;\n}\n.goods-item .goods-picture {\n\t\tfloat: left;\n\t    width: 2.8rem;\n\t    height: 2.8rem;\n\t    margin: 0.55rem 0.75rem 0.55rem 0;\n\t    flex: 1;\n}\n.goods-item .goods-desc{\n\t\tfloat: left;\n\t    height: 100%;\n\t    padding-top: 0.2rem;\n\t    flex: 4;\n\t    position: relative;\n}\n.goods-item .goods-desc .goods-name {\n\t\tfont-size: 0.685rem;   \n    \tfont-weight: normal;\n\t\t-line-height:1.1rem;\n\t\ttext-align: left;\n\t\tpadding:0.55rem 0;\n        width: 10.8rem;\n        white-space: nowrap;\n        text-overflow: ellipsis;\n        overflow: hidden;\n}\n.goods-item .goods-desc .goods-price{\n\t\tdisplay:flex;\n\t\tjustify-content: space-between;\n\t\t-color: #D8232A;\n    \t-font-size: 0.75rem;\n}\n.goods-item .goods-desc .goods-price .price-flag{\n\t\t-font-size:0.5rem;\n}\n.goods-item .goods-desc .goods-spec{\n\t\tposition: absolute;\n\t    top: 2rem;\n\t    right: 0;\n}\n.goods-item .goods-desc .goods-spec .spec-item{\n\t\tfont-size: 0.55rem;\n\t    background-color: #fff;\n\t    border: 1px solid #ddd;\n\t    border-radius: 2px;\n\t    display: inline-block;\n\t    padding: 0.25rem 0.65rem;\n\t    margin:0 0.1rem;\n}\n.goods-item .goods-desc .goods-spec .spec-item:active{\n\t\t-background-color:#eee;\n\t\t-color:#fff;\n}\n\t/*.goods-item .goods-desc .goods-spec .spec-item:hover,*/\n.goods-item .goods-desc .goods-spec .spec-item.active{\n\t\tbackground-color:#D8232A;\n\t\tcolor:#fff;\n}\n#buy .totalPrice{\n        justify-content: space-between;\n        color: /* #D8232A */#000;\n        font-size: 0.85rem;\n        width: 18%;\n        float: left;\n        height: 2.2rem;\n        line-height: 2.2rem;\n        margin-left: 0.3rem;\n}\n#buy.active .totalPrice{\n        color:#D8232A;\n}\n#buy a.cart{\n    \tfloat: right;\n        width: 4.25rem;\n        height: 2.2rem;\n        line-height: 2.2rem;\n        padding: 0 0.2rem;\n        text-align: center;\n        text-decoration: none;\n        color: #fff;\n        background-color: #ccc;\n}\n#buy.active a.cart{\n        background-color:#D8232A\n}\n\n", ""]);
 
 // exports
 
@@ -24781,8 +24781,10 @@ return vueLazyload;
 				isActive:true,
 				selectedClass:"selected",
 				unselectedClass:"unselected"
+
 			}
 		},
+
 		methods:{
 			
 			select:function(index){
@@ -24795,6 +24797,9 @@ return vueLazyload;
                     this.isActive = true;
                 }
 
+            },
+            ready:function(){
+                console.log('deviceUId:'+this.$route.params.deviceUId)
             }
 			
 			
@@ -24805,7 +24810,7 @@ return vueLazyload;
 		},
 		created:function(){
 			//在实例创建之后同步调用Ajax
-			
+			this.ready();
 			
 		}
 	}
@@ -24870,9 +24875,12 @@ return vueLazyload;
 //
 //
 //
+//
+//
 
 	module.exports = {
 		data:function(){
+
 			return {
 				show:false,
 				isActive:false,
@@ -24886,11 +24894,13 @@ return vueLazyload;
                 drinkCups:[],
                 cupSpecFlag:"",
                 cupSpecActiveFlag:"",
-                cupSpecIs:"spec-small",
-				activeButton:[],
 
+				activeButton:[],
 				preNum:0,
-				totalPriceNum:0
+
+				totalPriceNum:0,
+
+               uId:"ff556yyuidde"
 
 			}
 		},
@@ -24900,11 +24910,15 @@ return vueLazyload;
                ).then(function(response){
                    console.log(response.data);
                    this.goods = response.data.data;
-                    console.log(this.goods)
+                   // console.log(this.goods)
 
                    var self = this;
+
                    this.drinkCups = [];
                    this.activeButton = [];
+                   this.cupSpecIs =[];
+                   this.cupSpecActiveFlag="";
+
                    this.goods.forEach(function(item){
                         self.drinkCups = JSON.parse(item.cups)
                         console.log(self.drinkCups)
@@ -24912,15 +24926,35 @@ return vueLazyload;
                         	smallActive:false,
                         	bigActive:false
                         })
+                        //饮品规格初始化定义class
+
+
+
+                        self.cupSpecFlag ="";
+                        self.drinkCups.forEach(function(cupItem){
+                            if(cupItem.name == "小"){
+                                self.cupSpecActiveFlag = "smallActive";
+                                self.cupSpecFlag = 'small';
+                            }
+                            if(cupItem.name == "大"){
+                                 self.cupSpecActiveFlag = "bigActive";
+                                 self.cupSpecFlag = 'big';
+                            }
+
+
+                           // console.log(self.cupSpecActiveFlag, self.cupSpecIs)
+                        })
+
                     })
-                    console.log(this.activeButton)
+                   // console.log( "cupSpec")
+                  // console.log(self.cupSpecIs)
+                   console.log('cupSpecFlag')
+                   console.log(self.cupSpecFlag)
              })
 			},
-			initClass:function(){
-                console.log('cupSpecFlag---'+this.cupSpecFlag)
-			},
-			select:function(index,type){
-
+			select:function(index,eq,type){
+                //console.log(type)
+                console.log(index,eq)
 			    this.isActive = true;
 
 				this.activeButton[this.preNum].smallActive = false;
@@ -24935,9 +24969,21 @@ return vueLazyload;
 				this.preNum = index;
 				this.url = "#/cart";
 			},
+            createUID:function(isActive){
 
+                if(isActive){
+                //setTimeOut(function(){
+                    this.$http.get("/drinkOrder-controller/api/drinkOrder/generateCode")
+                         .then(function(response){
+                            //console.log(response.data.data);
+                            this.uId = response.data.data;
+                         })
+                //},800)
+
+                }
+            },
 			refresh:function(){
-				location.reload();
+				//location.reload();
 			}
 			
 		},
@@ -24949,30 +24995,23 @@ return vueLazyload;
                 }
             },
             smallCupFilter:function(value){
-
-                var cupSpecFlag = "";
-                var cupSpecActiveFlag ="";
-
-                var self = this;
                 if(value == "小"){
-                    self.cupSpecActiveFlag = "smallActive";
-                    self.cupSpecFlag = 'small';
                     return "小杯";
+                };
+                if(value == "大"){
+                    return "大杯";
+                };
+                if(value =="中"){
+                    return "中杯";
                 }
 
-                if(value == "大"){
-                    self.cupSpecActiveFlag = "bigActive";
-                    self.cupSpecFlag = 'big';
-                    return "大杯";
-                }
-                self.cupSpecIs = "spec-"+cupSpecFlag;
 
             }
 		},
 		created:function(){
 			//在实例创建之后同步调用Ajax
 			this.getDataGood();
-			this.initClass();
+
 		}
 	}
 	
@@ -25045,7 +25084,7 @@ return vueLazyload;
 		},
 		created:function(){
 			//在实例创建之后同步调用Ajax
-			
+			console.log(this.uId)
 			
 		}
 	}
@@ -25353,7 +25392,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       staticClass: "goods-name"
     }, [_vm._v(_vm._s(o.drinkName))]), _vm._v(" "), _c('div', {
       staticClass: "goods-price money"
-    }, _vm._l((_vm.drinkCups), function(d) {
+    }, _vm._l((JSON.parse(o.cups)), function(d) {
       return _c('span', {
         directives: [{
           name: "show",
@@ -25368,10 +25407,10 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       }, [_vm._v(_vm._s(d.price)), _c('span')])])
     })), _vm._v(" "), _c('div', {
       staticClass: "goods-spec"
-    }, _vm._l((_vm.drinkCups), function(d) {
+    }, _vm._l((JSON.parse(o.cups)), function(d, eq) {
       return _c('button', {
         staticClass: "spec-item",
-        class: [_vm.cupSpecIs, {
+        class: [{
           active: _vm.activeButton[index][_vm.cupSpecActiveFlag]
         }],
         attrs: {
@@ -25379,7 +25418,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
         },
         on: {
           "click": function($event) {
-            _vm.select(index, _vm.cupSpecFlag)
+            _vm.select(index, eq, d.name)
           }
         }
       }, [_vm._v(_vm._s(_vm._f("smallCupFilter")(d.name)))])
@@ -25397,12 +25436,23 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     staticClass: "totalPrice"
   }, [_c('i', {
     staticClass: "price-flag"
-  }, [_vm._v("￥")]), _vm._v(_vm._s(_vm._f("priceJudge")(_vm.totalPriceNum)))]), _vm._v(" "), _c('a', {
-    staticClass: "cart",
+  }, [_vm._v("￥")]), _vm._v(_vm._s(_vm._f("priceJudge")(_vm.totalPriceNum)))]), _vm._v(" "), _c('router-link', {
     attrs: {
-      "href": _vm.url
+      "to": {
+        name: 'router1',
+        params: {
+          deviceUId: _vm.uId
+        }
+      }
     }
-  }, [_vm._v("确认购买")])])])
+  }, [_c('a', {
+    staticClass: "cart",
+    on: {
+      "click": function($event) {
+        _vm.createUID(_vm.isActive)
+      }
+    }
+  }, [_vm._v("确认购买")])])], 1)])
 },staticRenderFns: []}
 module.exports.render._withStripped = true
 if (false) {
@@ -25596,7 +25646,9 @@ var order = __webpack_require__ (9);
 /*创建路由*/
 var router = new VueRouter({
   routes:[
-  	{path:'/',component:homeIndex},
+  	//{path:'/',redirect:"/home"},//重定向
+    {path:'/',component:homeIndex},
+    {name:"router1",path:"/cart",component:cart},
   	{path:'/result',component:result},
   	{path:'/cart',component:cart},
     {path:'/order',component:order}
@@ -25606,6 +25658,7 @@ var router = new VueRouter({
 new Vue({
   router
 }).$mount('#app');
+
 
 
 

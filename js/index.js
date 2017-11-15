@@ -25,7 +25,9 @@ var order = require ("../js/components/orderList.vue");
 /*创建路由*/
 var router = new VueRouter({
   routes:[
-  	{path:'/',component:homeIndex},
+  	//{path:'/',redirect:"/home"},//重定向
+    {path:'/',component:homeIndex},
+    {name:"router1",path:"/cart",component:cart},
   	{path:'/result',component:result},
   	{path:'/cart',component:cart},
     {path:'/order',component:order}
@@ -35,6 +37,7 @@ var router = new VueRouter({
 new Vue({
   router
 }).$mount('#app');
+
 
 
 

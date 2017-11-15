@@ -54,8 +54,10 @@
 				isActive:true,
 				selectedClass:"selected",
 				unselectedClass:"unselected"
+
 			}
 		},
+
 		methods:{
 			
 			select:function(index){
@@ -68,6 +70,9 @@
                     this.isActive = true;
                 }
 
+            },
+            ready:function(){
+                console.log('deviceUId:'+this.$route.params.deviceUId)
             }
 			
 			
@@ -78,7 +83,7 @@
 		},
 		created:function(){
 			//在实例创建之后同步调用Ajax
-			
+			this.ready();
 			
 		}
 	}

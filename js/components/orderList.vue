@@ -60,7 +60,7 @@
 		},
 		created:function(){
 			//在实例创建之后同步调用Ajax
-			
+			console.log(this.uId)
 			
 		}
 	}
