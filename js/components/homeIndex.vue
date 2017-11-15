@@ -66,6 +66,7 @@
                 dropUpClass:"drop-up",
 
                 sn:"ff556yyuidde",
+                drinkListData:"",
 				goods:{},
 				drinkList:{},
                 drinkCups:[],
@@ -87,6 +88,7 @@
                ).then(function(response){
                    console.log(response.data);
                    this.goods = response.data.data;
+                   this.setStorage("drinkListData",this.goods);
                    // console.log(this.goods)
 
                    var self = this;
@@ -159,8 +161,42 @@
 
                 }
             },
+            setStorage:function(name,data){
+                var value = typeof(data) == "object" ? JSON.stringify(data):data;
+
+                	console.log('set localStorage----')
+                	if(window.localStorage){
+                		localStorage.setItem(name,value);
+                	}else{
+                		alert('浏览器不支持localStorage');
+                		return
+                	}
+            },
+            getStroage:function(name){
+                if(! window.localStorage){
+                    alert('浏览器不支持localStorage');
+                    return;
+                }
+                if(localStorage.length>0 && localStorage.getItem(name) ){
+                    var value = localStorage.getItem(name);
+                    //console.log(value)
+                    return value;
+                }
+            },
+            judgeStorage:function(name){
+                 if(name == "drinkListData"){
+                    if(getStorage(name)){
+
+                        this.drinkListData = JSON.parse(getStorage("drinkListData"));
+
+                    }else{
+                        this.getDataGood();
+
+                    };
+                 };
+            },
 			refresh:function(){
-				//location.reload();
+				location.reload();
 			}
 			
 		},
@@ -187,8 +223,9 @@
 		},
 		created:function(){
 			//在实例创建之后同步调用Ajax
-			this.getDataGood();
 
+			//this.getDataGood();
+            this.judgeStorage("drinkListData");
 		}
 	}
 	
