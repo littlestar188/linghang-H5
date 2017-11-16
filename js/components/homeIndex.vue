@@ -33,8 +33,9 @@
 
 							</div>
 							<div class="goods-spec">
-								<button v-for="(d,eq) in JSON.parse(o.cups)" type="button" class="spec-item" v-bind:class="[{active:activeButton[index][cupSpecActiveFlag]}]" @click="select(index,eq,d.name)">{{d.name | smallCupFilter}}</button>
-								<!--<button type="button" class="spec-item spec-big" v-bind:class="{active:activeButton[index].bigActive}" @click="select(index,'big')">{{d.name | bigCupFilter}}</button>-->
+								<!-- <button v-for="(d,eq) in JSON.parse(o.cups)" type="button" class="spec-item" v-bind:class="[{active:activeButton[index][cupSpecActiveFlag]}]" @click="select(index,eq,d.name)">{{d.name | smallCupFilter}}</button> -->
+								
+								<button type="button" v-for="(d,eq) in JSON.parse(o.cups)" class="spec-item" v-bind:class="buttonState" @click="choseone(d.index)">{{d.name|cupFilter}}</button>
 							</div>
 						</div>
 						<div class="clear"></div>
@@ -49,7 +50,7 @@
 			<!--<router-link v-bind:to="{name:'router1',params:{deviceUId:uId}}">
 
 			</router-link>-->
-			<a class="cart" @click="createUID(isActive)">确认购买</a><!-- v-bind:href="url"
+			<a class="cart" @click="nextCart(isActive)">确认购买</a><!-- v-bind:href="url"-->
 		</div>
 	</div>
 
@@ -78,20 +79,35 @@
 
 				totalPriceNum:0,
 
-               deviceUId:string
+               deviceUId:''
 
 			}
 		},
+		computed:{
+			buttonState:function(index){
+				console.log(index)
+				return {
+					active:false
+				}
+			}
+		},
 		methods:{
+			createUID:function(){
+                this.$http.get("/drinkOrder-controller/api/drinkOrder/generateCode")
+                    .then(function(response){
+                     this.deviceUId = response.data.data;                    
+                })
+            },
 			getDataGood:function() {
-               this.$http.post("/capital-controller/api/device/getDeviceDrinkList",{"sn":this.sn}
+               this.$http.get("/capital-controller/api/device/getDeviceDrinkList?sn="+this.sn
                ).then(function(response){
                    console.log(response.data);
                    this.goods = response.data.data;
-                   this.setStorage("drinkListData",this.goods);
+                   this.setStorage("drinkListData",response.data.data);
+                   this.goodsHandle(this.goods);
                    // console.log(this.goods)
 
-                   var self = this;
+                   /*var self = this;
 
                    this.drinkCups = [];
                    this.activeButton = [];
@@ -124,12 +140,25 @@
                            // console.log(self.cupSpecActiveFlag, self.cupSpecIs)
                         })
 
-                    })
-                   // console.log( "cupSpec")
-                  // console.log(self.cupSpecIs)
-                   console.log('cupSpecFlag')
-                   console.log(self.cupSpecFlag)
+                    })*/
              })
+			},
+			goodsHandle:function(){
+				var self = this;
+
+                this.drinkCups = [];
+              
+               this.goods.forEach(function(item){
+                    self.drinkCups = JSON.parse(item.cups)
+                    console.log(self.drinkCups)
+                    self.activeButton.push({
+                    	smallActive:false,
+                    	bigActive:false
+                    })
+                })    
+			},
+			choseone:function(index){
+				this.buttonState(index,index)
 			},
 			select:function(index,eq,type){
                 //console.log(type)
@@ -148,22 +177,14 @@
 				this.preNum = index;
 				this.url = "#/cart";
 			},
-            createUID:function(isActive){
+            nextCart:function(isActive){
 
-                if(isActive){
-
-                 this.$http.get("/drinkOrder-controller/api/drinkOrder/generateCode")
-                    .then(function(response){
-                     //this.deviceUId = response.data.data;
-                     this.$route.push(name:'router1',params:{deviceUId:response.data.data}) ;
-                 })
-
-
-                }
+                //if(isActive){
+                 this.$router.push({name:'router1',params:{deviceUId:this.deviceUId}}) ;
+               // }
             },
             setStorage:function(name,data){
                 var value = typeof(data) == "object" ? JSON.stringify(data):data;
-
                 	console.log('set localStorage----')
                 	if(window.localStorage){
                 		localStorage.setItem(name,value);
@@ -172,7 +193,7 @@
                 		return
                 	}
             },
-            getStroage:function(name){
+            getStorage:function(name){
                 if(! window.localStorage){
                     alert('浏览器不支持localStorage');
                     return;
@@ -184,17 +205,15 @@
                 }
             },
             judgeStorage:function(name){
-                 if(name == "drinkListData"){
-                    if(getStorage(name)){
-
-                        this.drinkListData = JSON.parse(getStorage("drinkListData"));
-
-                    }else{
-                        this.getDataGood();
-
-                    };
-                 };
-            },
+                 
+                if(this.getStorage("drinkListData")){
+                    this.goods = JSON.parse(this.getStorage("drinkListData"));
+                    this.goodsHandle();
+                }else{
+                    this.getDataGood();
+                };
+            
+            },	
 			refresh:function(){
 				location.reload();
 			}
@@ -207,7 +226,7 @@
                     return parseFloat(0).toFixed(2);
                 }
             },
-            smallCupFilter:function(value){
+            cupFilter:function(value){
                 if(value == "小"){
                     return "小杯";
                 };
@@ -225,6 +244,7 @@
 			//在实例创建之后同步调用Ajax
 
 			//this.getDataGood();
+			this.createUID();
             this.judgeStorage("drinkListData");
 		}
 	}

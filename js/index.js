@@ -25,12 +25,13 @@ var order = require ("../js/components/orderList.vue");
 /*创建路由*/
 var router = new VueRouter({
   routes:[
-  	//{path:'/',redirect:"/home"},//重定向
-    {path:'/',component:homeIndex},
-    {name:"router1",path:"/cart",component:cart},
+  	// {path:'/',redirect:"/home"},//重定向
+    {path:'/',component:homeIndex},    
   	{path:'/result',component:result},
   	{path:'/cart',component:cart},
-    {path:'/order',component:order}
+    {path:'/order',component:order},
+    {name:"router1",path:"/cart",component:cart},
+    {name:"router2",path:"/result",component:result}
   ]
 })
 
