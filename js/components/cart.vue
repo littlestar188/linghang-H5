@@ -79,8 +79,13 @@
             createOrder:function(){
             	//"contentType": 'application/json;charset=utf-8'
             	console.log(this.deviceUId)
-				this.$http.post("/drinkOrder-controller/api/drinkOrder/order?sn=ff556yyuidde&uid="+this.deviceUId+"&drinkId=1ef27034f9394930b43b810a0ba2286d&drinkCode=leee")
-				.then(function(response){
+				this.$http.post("/drinkOrder-controller/api/drinkOrder/order",{},{headers:{'Content-Type': 'application/x-www-form-urlencoded'}, params:{
+					"sn":"ff556yyuidde",
+					"uid":this.deviceUId
+					"drinkId":"1ef27034f9394930b43b810a0ba2286d",
+					"drinkCode":"leee"}}
+				
+				).then(function(response){
                     
                    
                 })
