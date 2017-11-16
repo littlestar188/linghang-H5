@@ -50,7 +50,7 @@
 			<!--<router-link v-bind:to="{name:'router1',params:{deviceUId:uId}}">
 
 			</router-link>-->
-			<a class="cart" @click="nextCart(isActive)">确认购买</a><!-- v-bind:href="url"-->
+			<a class="cart"  @click="createOrder(isActive)">确认购买</a><!-- v-bind:href="url"-->
 		</div>
 	</div>
 
@@ -79,7 +79,9 @@
 
 				totalPriceNum:0,
 
-               deviceUId:''
+               deviceUId:"",
+               drinkCode:"",
+               drinkId:""
 
 			}
 		},
@@ -97,7 +99,7 @@
                     .then(function(response){
                      this.deviceUId = response.data.data;                    
                 })
-            },
+            },			
 			getDataGood:function() {
                this.$http.get("/capital-controller/api/device/getDeviceDrinkList?sn="+this.sn
                ).then(function(response){
@@ -177,10 +179,20 @@
 				this.preNum = index;
 				this.url = "#/cart";
 			},
-            nextCart:function(isActive){
-
+            createOrder:function(isActive){
+            	console.log("createOrder"+this.deviceUId)
                 //if(isActive){
-                 this.$router.push({name:'router1',params:{deviceUId:this.deviceUId}}) ;
+                 this.$http.post("/drinkOrder-controller/api/drinkOrder/order",{},{headers:{'Content-Type': 'application/x-www-form-urlencoded'}, params:{
+					"sn":this.sn,
+					"uid":this.deviceUId,
+					"drinkId":"1ef27034f9394930b43b810a0ba2286d",
+					"drinkCode":"leee"}}
+				
+				).then(function(response){
+
+                    this.$router.push({name:'router1',params:{deviceUId:this.deviceUId,sn:this.sn}}) ;                  
+                });	
+                
                // }
             },
             setStorage:function(name,data){

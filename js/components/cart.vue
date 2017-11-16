@@ -41,7 +41,7 @@
 				</ul>
 			</div>	
 		</div>
-		<div id="pay" @click="createOrder()">
+		<div id="pay">
 			<a href="#/result">确认支付</a>
 		</div>	
 	</div>
@@ -55,15 +55,17 @@
 				selectedClass:"selected",
 				unselectedClass:"unselected",
 
-				deviceUId:""	
+				deviceUId:"",
+				sn:""	
 			}
 		},
 
 		methods:{
 			ready:function(){
-                console.log('deviceUId:'+this.$route.params.deviceUId);
+				console.log('deviceUId:'+this.$route.params.deviceUId);
                 this.deviceUId=this.$route.params.deviceUId;
-            },
+                this.sn = this.$route.params.sn;
+			},
 			select:function(index){
                 console.log(this.isActive)
 
@@ -74,22 +76,9 @@
                     this.isActive = true;
                 }
 
-            },
+            }
 
-            createOrder:function(){
-            	//"contentType": 'application/json;charset=utf-8'
-            	console.log(this.deviceUId)
-				this.$http.post("/drinkOrder-controller/api/drinkOrder/order",{},{headers:{'Content-Type': 'application/x-www-form-urlencoded'}, params:{
-					"sn":"ff556yyuidde",
-					"uid":this.deviceUId
-					"drinkId":"1ef27034f9394930b43b810a0ba2286d",
-					"drinkCode":"leee"}}
-				
-				).then(function(response){
-                    
-                   
-                })
-			}
+            
             			
 		},
 		filters:{

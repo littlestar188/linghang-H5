@@ -24772,7 +24772,9 @@ module.exports = function listToStyles (parentId, list) {
 
 				totalPriceNum:0,
 
-               deviceUId:''
+               deviceUId:"",
+               drinkCode:"",
+               drinkId:""
 
 			}
 		},
@@ -24790,7 +24792,7 @@ module.exports = function listToStyles (parentId, list) {
                     .then(function(response){
                      this.deviceUId = response.data.data;                    
                 })
-            },
+            },			
 			getDataGood:function() {
                this.$http.get("/capital-controller/api/device/getDeviceDrinkList?sn="+this.sn
                ).then(function(response){
@@ -24870,10 +24872,20 @@ module.exports = function listToStyles (parentId, list) {
 				this.preNum = index;
 				this.url = "#/cart";
 			},
-            nextCart:function(isActive){
-
+            createOrder:function(isActive){
+            	console.log("createOrder"+this.deviceUId)
                 //if(isActive){
-                 this.$router.push({name:'router1',params:{deviceUId:this.deviceUId}}) ;
+                 this.$http.post("/drinkOrder-controller/api/drinkOrder/order",{},{headers:{'Content-Type': 'application/x-www-form-urlencoded'}, params:{
+					"sn":this.sn,
+					"uid":this.deviceUId,
+					"drinkId":"1ef27034f9394930b43b810a0ba2286d",
+					"drinkCode":"leee"}}
+				
+				).then(function(response){
+
+                    this.$router.push({name:'router1',params:{deviceUId:this.deviceUId,sn:this.sn}}) ;                  
+                });	
+                
                // }
             },
             setStorage:function(name,data){
@@ -25048,7 +25060,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     staticClass: "cart",
     on: {
       "click": function($event) {
-        _vm.nextCart(_vm.isActive)
+        _vm.createOrder(_vm.isActive)
       }
     }
   }, [_vm._v("确认购买")])])])
@@ -25316,7 +25328,102 @@ exports.push([module.i, "\n#pay{\n\t\ttext-align:center;\n\t\tbackground-color:#
 /* 30 */
 /***/ (function(module, exports) {
 
-throw new Error("Module parse failed: Unexpected token (85:5)\nYou may need an appropriate loader to handle this file type.\n| \t\t\t\t\t\"sn\":\"ff556yyuidde\",\n| \t\t\t\t\t\"uid\":this.deviceUId\n| \t\t\t\t\t\"drinkId\":\"1ef27034f9394930b43b810a0ba2286d\",\n| \t\t\t\t\t\"drinkCode\":\"leee\"}}\n| \t\t\t\t");
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+	module.exports = {
+		data:function(){
+			return {
+				isActive:true,
+				selectedClass:"selected",
+				unselectedClass:"unselected",
+
+				deviceUId:"",
+				sn:""	
+			}
+		},
+
+		methods:{
+			ready:function(){
+				console.log('deviceUId:'+this.$route.params.deviceUId);
+                this.deviceUId=this.$route.params.deviceUId;
+                this.sn = this.$route.params.sn;
+			},
+			select:function(index){
+                console.log(this.isActive)
+
+                if(this.isActive){
+                    this.isActive = false;
+
+                }else{
+                    this.isActive = true;
+                }
+
+            }
+
+            
+            			
+		},
+		filters:{
+			//过滤器
+			
+		},
+		created:function(){
+			//在实例创建之后同步调用Ajax
+			this.ready();
+			
+		}
+	}
+	
+	
+
 
 /***/ }),
 /* 31 */
@@ -25355,20 +25462,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
         _vm.select()
       }
     }
-  })])])])]), _vm._v(" "), _c('div', {
-    attrs: {
-      "id": "pay"
-    },
-    on: {
-      "click": function($event) {
-        _vm.createOrder()
-      }
-    }
-  }, [_c('a', {
-    attrs: {
-      "href": "#/result"
-    }
-  }, [_vm._v("确认支付")])])])
+  })])])])]), _vm._v(" "), _vm._m(4)])
 },staticRenderFns: [function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('header', {
     staticClass: "cart-title"
@@ -25411,6 +25505,16 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
   }, [_vm._v("微信")]), _vm._v(" "), _c('p', {
     staticClass: "txt-con"
   }, [_vm._v("微信安全支付")])])])
+},function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('div', {
+    attrs: {
+      "id": "pay"
+    }
+  }, [_c('a', {
+    attrs: {
+      "href": "#/result"
+    }
+  }, [_vm._v("确认支付")])])
 }]}
 module.exports.render._withStripped = true
 if (false) {
