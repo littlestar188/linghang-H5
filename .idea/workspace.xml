@@ -3,7 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="66888d8c-89b5-45f8-b395-3b6e258576a9" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/js/components/cart.vue" afterPath="$PROJECT_DIR$/js/components/cart.vue" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/js/components/homeIndex.vue" afterPath="$PROJECT_DIR$/js/components/homeIndex.vue" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/js/dist/main.js" afterPath="$PROJECT_DIR$/js/dist/main.js" />
     </list>
@@ -21,8 +20,8 @@
       <file leaf-file-name="homeIndex.vue" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/js/components/homeIndex.vue">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="266">
-              <caret line="229" column="34" lean-forward="false" selection-start-line="229" selection-start-column="34" selection-end-line="229" selection-end-column="34" />
+            <state relative-caret-position="281">
+              <caret line="15" column="21" lean-forward="true" selection-start-line="15" selection-start-column="21" selection-end-line="15" selection-end-column="21" />
               <folding />
             </state>
           </provider>
@@ -150,6 +149,7 @@
     </navigator>
     <panes>
       <pane id="PackagesPane" />
+      <pane id="Scratches" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -214,12 +214,11 @@
           </PATH>
         </subPane>
       </pane>
-      <pane id="Scratches" />
       <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="F:/websource/wanlida/wanlida-farm-web" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
     <property name="nodejs_interpreter_path" value="C:/Program Files/nodejs/node" />
@@ -667,7 +666,10 @@
       <workItem from="1510793777093" duration="3267000" />
       <workItem from="1510818450692" duration="368000" />
       <workItem from="1510821032290" duration="196000" />
-      <workItem from="1510823035032" duration="8000" />
+      <workItem from="1510823035032" duration="457000" />
+      <workItem from="1510986302515" duration="305000" />
+      <workItem from="1510995235481" duration="60000" />
+      <workItem from="1510999122734" duration="88000" />
     </task>
     <task id="LOCAL-00001" summary="单选商品完成">
       <created>1510057465576</created>
@@ -725,11 +727,18 @@
       <option name="project" value="LOCAL" />
       <updated>1510821165015</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="接口调试完成最终点">
+      <created>1510823143246</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1510823143246</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="65025000" />
+    <option name="totallyTimeSpent" value="65927000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="1912" y="-8" width="1936" height="1056" extended-state="6" />
@@ -748,7 +757,7 @@
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.1369936" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.14179105" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -777,7 +786,8 @@
     <MESSAGE value="饮品列表数据缓存" />
     <MESSAGE value="接口调试完成" />
     <MESSAGE value="接口调试完成终点" />
-    <option name="LAST_COMMIT_MESSAGE" value="接口调试完成终点" />
+    <MESSAGE value="接口调试完成最终点" />
+    <option name="LAST_COMMIT_MESSAGE" value="接口调试完成最终点" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
@@ -1179,8 +1189,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/js/components/homeIndex.vue">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="266">
-          <caret line="229" column="34" lean-forward="false" selection-start-line="229" selection-start-column="34" selection-end-line="229" selection-end-column="34" />
+        <state relative-caret-position="281">
+          <caret line="15" column="21" lean-forward="true" selection-start-line="15" selection-start-column="21" selection-end-line="15" selection-end-column="21" />
           <folding />
         </state>
       </provider>

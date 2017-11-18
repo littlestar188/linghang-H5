@@ -29,13 +29,14 @@
 						<div class="goods-desc">
 							<h3 class="goods-name">{{o.drinkName}}</h3>
 							<div class="goods-price money">
-								<span v-for="d in JSON.parse(o.cups)" v-show="d.name =='小'"><i class="price-flag">￥</i><span class="single-price">{{d.price}}<span></span>
-
+								<!-- <span v-for="d in JSON.parse(o.cups)" v-show="d.name =='小'"><i class="price-flag">￥</i><span class="single-price">{{d.price}}<span></span> -->
 							</div>
 							<div class="goods-spec">
 								<!-- <button v-for="(d,eq) in JSON.parse(o.cups)" type="button" class="spec-item" v-bind:class="[{active:activeButton[index][cupSpecActiveFlag]}]" @click="select(index,eq,d.name)">{{d.name | smallCupFilter}}</button> -->
-								
-								<button type="button" v-for="(d,eq) in JSON.parse(o.cups)" class="spec-item" v-bind:class="buttonState" @click="choseone(d.index)">{{d.name|cupFilter}}</button>
+								<div v-for="(d,eq) in JSON.parse(o.cups)">
+								<button type="button"  class="spec-item" v-bind:class="[(index == linum && eq == buttonnum) ? 'active' : '']" @click="choseone(d,index,eq)">{{d.name|cupFilter}}</button>
+								<span v-show="(index == linum && eq == buttonnum) ? true : false"><i class="price-flag">￥</i><span class="single-price">{{d.price}}<span></span>
+								</div>
 							</div>
 						</div>
 						<div class="clear"></div>
@@ -73,7 +74,8 @@
                 drinkCups:[],
                 cupSpecFlag:"",
                 cupSpecActiveFlag:"",
-
+                linum:0,
+                buttonnum:0,
 				activeButton:[],
 				preNum:0,
 
@@ -159,8 +161,9 @@
                     })
                 })    
 			},
-			choseone:function(index){
-				this.buttonState(index,index)
+			choseone:function(obj,index,eq){
+				this.linum=index;
+				this.buttonnum=eq;
 			},
 			select:function(index,eq,type){
                 //console.log(type)

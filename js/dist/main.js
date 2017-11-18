@@ -24748,6 +24748,7 @@ module.exports = function listToStyles (parentId, list) {
 //
 //
 //
+//
 
 	module.exports = {
 		data:function(){
@@ -24766,7 +24767,8 @@ module.exports = function listToStyles (parentId, list) {
                 drinkCups:[],
                 cupSpecFlag:"",
                 cupSpecActiveFlag:"",
-
+                linum:0,
+                buttonnum:0,
 				activeButton:[],
 				preNum:0,
 
@@ -24852,8 +24854,9 @@ module.exports = function listToStyles (parentId, list) {
                     })
                 })    
 			},
-			choseone:function(index){
-				this.buttonState(index,index)
+			choseone:function(obj,index,eq){
+				this.linum=index;
+				this.buttonnum=eq;
 			},
 			select:function(index,eq,type){
                 //console.log(type)
@@ -25014,34 +25017,32 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       staticClass: "goods-name"
     }, [_vm._v(_vm._s(o.drinkName))]), _vm._v(" "), _c('div', {
       staticClass: "goods-price money"
-    }, _vm._l((JSON.parse(o.cups)), function(d) {
-      return _c('span', {
-        directives: [{
-          name: "show",
-          rawName: "v-show",
-          value: (d.name == '小'),
-          expression: "d.name =='小'"
-        }]
-      }, [_c('i', {
-        staticClass: "price-flag"
-      }, [_vm._v("￥")]), _c('span', {
-        staticClass: "single-price"
-      }, [_vm._v(_vm._s(d.price)), _c('span')])])
-    })), _vm._v(" "), _c('div', {
+    }), _vm._v(" "), _c('div', {
       staticClass: "goods-spec"
     }, _vm._l((JSON.parse(o.cups)), function(d, eq) {
-      return _c('button', {
+      return _c('div', [_c('button', {
         staticClass: "spec-item",
-        class: _vm.buttonState,
+        class: [(index == _vm.linum && eq == _vm.buttonnum) ? 'active' : ''],
         attrs: {
           "type": "button"
         },
         on: {
           "click": function($event) {
-            _vm.choseone(d.index)
+            _vm.choseone(d, index, eq)
           }
         }
-      }, [_vm._v(_vm._s(_vm._f("cupFilter")(d.name)))])
+      }, [_vm._v(_vm._s(_vm._f("cupFilter")(d.name)))]), _vm._v(" "), _c('span', {
+        directives: [{
+          name: "show",
+          rawName: "v-show",
+          value: ((index == _vm.linum && eq == _vm.buttonnum) ? true : false),
+          expression: "(index == linum && eq == buttonnum) ? true : false"
+        }]
+      }, [_c('i', {
+        staticClass: "price-flag"
+      }, [_vm._v("￥")]), _c('span', {
+        staticClass: "single-price"
+      }, [_vm._v(_vm._s(d.price)), _c('span')])])])
     }))]), _vm._v(" "), _c('div', {
       staticClass: "clear"
     })])
