@@ -19239,8 +19239,8 @@ var router = new VueRouter({
   	{path:'/result',component:result},
   	{path:'/cart',component:cart},
     {path:'/order',component:order},
-    {name:"router1",path:"/cart",component:cart},
-    {name:"router2",path:"/result",component:result}
+    {name:"router1",path:"/cart",component:result}
+    //{name:"router2",path:"/result",component:result}
   ]
 })
 
@@ -24649,7 +24649,7 @@ exports = module.exports = __webpack_require__(0)();
 
 
 // module
-exports.push([module.i, "\n.modal-bg{\n        position:absolute;\n        top:0;\n        z-index:99;\n        height:100%;\n        width:100%;\n       - background-color:#000;\n        -opacity:0.8;\n}\n.deviceBaseInfo {\n\t\tposition:fixed;\n\t\tz-index:9999;\n\t\ttop:0;\n\t\twidth: 100%;\n\t    -height:7rem;\n\t    padding:0 1rem;\n\t    font-weight: lighter;\n\t    text-align: left;\n\t    background: rgb(71,71,71);   \n\t    color: #fff;\n\t    box-sizing: border-box;\n}\n.deviceBaseInfo .info-header{\n\t    height: 1.95rem;\n        line-height: 1.95rem;\n}\n.deviceBaseInfo .info-content{\n        overflow:hidden;\n\t   - height:6rem;\n\t    font-size:0.6rem;\n\t    padding-bottom:0.5rem;\n}\n.deviceBaseInfo .info-content li{\n\t    width: 100%;\n\t    overflow: hidden;\n        margin-right: 1rem;\n        padding:0.3rem 0;\n}\n.deviceBaseInfo .info-content .tle{\n\t    float:left;\n}\n.deviceBaseInfo .info-content .con{\n        float:right;\n}\n.deviceBaseInfo .drop-down{\n\t\tposition: absolute;\n\t    top: 0.5rem;\n\t    right: 1rem;\n\t    width: 0.8rem;\n\t    height: 0.8rem;\n\t    background: url(/vue-demo/img/drop_down.png) no-repeat center;\n\t    background-size: 100% 100%;\n}\n.deviceBaseInfo .drop-up{\n    \t\tposition: absolute;\n    \t    top: 0.5rem;\n    \t    right: 1rem;\n    \t    width: 0.8rem;\n    \t    height: 0.8rem;\n    \t    background: url(/vue-demo/img/drop_up.png) no-repeat center;\n    \t    background-size: 100% 100%;\n}\n.content{\n\t\tpadding-top: 2.5rem;\n    \t-background-color: #eee;\n}\n.tip{\n\t\theight: 1.5rem;\n    \tline-height: 1.5rem;\n    \tpadding:0.2rem 0;\n    \tcolor:#444;\n\t\ttext-align:center;\n\t\tbackground-color: #fff;\n\t\tborder-top: 1px solid #eee; \n\t\tborder-bottom: 1px solid #eee;\n}\n.goodsCon {\n\t\ttext-align:center;\n\t\tpadding-bottom:2.5rem;\n\t\tbackground-color: #fff;\n}\n.goods-item {\t\t\n\t\tborder-bottom: 1px solid #eee;\n\t    padding: 0 0.75rem;\n\t    display: flex;\n}\n.goods-item .goods-picture {\n\t\tfloat: left;\n\t    width: 2.8rem;\n\t    height: 2.8rem;\n\t    margin: 0.55rem 0.75rem 0.55rem 0;\n\t    flex: 1;\n}\n.goods-item .goods-desc{\n\t\tfloat: left;\n\t    height: 100%;\n\t    padding-top: 0.2rem;\n\t    flex: 4;\n\t    position: relative;\n}\n.goods-item .goods-desc .goods-name {\n\t\tfont-size: 0.685rem;   \n    \tfont-weight: normal;\n\t\t-line-height:1.1rem;\n\t\ttext-align: left;\n\t\tpadding:0.55rem 0;\n        width: 10.8rem;\n        white-space: nowrap;\n        text-overflow: ellipsis;\n        overflow: hidden;\n}\n.goods-item .goods-desc .goods-price{\n\t\tdisplay:flex;\n\t\tjustify-content: space-between;\n\t\t-color: #D8232A;\n    \t-font-size: 0.75rem;\n}\n.goods-item .goods-desc .goods-price .price-flag{\n\t\t-font-size:0.5rem;\n}\n.goods-item .goods-desc .goods-spec{\n\t\tposition: absolute;\n\t    top: 2rem;\n\t    right: 0;\n}\n.goods-item .goods-desc .goods-spec .spec-item{\n\t\tfont-size: 0.55rem;\n\t    background-color: #fff;\n\t    border: 1px solid #ddd;\n\t    border-radius: 2px;\n\t    display: inline-block;\n\t    padding: 0.25rem 0.65rem;\n\t    margin:0 0.1rem;\n}\n.goods-item .goods-desc .goods-spec .spec-item:active{\n\t\t-background-color:#eee;\n\t\t-color:#fff;\n}\n\t/*.goods-item .goods-desc .goods-spec .spec-item:hover,*/\n.goods-item .goods-desc .goods-spec .spec-item.active{\n\t\tbackground-color:#D8232A;\n\t\tcolor:#fff;\n}\n#buy .totalPrice{\n        justify-content: space-between;\n        color: /* #D8232A */#000;\n        font-size: 0.85rem;\n        width: 18%;\n        float: left;\n        height: 2.2rem;\n        line-height: 2.2rem;\n        margin-left: 0.3rem;\n}\n#buy.active .totalPrice{\n        color:#D8232A;\n}\n#buy a.cart{\n    \tfloat: right;\n        width: 4.25rem;\n        height: 2.2rem;\n        line-height: 2.2rem;\n        padding: 0 0.2rem;\n        text-align: center;\n        text-decoration: none;\n        color: #fff;\n        background-color: #ccc;\n}\n#buy.active a.cart{\n        background-color:#D8232A\n}\n\n", ""]);
+exports.push([module.i, "\n.modal-bg{\n        position:absolute;\n        top:0;\n        z-index:99;\n        height:100%;\n        width:100%;\n       - background-color:#000;\n        -opacity:0.8;\n}\n.deviceBaseInfo {\n\t\tposition:fixed;\n\t\tz-index:9999;\n\t\ttop:0;\n\t\twidth: 100%;\n\t    -height:7rem;\n\t    padding:0 1rem;\n\t    font-weight: lighter;\n\t    text-align: left;\n\t    background: rgb(71,71,71);   \n\t    color: #fff;\n\t    box-sizing: border-box;\n}\n.deviceBaseInfo .info-header{\n\t    height: 1.95rem;\n        line-height: 1.95rem;\n}\n.deviceBaseInfo .info-content{\n        overflow:hidden;\n\t   - height:6rem;\n\t    font-size:0.6rem;\n\t    padding-bottom:0.5rem;\n}\n.deviceBaseInfo .info-content li{\n\t    width: 100%;\n\t    overflow: hidden;\n        margin-right: 1rem;\n        padding:0.3rem 0;\n}\n.deviceBaseInfo .info-content .tle{\n\t    float:left;\n}\n.deviceBaseInfo .info-content .con{\n        float:right;\n}\n.deviceBaseInfo .drop-down{\n\t\tposition: absolute;\n\t    top: 0.5rem;\n\t    right: 1rem;\n\t    width: 0.8rem;\n\t    height: 0.8rem;\n\t    background: url(/vue-demo/img/drop_down.png) no-repeat center;\n\t    background-size: 100% 100%;\n}\n.deviceBaseInfo .drop-up{\n    \t\tposition: absolute;\n    \t    top: 0.5rem;\n    \t    right: 1rem;\n    \t    width: 0.8rem;\n    \t    height: 0.8rem;\n    \t    background: url(/vue-demo/img/drop_up.png) no-repeat center;\n    \t    background-size: 100% 100%;\n}\n.content{\n\t\tpadding-top: 2.5rem;\n    \t-background-color: #eee;\n}\n.tip{\n\t\theight: 1.5rem;\n    \tline-height: 1.5rem;\n    \tpadding:0.2rem 0;\n    \tcolor:#444;\n\t\ttext-align:center;\n\t\tbackground-color: #fff;\n\t\tborder-top: 1px solid #eee; \n\t\tborder-bottom: 1px solid #eee;\n}\n.goodsCon {\n\t\ttext-align:center;\n\t\tpadding-bottom:2.5rem;\n\t\tbackground-color: #fff;\n}\n.goods-item {\t\t\n\t\tborder-bottom: 1px solid #eee;\n\t    padding: 0 0.75rem;\n\t    display: flex;\n}\n.goods-item .goods-picture {\n\t\tfloat: left;\n\t    width: 2.8rem;\n\t    height: 2.8rem;\n\t    margin: 0.55rem 0.75rem 0.55rem 0;\n\t    flex: 1;\n}\n.goods-item .goods-desc{\n\t\tfloat: left;\n\t    height: 100%;\n\t    padding-top: 0.2rem;\n\t    flex: 4;\n\t    position: relative;\n}\n.goods-item .goods-desc .goods-name {\n\t\tfont-size: 0.685rem;   \n    \tfont-weight: normal;\n\t\t-line-height:1.1rem;\n\t\ttext-align: left;\n\t\tpadding:0.55rem 0;\n        width: 10.8rem;\n        white-space: nowrap;\n        text-overflow: ellipsis;\n        overflow: hidden;\n}\n.goods-item .goods-spec>div{\n\t\theight:100%;\n}\n.goods-item .goods-spec .money{\n\t\tposition:absolute;\n\t\tleft:0;\n\t\ttop:0.3rem;\n}\n\t/* .goods-item .goods-spec .single-price{\n\t\tdisplay:flex;\n\t\tjustify-content: space-between;\n\t} */\n\t/* .goods-item .goods-spec .price-flag{\n\t\tfont-size:0.5rem;\n\t} */\n.goods-item .goods-desc .goods-spec{\n\t\tposition: absolute;\n\t    top: 2rem;\n\t    right: 0;\n\t    width:100%;\n\t    height:100%;\n}\n.goods-item .goods-desc .goods-spec .spec-item{\n\t\tposition: absolute;\n    \tright: 0;\n\t\tfont-size: 0.55rem;\n\t    background-color: #fff;\n\t    border: 1px solid #ddd;\n\t    border-radius: 2px;\n\t    display: inline-block;\n\t    padding: 0.25rem 0.65rem;\n\t    margin:0 0.1rem;\n}\n.goods-item .goods-desc .goods-spec .spec-item:active{\n\t\t-background-color:#eee;\n\t\t-color:#fff;\n}\n\t/*.goods-item .goods-desc .goods-spec .spec-item:hover,*/\n.goods-item .goods-desc .goods-spec .spec-item.active{\n\t\tbackground-color:#D8232A;\n\t\tcolor:#fff;\n}\n#buy .totalPrice{\n        justify-content: space-between;\n        color: /* #D8232A */#000;\n        font-size: 0.85rem;\n        width: 18%;\n        float: left;\n        height: 2.2rem;\n        line-height: 2.2rem;\n        margin-left: 0.3rem;\n}\n#buy.active .totalPrice{\n        color:#D8232A;\n}\n#buy a.cart{\n    \tfloat: right;\n        width: 4.25rem;\n        height: 2.2rem;\n        line-height: 2.2rem;\n        padding: 0 0.2rem;\n        text-align: center;\n        text-decoration: none;\n        color: #fff;\n        background-color: #ccc;\n}\n#buy.active a.cart{\n        background-color:#D8232A\n}\n\n", ""]);
 
 // exports
 
@@ -24747,8 +24747,6 @@ module.exports = function listToStyles (parentId, list) {
 //
 //
 //
-//
-//
 
 	module.exports = {
 		data:function(){
@@ -24759,6 +24757,8 @@ module.exports = function listToStyles (parentId, list) {
 				url:"javascript:void(0)",
 				dropDownClass:"drop-down",
                 dropUpClass:"drop-up",
+                right:3,
+                top:0,
 
                 sn:"ff556yyuidde",
                 drinkListData:"",
@@ -24767,12 +24767,13 @@ module.exports = function listToStyles (parentId, list) {
                 drinkCups:[],
                 cupSpecFlag:"",
                 cupSpecActiveFlag:"",
-                linum:0,
-                buttonnum:0,
+                listinit:0,
+                linum:-1,
+                buttonnum:-1,
 				activeButton:[],
 				preNum:0,
 
-				totalPriceNum:0,
+				totalPriceNum:parseFloat(0).toFixed(2),
 
                deviceUId:"",
                drinkCode:"",
@@ -24780,16 +24781,22 @@ module.exports = function listToStyles (parentId, list) {
 
 			}
 		},
-		computed:{
+		/*computed:{
 			buttonState:function(index){
 				console.log(index)
 				return {
 					active:false
 				}
 			}
-		},
+		},*/
 		methods:{
-			createUID:function(){
+			ready:function(){
+
+			},
+			getSN:function(){
+
+			},
+			createUID:function(){			
                 this.$http.get("/drinkOrder-controller/api/drinkOrder/generateCode")
                     .then(function(response){
                      this.deviceUId = response.data.data;                    
@@ -24803,90 +24810,57 @@ module.exports = function listToStyles (parentId, list) {
                    this.setStorage("drinkListData",response.data.data);
                    this.goodsHandle(this.goods);
                    // console.log(this.goods)
-
-                   /*var self = this;
-
-                   this.drinkCups = [];
-                   this.activeButton = [];
-                   this.cupSpecIs =[];
-                   this.cupSpecActiveFlag="";
-
-                   this.goods.forEach(function(item){
-                        self.drinkCups = JSON.parse(item.cups)
-                        console.log(self.drinkCups)
-                        self.activeButton.push({
-                        	smallActive:false,
-                        	bigActive:false
-                        })
-                        //饮品规格初始化定义class
-
-
-
-                        self.cupSpecFlag ="";
-                        self.drinkCups.forEach(function(cupItem){
-                            if(cupItem.name == "小"){
-                                self.cupSpecActiveFlag = "smallActive";
-                                self.cupSpecFlag = 'small';
-                            }
-                            if(cupItem.name == "大"){
-                                 self.cupSpecActiveFlag = "bigActive";
-                                 self.cupSpecFlag = 'big';
-                            }
-
-
-                           // console.log(self.cupSpecActiveFlag, self.cupSpecIs)
-                        })
-
-                    })*/
-             })
+             	})
 			},
 			goodsHandle:function(){
 				var self = this;
 
                 this.drinkCups = [];
               
-               this.goods.forEach(function(item){
+                this.goods.forEach(function(item){
                     self.drinkCups = JSON.parse(item.cups)
-                    console.log(self.drinkCups)
+                    //console.log(self.drinkCups)
                     self.activeButton.push({
                     	smallActive:false,
                     	bigActive:false
                     })
                 })    
 			},
-			choseone:function(obj,index,eq){
+			choseone:function(obj,drinkObj,index,eq){
+				this.listinit=1;
+				//console.log(obj,drinkObj)
 				this.linum=index;
 				this.buttonnum=eq;
-			},
-			select:function(index,eq,type){
-                //console.log(type)
-                console.log(index,eq)
-			    this.isActive = true;
-
-				this.activeButton[this.preNum].smallActive = false;
-				this.activeButton[this.preNum].bigActive = false;
-				if(type == 'small'){
-					this.activeButton[index].smallActive = true;
-					this.activeButton[index].bigActive = false;
-				}else{
-					this.activeButton[index].smallActive = false;
-					this.activeButton[index].bigActive = true;
-				}
-				this.preNum = index;
-				this.url = "#/cart";
-			},
+				
+				this.totalPriceNum = parseFloat(obj.price).toFixed(2);
+				this.drinkCode = obj.code;
+				this.drinkId = drinkObj.id;
+				this.isActive = true;				
+			},			
             createOrder:function(isActive){
             	console.log("createOrder"+this.deviceUId)
                 //if(isActive){
                  this.$http.post("/drinkOrder-controller/api/drinkOrder/order",{},{headers:{'Content-Type': 'application/x-www-form-urlencoded'}, params:{
 					"sn":this.sn,
 					"uid":this.deviceUId,
-					"drinkId":"1ef27034f9394930b43b810a0ba2286d",
-					"drinkCode":"leee"}}
+					"drinkId":this.drinkId,
+					"drinkCode":this.drinkCode}}
 				
 				).then(function(response){
-
-                    this.$router.push({name:'router1',params:{deviceUId:this.deviceUId,sn:this.sn}}) ;                  
+					console.log(response.data.data)
+					var orderOne = response.data.data;
+                    this.$router.push({
+                    	name:'router1',
+                    	params:{
+	                    	deviceUId:orderOne.uId,
+	                    	sn:orderOne.deviceSN,
+	                    	drinkId:orderOne.drinkId,
+	                    	drinkCode:orderOne.drinkCode,
+	                    	drinkName:orderOne.drinkName,
+	                    	//drinkCup:orderOne.drinkCup,
+	                    	drinkPrice:orderOne.drinkPrice
+                    	}
+                    }) ;                  
                 });	
                 
                // }
@@ -24923,17 +24897,13 @@ module.exports = function listToStyles (parentId, list) {
             
             },	
 			refresh:function(){
+
 				location.reload();
 			}
 			
 		},
 		filters:{
 			//过滤器
-			priceJudge:function(value){
-                if(!value){
-                    return parseFloat(0).toFixed(2);
-                }
-            },
             cupFilter:function(value){
                 if(value == "小"){
                     return "小杯";
@@ -24953,6 +24923,7 @@ module.exports = function listToStyles (parentId, list) {
 
 			//this.getDataGood();
 			this.createUID();
+			//localStorage.removeItem("drinkListData");
             this.judgeStorage("drinkListData");
 		}
 	}
@@ -25016,33 +24987,48 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     }, [_c('h3', {
       staticClass: "goods-name"
     }, [_vm._v(_vm._s(o.drinkName))]), _vm._v(" "), _c('div', {
-      staticClass: "goods-price money"
-    }), _vm._v(" "), _c('div', {
       staticClass: "goods-spec"
     }, _vm._l((JSON.parse(o.cups)), function(d, eq) {
       return _c('div', [_c('button', {
         staticClass: "spec-item",
         class: [(index == _vm.linum && eq == _vm.buttonnum) ? 'active' : ''],
+        style: ({
+          right: eq * _vm.right + 'rem',
+          top: 0
+        }),
         attrs: {
           "type": "button"
         },
         on: {
           "click": function($event) {
-            _vm.choseone(d, index, eq)
+            _vm.choseone(d, o, index, eq)
           }
         }
       }, [_vm._v(_vm._s(_vm._f("cupFilter")(d.name)))]), _vm._v(" "), _c('span', {
         directives: [{
           name: "show",
           rawName: "v-show",
-          value: ((index == _vm.linum && eq == _vm.buttonnum) ? true : false),
-          expression: "(index == linum && eq == buttonnum) ? true : false"
-        }]
+          value: ((eq == JSON.parse(o.cups).length - 1 && index !== _vm.linum)),
+          expression: "(eq==JSON.parse(o.cups).length-1 && index !== linum)"
+        }],
+        staticClass: "money"
       }, [_c('i', {
         staticClass: "price-flag"
       }, [_vm._v("￥")]), _c('span', {
         staticClass: "single-price"
-      }, [_vm._v(_vm._s(d.price)), _c('span')])])])
+      }, [_vm._v(_vm._s(d.price))])]), _vm._v(" "), _c('span', {
+        directives: [{
+          name: "show",
+          rawName: "v-show",
+          value: ((index == _vm.linum && eq == _vm.buttonnum)),
+          expression: "(index == linum && eq == buttonnum)"
+        }],
+        staticClass: "money"
+      }, [_c('i', {
+        staticClass: "price-flag"
+      }, [_vm._v("￥")]), _c('span', {
+        staticClass: "single-price"
+      }, [_vm._v(_vm._s(d.price))])])])
     }))]), _vm._v(" "), _c('div', {
       staticClass: "clear"
     })])
@@ -25057,7 +25043,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     staticClass: "totalPrice"
   }, [_c('i', {
     staticClass: "price-flag"
-  }, [_vm._v("￥")]), _vm._v(_vm._s(_vm._f("priceJudge")(_vm.totalPriceNum)))]), _vm._v(" "), _c('a', {
+  }, [_vm._v("￥")]), _vm._v(_vm._s(_vm.totalPriceNum))]), _vm._v(" "), _c('a', {
     staticClass: "cart",
     on: {
       "click": function($event) {
@@ -25386,6 +25372,9 @@ exports.push([module.i, "\n#pay{\n\t\ttext-align:center;\n\t\tbackground-color:#
 				selectedClass:"selected",
 				unselectedClass:"unselected",
 
+				oneName:"",
+				oneCup:"",
+				onePrice:"",
 				deviceUId:"",
 				sn:""	
 			}
@@ -25396,6 +25385,9 @@ exports.push([module.i, "\n#pay{\n\t\ttext-align:center;\n\t\tbackground-color:#
 				console.log('deviceUId:'+this.$route.params.deviceUId);
                 this.deviceUId=this.$route.params.deviceUId;
                 this.sn = this.$route.params.sn;
+                this.oneName = this.$route.params.drinkName;
+               // this.oneCup = "("+this.$route.params.drinkCup+")";
+                this.onePrice = parseFloat(this.$route.params.drinkPrice).toFixed(2);
 			},
 			select:function(index){
                 console.log(this.isActive)
@@ -25437,7 +25429,19 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     }
   }, [_vm._m(0), _vm._v(" "), _c('div', {
     staticClass: "content"
-  }, [_vm._m(1), _vm._v(" "), _c('div', {
+  }, [_c('ul', {
+    staticClass: "order-content"
+  }, [_c('li', {
+    staticClass: "con-item"
+  }, [_c('label', [_vm._v("订单名称:")]), _vm._v(" "), _c('span', [_vm._v(_vm._s(_vm.oneName) + " "), _c('i', {
+    staticClass: "order-spec"
+  }, [_vm._v(_vm._s(_vm.oneCup))])])]), _vm._v(" "), _c('li', {
+    staticClass: "con-item"
+  }, [_c('label', [_vm._v("订单金额:")]), _vm._v(" "), _c('span', {
+    staticClass: "money"
+  }, [_c('span', [_c('i', {
+    staticClass: "price-flag"
+  }, [_vm._v("￥")]), _vm._v(_vm._s(_vm.onePrice))])])])]), _vm._v(" "), _c('div', {
     staticClass: "triangle"
   }), _vm._v(" "), _c('div', {
     staticClass: "payment"
@@ -25445,7 +25449,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     staticClass: "payment-tip"
   }, [_vm._v("请选择支付方式")]), _vm._v(" "), _c('ul', [_c('li', {
     staticClass: "ali payment-item"
-  }, [_vm._m(2), _vm._v(" "), _c('div', {
+  }, [_vm._m(1), _vm._v(" "), _c('div', {
     staticClass: "right-con",
     class: [_vm.isActive ? _vm.selectedClass : _vm.unselectedClass],
     on: {
@@ -25455,7 +25459,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     }
   })]), _vm._v(" "), _c('li', {
     staticClass: "weixin payment-item"
-  }, [_vm._m(3), _vm._v(" "), _c('div', {
+  }, [_vm._m(2), _vm._v(" "), _c('div', {
     staticClass: "right-con",
     class: [!_vm.isActive ? _vm.selectedClass : _vm.unselectedClass],
     on: {
@@ -25463,25 +25467,11 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
         _vm.select()
       }
     }
-  })])])])]), _vm._v(" "), _vm._m(4)])
+  })])])])]), _vm._v(" "), _vm._m(3)])
 },staticRenderFns: [function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('header', {
     staticClass: "cart-title"
   }, [_c('h3', [_vm._v("支付订单")])])
-},function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('ul', {
-    staticClass: "order-content"
-  }, [_c('li', {
-    staticClass: "con-item"
-  }, [_c('label', [_vm._v("订单名称:")]), _vm._v(" "), _c('span', [_vm._v("意式浓缩咖啡 "), _c('i', {
-    staticClass: "order-spec"
-  }, [_vm._v("(大杯)")])])]), _vm._v(" "), _c('li', {
-    staticClass: "con-item"
-  }, [_c('label', [_vm._v("订单金额:")]), _vm._v(" "), _c('span', {
-    staticClass: "money"
-  }, [_c('span', [_c('i', {
-    staticClass: "price-flag"
-  }, [_vm._v("￥")]), _vm._v("12.00")])])])])
 },function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('div', {
     staticClass: "left-con"

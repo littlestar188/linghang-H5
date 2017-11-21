@@ -5,12 +5,12 @@
 			<ul class="order-content">
 			<li class="con-item">
 				<label>订单名称:</label>
-				<span>意式浓缩咖啡&nbsp;<i class="order-spec">(大杯)</i></span>
+				<span>{{oneName}}&nbsp;<i class="order-spec">{{oneCup}}</i></span>
 			</li>
 			<li class="con-item">
 				<label>订单金额:</label>
 				<span class="money">
-					<span><i class="price-flag">￥</i>12.00</span>
+					<span><i class="price-flag">￥</i>{{onePrice}}</span>
 				</span>
 			</li>
 			</ul>
@@ -55,6 +55,9 @@
 				selectedClass:"selected",
 				unselectedClass:"unselected",
 
+				oneName:"",
+				oneCup:"",
+				onePrice:"",
 				deviceUId:"",
 				sn:""	
 			}
@@ -65,6 +68,9 @@
 				console.log('deviceUId:'+this.$route.params.deviceUId);
                 this.deviceUId=this.$route.params.deviceUId;
                 this.sn = this.$route.params.sn;
+                this.oneName = this.$route.params.drinkName;
+               // this.oneCup = "("+this.$route.params.drinkCup+")";
+                this.onePrice = parseFloat(this.$route.params.drinkPrice).toFixed(2);
 			},
 			select:function(index){
                 console.log(this.isActive)

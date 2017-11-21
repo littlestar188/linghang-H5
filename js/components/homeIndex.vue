@@ -28,14 +28,12 @@
 						<img src="http://192.168.1.98/vue-demo/img/coffe.png" class="goods-picture">
 						<div class="goods-desc">
 							<h3 class="goods-name">{{o.drinkName}}</h3>
-							<div class="goods-price money">
-								<!-- <span v-for="d in JSON.parse(o.cups)" v-show="d.name =='小'"><i class="price-flag">￥</i><span class="single-price">{{d.price}}<span></span> -->
-							</div>
-							<div class="goods-spec">
-								<!-- <button v-for="(d,eq) in JSON.parse(o.cups)" type="button" class="spec-item" v-bind:class="[{active:activeButton[index][cupSpecActiveFlag]}]" @click="select(index,eq,d.name)">{{d.name | smallCupFilter}}</button> -->
+							
+							<div  class="goods-spec">
 								<div v-for="(d,eq) in JSON.parse(o.cups)">
-								<button type="button"  class="spec-item" v-bind:class="[(index == linum && eq == buttonnum) ? 'active' : '']" @click="choseone(d,index,eq)">{{d.name|cupFilter}}</button>
-								<span v-show="(index == linum && eq == buttonnum) ? true : false"><i class="price-flag">￥</i><span class="single-price">{{d.price}}<span></span>
+								<button type="button" class="spec-item"  v-bind:style="{right:eq*right+'rem',top:0}" v-bind:class="[(index == linum && eq == buttonnum) ? 'active' : '']" @click="choseone(d,o,index,eq)" >{{d.name|cupFilter}}</button>
+								<span class="money" v-show="(eq==JSON.parse(o.cups).length-1 && index !== linum)"><i class="price-flag">￥</i><span class="single-price">{{d.price}}</span></span>
+								<span class="money" v-show="(index == linum && eq == buttonnum)"><i class="price-flag">￥</i><span class="single-price">{{d.price}}</span></span>
 								</div>
 							</div>
 						</div>
@@ -47,7 +45,7 @@
 			<!--</mt-loadmore>-->
 		</div>
 		<div id="buy" v-bind:class="{active:isActive}">
-			<div class="totalPrice"><i class="price-flag">￥</i>{{totalPriceNum | priceJudge}}</div>
+			<div class="totalPrice"><i class="price-flag">￥</i>{{totalPriceNum}}</div><!--  | priceJudge -->
 			<!--<router-link v-bind:to="{name:'router1',params:{deviceUId:uId}}">
 
 			</router-link>-->
@@ -66,6 +64,8 @@
 				url:"javascript:void(0)",
 				dropDownClass:"drop-down",
                 dropUpClass:"drop-up",
+                right:3,
+                top:0,
 
                 sn:"ff556yyuidde",
                 drinkListData:"",
@@ -74,12 +74,13 @@
                 drinkCups:[],
                 cupSpecFlag:"",
                 cupSpecActiveFlag:"",
-                linum:0,
-                buttonnum:0,
+                listinit:0,
+                linum:-1,
+                buttonnum:-1,
 				activeButton:[],
 				preNum:0,
 
-				totalPriceNum:0,
+				totalPriceNum:parseFloat(0).toFixed(2),
 
                deviceUId:"",
                drinkCode:"",
@@ -87,16 +88,22 @@
 
 			}
 		},
-		computed:{
+		/*computed:{
 			buttonState:function(index){
 				console.log(index)
 				return {
 					active:false
 				}
 			}
-		},
+		},*/
 		methods:{
-			createUID:function(){
+			ready:function(){
+
+			},
+			getSN:function(){
+
+			},
+			createUID:function(){			
                 this.$http.get("/drinkOrder-controller/api/drinkOrder/generateCode")
                     .then(function(response){
                      this.deviceUId = response.data.data;                    
@@ -110,90 +117,57 @@
                    this.setStorage("drinkListData",response.data.data);
                    this.goodsHandle(this.goods);
                    // console.log(this.goods)
-
-                   /*var self = this;
-
-                   this.drinkCups = [];
-                   this.activeButton = [];
-                   this.cupSpecIs =[];
-                   this.cupSpecActiveFlag="";
-
-                   this.goods.forEach(function(item){
-                        self.drinkCups = JSON.parse(item.cups)
-                        console.log(self.drinkCups)
-                        self.activeButton.push({
-                        	smallActive:false,
-                        	bigActive:false
-                        })
-                        //饮品规格初始化定义class
-
-
-
-                        self.cupSpecFlag ="";
-                        self.drinkCups.forEach(function(cupItem){
-                            if(cupItem.name == "小"){
-                                self.cupSpecActiveFlag = "smallActive";
-                                self.cupSpecFlag = 'small';
-                            }
-                            if(cupItem.name == "大"){
-                                 self.cupSpecActiveFlag = "bigActive";
-                                 self.cupSpecFlag = 'big';
-                            }
-
-
-                           // console.log(self.cupSpecActiveFlag, self.cupSpecIs)
-                        })
-
-                    })*/
-             })
+             	})
 			},
 			goodsHandle:function(){
 				var self = this;
 
                 this.drinkCups = [];
               
-               this.goods.forEach(function(item){
+                this.goods.forEach(function(item){
                     self.drinkCups = JSON.parse(item.cups)
-                    console.log(self.drinkCups)
+                    //console.log(self.drinkCups)
                     self.activeButton.push({
                     	smallActive:false,
                     	bigActive:false
                     })
                 })    
 			},
-			choseone:function(obj,index,eq){
+			choseone:function(obj,drinkObj,index,eq){
+				this.listinit=1;
+				//console.log(obj,drinkObj)
 				this.linum=index;
 				this.buttonnum=eq;
-			},
-			select:function(index,eq,type){
-                //console.log(type)
-                console.log(index,eq)
-			    this.isActive = true;
-
-				this.activeButton[this.preNum].smallActive = false;
-				this.activeButton[this.preNum].bigActive = false;
-				if(type == 'small'){
-					this.activeButton[index].smallActive = true;
-					this.activeButton[index].bigActive = false;
-				}else{
-					this.activeButton[index].smallActive = false;
-					this.activeButton[index].bigActive = true;
-				}
-				this.preNum = index;
-				this.url = "#/cart";
-			},
+				
+				this.totalPriceNum = parseFloat(obj.price).toFixed(2);
+				this.drinkCode = obj.code;
+				this.drinkId = drinkObj.id;
+				this.isActive = true;				
+			},			
             createOrder:function(isActive){
             	console.log("createOrder"+this.deviceUId)
                 //if(isActive){
                  this.$http.post("/drinkOrder-controller/api/drinkOrder/order",{},{headers:{'Content-Type': 'application/x-www-form-urlencoded'}, params:{
 					"sn":this.sn,
 					"uid":this.deviceUId,
-					"drinkId":"1ef27034f9394930b43b810a0ba2286d",
-					"drinkCode":"leee"}}
+					"drinkId":this.drinkId,
+					"drinkCode":this.drinkCode}}
 				
 				).then(function(response){
-
-                    this.$router.push({name:'router1',params:{deviceUId:this.deviceUId,sn:this.sn}}) ;                  
+					console.log(response.data.data)
+					var orderOne = response.data.data;
+                    this.$router.push({
+                    	name:'router1',
+                    	params:{
+	                    	deviceUId:orderOne.uId,
+	                    	sn:orderOne.deviceSN,
+	                    	drinkId:orderOne.drinkId,
+	                    	drinkCode:orderOne.drinkCode,
+	                    	drinkName:orderOne.drinkName,
+	                    	//drinkCup:orderOne.drinkCup,
+	                    	drinkPrice:orderOne.drinkPrice
+                    	}
+                    }) ;                  
                 });	
                 
                // }
@@ -230,17 +204,13 @@
             
             },	
 			refresh:function(){
+
 				location.reload();
 			}
 			
 		},
 		filters:{
 			//过滤器
-			priceJudge:function(value){
-                if(!value){
-                    return parseFloat(0).toFixed(2);
-                }
-            },
             cupFilter:function(value){
                 if(value == "小"){
                     return "小杯";
@@ -260,6 +230,7 @@
 
 			//this.getDataGood();
 			this.createUID();
+			//localStorage.removeItem("drinkListData");
             this.judgeStorage("drinkListData");
 		}
 	}
@@ -369,6 +340,7 @@
 	    flex: 4;
 	    position: relative;
 	}
+	
 	.goods-item .goods-desc .goods-name {
 		font-size: 0.685rem;   
     	font-weight: normal;
@@ -381,21 +353,32 @@
         overflow: hidden;
 		
 	}
-	.goods-item .goods-desc .goods-price{
+	.goods-item .goods-spec>div{
+		height:100%;
+	}
+	.goods-item .goods-spec .money{
+		position:absolute;
+		left:0;
+		top:0.3rem;
+	}
+	/* .goods-item .goods-spec .single-price{
 		display:flex;
 		justify-content: space-between;
-		-color: #D8232A;
-    	-font-size: 0.75rem;
-	}
-	.goods-item .goods-desc .goods-price .price-flag{
-		-font-size:0.5rem;
-	}
+	} */
+	/* .goods-item .goods-spec .price-flag{
+		font-size:0.5rem;
+	} */
 	.goods-item .goods-desc .goods-spec{
 		position: absolute;
 	    top: 2rem;
 	    right: 0;
+	    width:100%;
+	    height:100%;
 	}
+	
 	.goods-item .goods-desc .goods-spec .spec-item{
+		position: absolute;
+    	right: 0;
 		font-size: 0.55rem;
 	    background-color: #fff;
 	    border: 1px solid #ddd;
@@ -403,6 +386,7 @@
 	    display: inline-block;
 	    padding: 0.25rem 0.65rem;
 	    margin:0 0.1rem;
+	   
 	}
 	.goods-item .goods-desc .goods-spec .spec-item:active{
 		-background-color:#eee;

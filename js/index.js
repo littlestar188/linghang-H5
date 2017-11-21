@@ -30,8 +30,8 @@ var router = new VueRouter({
   	{path:'/result',component:result},
   	{path:'/cart',component:cart},
     {path:'/order',component:order},
-    {name:"router1",path:"/cart",component:cart},
-    {name:"router2",path:"/result",component:result}
+    {name:"router1",path:"/cart",component:result}
+    //{name:"router2",path:"/result",component:result}
   ]
 })
 
