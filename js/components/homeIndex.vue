@@ -7,11 +7,19 @@
                 <ul v-if="show" class="info-content">
                     <li>
                         <span class="tle">SN码</span>
-                        <span class="con">10398034355676793889XXXX</span>
+                        <span class="con">{{sn}}</span>
                     </li>
                     <li>
-                        <span class="tle">SN码</span>
-                        <span class="con">10398034355676793889XXXX</span>
+                        <span class="tle">是否在线</span>
+                        <span class="con">{{online|onlineFilter}}</span>
+                    </li>
+                    <li>
+                        <span class="tle">当天出杯数量</span>
+                        <span class="con">{{dailyCupsNumber}}</span>
+                    </li>
+                    <li>
+                        <span class="tle">历史出杯数量</span>
+                        <span class="con">{{historyCupsNumber}}</span>
                     </li>
                 </ul>
 			</transition>
@@ -25,13 +33,13 @@
 				<ul>
 					<li v-for="(o,index) in goods" class="goods-item">
 						<!--<img v-bind:src="o.goodsListImg" class="goods-picture"/>-->
-						<img src="http://192.168.1.98/vue-demo/img/coffe.png" class="goods-picture">
+						<img src="/drinkOrder/img/coffe.png" class="goods-picture">
 						<div class="goods-desc">
 							<h3 class="goods-name">{{o.drinkName}}</h3>
 							
 							<div  class="goods-spec">
 								<div v-for="(d,eq) in JSON.parse(o.cups)">
-								<button type="button" class="spec-item"  v-bind:style="{right:eq*right+'rem',top:0}" v-bind:class="[(index == linum && eq == buttonnum) ? 'active' : '']" @click="choseone(d,o,index,eq)" >{{d.name|cupFilter}}</button>
+								<button type="button" class="spec-item"  v-bind:style="{right:eq*right+'rem',top:0}" v-bind:class="[(index == linum && eq == buttonnum) ? 'active' : '']" @click="choseone(d,o,index,eq)" >{{d.name}}</button>
 								<span class="money" v-show="(eq==JSON.parse(o.cups).length-1 && index !== linum)"><i class="price-flag">￥</i><span class="single-price">{{d.price}}</span></span>
 								<span class="money" v-show="(index == linum && eq == buttonnum)"><i class="price-flag">￥</i><span class="single-price">{{d.price}}</span></span>
 								</div>
@@ -67,7 +75,12 @@
                 right:3,
                 top:0,
 
-                sn:"ff556yyuidde",
+                sn:"",
+                online:"",
+                asked_false:false,
+                asked_true:false,
+                dailyCupsNumber:"",
+                historyCupsNumber:"",
                 drinkListData:"",
 				goods:{},
 				drinkList:{},
@@ -96,91 +109,219 @@
 				}
 			}
 		},*/
-		methods:{
-			ready:function(){
-
-			},
+		methods:{			
 			getSN:function(){
+			   var href = location.href.split("?");
+			   var condition = href.slice(1,href.length);
+			   //console.log(condition,href)		  
+			   if(condition.length==0){
+			   	  alert("SN码不存在！");
+			   	  return;
+			   }else{
+			   		
+			   	 	this.sn = condition[0].split("=")[1];
+			   		console.log(href,condition,this.sn);
 
+				    this.getCupNumer();
+				   
+					//localStorage.removeItem("drinkListData");
+					/*var orignalSetItem = localStorage.setItem;
+				    localStorage.setItem = function(key,newValue){
+				        var setItemEvent = new Event("setItemEvent");
+				        setItemEvent.newValue = newValue;
+				        window.dispatchEvent(setItemEvent);
+				        orignalSetItem.apply(this,arguments);
+				    }*/
+				  this.judgeStorage("generateCode");
+		         // this.judgeStorage("drinkListData");
+
+			   };
+			   
+			},
+			onlineJudge:function(){
+				this.$http.get("/capital-controller//external/device/getDeviceOnlineStatus?sn="+this.sn+"&generateCode="+this.deviceUId)
+                    .then(function(response){
+	                    console.log(response.data.data)
+	                    this.online = response.data.online;
+	                    this.lock =  response.data.lock;
+	                    this.error = response.data.error;
+	                    if(!this.online){
+	                    	alert("该设备处于离线状态，不可操作！");
+	                    	this.asked_false=true;
+	                     	this.isActive = false;
+	                     	return;	
+	                    }else{
+	                    	if(this.error){
+	                    		alert("该设备处于离线状态，不可操作！");
+		                    	this.asked_false=true;
+		                     	this.isActive = false;
+		                     	return;	
+	                    	}else{
+	                    		if(this.lock){
+	                    			alert("该设备处于离线状态，不可操作！");
+			                    	this.asked_false=true;
+			                     	this.isActive = false;
+			                     	return;	
+	                    		}
+	                    	}
+	                    };
+                                        
+                });
+			},
+			onlineJudge_ask:function(){
+				
+				this.$http.get("/capital-controller//external/device/getDeviceOnlineStatus?sn="+this.sn+"&generateCode="+this.deviceUId)
+                    .then(function(response){
+	                    console.log(response.data.data)
+	                    this.online = response.data.online;
+	                    this.lock =  response.data.lock;
+	                    this.error = response.data.error;
+	                    if(this.asked_false == false && this.online==false){
+	                    	this.forbid();
+	                    	return;	
+	                    };
+	                    if(this.asked_false == true && this.asked_true == false && this.online==true){
+	                    	if(this.error == true){
+	                    		this.forbid();
+	                    		return;	
+	                    	}else{
+	                    		if(this.lock == true){
+	                    			this.forbid();
+	                    			return;
+	                    		}else{
+	                    			this.allow();
+	                    			return;
+	                    		}
+	                    	};
+	                                       	
+	                    };                    
+                });
 			},
 			createUID:function(){			
                 this.$http.get("/drinkOrder-controller/api/drinkOrder/generateCode")
                     .then(function(response){
-                     this.deviceUId = response.data.data;                    
-                })
+                     this.deviceUId = response.data.data;
+                     this.setStorage("generateCode",response.data.data);
+                     this.judgeStorage("generateCode");                     
+                });
+            },
+            getCupNumer:function(){
+            	this.$http.get("/drinkOrder-controller/api/drinkOrder/getDrinksOrdersNumberBySN?deviceSN="+this.sn
+                ).then(function(response){
+                   //console.log(response.data);
+                   if(response.data.success == true){
+                   		this.dailyCupsNumber = response.data.data.daily;
+                   		this.historyCupsNumber =  response.data.data.total;
+                   		//console.log(this.dailyCupsNumber,this.historyCupsNumber)                   		
+                   }else{
+                   		alert(response.data.msg);
+                   		return;
+                   };
+                   
+             	})
             },			
 			getDataGood:function() {
-               this.$http.get("/capital-controller/api/device/getDeviceDrinkList?sn="+this.sn
+			  			   
+               this.$http.get("/capital-controller/external/device/getDeviceDrinkList?sn="+this.sn
                ).then(function(response){
                    console.log(response.data);
-                   this.goods = response.data.data;
-                   this.setStorage("drinkListData",response.data.data);
-                   this.goodsHandle(this.goods);
-                   // console.log(this.goods)
+                   if(response.data.success == true){
+                   		this.goods = response.data.data.drinks;
+                   		this.online =  response.data.data.online;
+                   		//this.setStorage("drinkListData",response.data.data.drinks);
+                  	 	this.goodsHandle(this.goods);
+                   		console.log(this.goods);
+                   }else{
+                   		alert(response.data.msg);
+                   		return;
+                   }
+                   
              	})
 			},
 			goodsHandle:function(){
 				var self = this;
 
                 this.drinkCups = [];
-              
-                this.goods.forEach(function(item){
-                    self.drinkCups = JSON.parse(item.cups)
-                    //console.log(self.drinkCups)
-                    self.activeButton.push({
-                    	smallActive:false,
-                    	bigActive:false
-                    })
-                })    
+              	console.log(this.goods)
+              	if(this.goods){
+              		this.goods.forEach(function(item){
+	                    self.drinkCups = JSON.parse(item.cups)
+	                    //console.log(self.drinkCups)
+	                    self.activeButton.push({
+	                    	smallActive:false,
+	                    	bigActive:false
+	                    })
+	                })  
+              	}else{
+              		alert("该设备不存在商品！");
+              		return;
+              	}
+                  
 			},
 			choseone:function(obj,drinkObj,index,eq){
-				this.listinit=1;
-				//console.log(obj,drinkObj)
-				this.linum=index;
-				this.buttonnum=eq;
-				
-				this.totalPriceNum = parseFloat(obj.price).toFixed(2);
-				this.drinkCode = obj.code;
-				this.drinkId = drinkObj.id;
-				this.isActive = true;				
+				if(this.online){
+					this.listinit=1;
+					//console.log(obj,drinkObj)
+					this.linum=index;
+					this.buttonnum=eq;
+					
+					this.totalPriceNum = parseFloat(obj.price).toFixed(2);
+					this.drinkCode = obj.code;
+					this.drinkId = drinkObj.id;
+					this.isActive = true;	
+				}			
 			},			
             createOrder:function(isActive){
             	console.log("createOrder"+this.deviceUId)
-                //if(isActive){
-                 this.$http.post("/drinkOrder-controller/api/drinkOrder/order",{},{headers:{'Content-Type': 'application/x-www-form-urlencoded'}, params:{
-					"sn":this.sn,
-					"uid":this.deviceUId,
-					"drinkId":this.drinkId,
-					"drinkCode":this.drinkCode}}
-				
-				).then(function(response){
-					console.log(response.data.data)
-					var orderOne = response.data.data;
-                    this.$router.push({
-                    	name:'router1',
-                    	params:{
-	                    	deviceUId:orderOne.uId,
-	                    	sn:orderOne.deviceSN,
-	                    	drinkId:orderOne.drinkId,
-	                    	drinkCode:orderOne.drinkCode,
-	                    	drinkName:orderOne.drinkName,
-	                    	//drinkCup:orderOne.drinkCup,
-	                    	drinkPrice:orderOne.drinkPrice
-                    	}
-                    }) ;                  
-                });	
+                if(this.online&&isActive){
+	                this.$http.post("/drinkOrder-controller/api/drinkOrder/order",{},{headers:{'Content-Type': 'application/x-www-form-urlencoded'}, params:{
+						"sn":this.sn,
+						"uid":this.deviceUId,
+						"drinkId":this.drinkId,
+						"drinkCode":this.drinkCode}}
+					
+					).then(function(response){
+						console.log(response.data.data)
+						var orderOne = response.data.data;
+	                    this.$router.push({
+	                    	name:'router1',
+	                    	params:{
+		                    	deviceUId:orderOne.uId,
+		                    	sn:orderOne.deviceSN,
+		                    	drinkId:orderOne.drinkId,
+		                    	drinkCode:orderOne.drinkCode,
+		                    	drinkName:orderOne.drinkName,
+		                    	//drinkCup:orderOne.drinkCup,
+		                    	drinkPrice:orderOne.drinkPrice
+	                    	}
+	                    }) ;                  
+	                });	
                 
-               // }
+             	}
             },
-            setStorage:function(name,data){
+            allow:function(){
+            	alert("该设备处于在线状态，可操作！");
+            	this.asked_true = true;
+            	this.asked_false = false;
+            	this.listinit=0;
+            	this.linum=-1;
+    			this.buttonnum=-1;
+            },
+            forbid:function(){
+            	alert("该设备处于离线状态，不可操作！");
+            	this.asked_false = true;
+            	this.asked_true = false;
+            	this.isActive = false;
+            },
+            setStorage:function(name,data,event){
                 var value = typeof(data) == "object" ? JSON.stringify(data):data;
-                	console.log('set localStorage----')
-                	if(window.localStorage){
-                		localStorage.setItem(name,value);
-                	}else{
-                		alert('浏览器不支持localStorage');
-                		return
-                	}
+            	console.log('set localStorage----')
+            	if(window.localStorage){
+            		localStorage.setItem(name,value);
+            	}else{
+            		alert('浏览器不支持localStorage');
+            		return
+            	}
             },
             getStorage:function(name){
                 if(! window.localStorage){
@@ -194,44 +335,71 @@
                 }
             },
             judgeStorage:function(name){
-                 
-                if(this.getStorage("drinkListData")){
-                    this.goods = JSON.parse(this.getStorage("drinkListData"));
+
+            	//console.log(this.getStorage("drinkListData"))
+            	console.log("code-----"+this.getStorage("generateCode"));
+
+               // var data =  this.getStorage("drinkListData");
+                var code =  this.getStorage("generateCode");
+
+              /*if(data && data!== undefined && data !=null){
+                	  if (window.addEventListener) {  
+					  window.addEventListener("storage",function(e){
+					  	console.log(e.key)
+					  }, false);  
+					} else {  
+					  window.attachEvent("onstorage",function(e){
+					  	console.log(e.key)
+					  });  
+					};
+                    this.goods = JSON.parse(data);
                     this.goodsHandle();
+                    return;
                 }else{
                     this.getDataGood();
+                    return;               
+                };*/
+
+                if(code && code != undefined && code !=null){
+                	
+                	this.deviceUId = code;               	
+		            this.onlineJudge();
+		            this.getDataGood();
+            	 	//轮询 判断设备状态
+			    	setInterval(this.onlineJudge_ask,5000);
+			    	return;	
+		                         	
+                }else{
+                	this.createUID();
+                	return;                
                 };
             
             },	
 			refresh:function(){
-
 				location.reload();
 			}
 			
 		},
 		filters:{
-			//过滤器
-            cupFilter:function(value){
-                if(value == "小"){
-                    return "小杯";
-                };
-                if(value == "大"){
-                    return "大杯";
-                };
-                if(value =="中"){
-                    return "中杯";
-                }
+			//过滤器 
+            onlineFilter:function(value){
 
-
+            	switch(value){
+            		case true:
+            			return "在线";
+            			break;
+            		case false:
+            			return "离线";
+            			break;
+            	};
             }
 		},
 		created:function(){
 			//在实例创建之后同步调用Ajax
 
 			//this.getDataGood();
-			this.createUID();
-			//localStorage.removeItem("drinkListData");
-            this.judgeStorage("drinkListData");
+			this.getSN();
+			
 		}
 	}
 	
@@ -245,7 +413,7 @@
         z-index:99;
         height:100%;
         width:100%;
-       - background-color:#000;
+        -background-color:#000;
         -opacity:0.8;
     }
 	.deviceBaseInfo {
@@ -290,7 +458,7 @@
 	    right: 1rem;
 	    width: 0.8rem;
 	    height: 0.8rem;
-	    background: url(/vue-demo/img/drop_down.png) no-repeat center;
+	    background: url(/drinkOrder/img/drop_down.png) no-repeat center;
 	    background-size: 100% 100%;
 	}
 	.deviceBaseInfo .drop-up{
@@ -299,7 +467,7 @@
     	    right: 1rem;
     	    width: 0.8rem;
     	    height: 0.8rem;
-    	    background: url(/vue-demo/img/drop_up.png) no-repeat center;
+    	    background: url(/drinkOrder/img/drop_up.png) no-repeat center;
     	    background-size: 100% 100%;
     	}
 	.content{

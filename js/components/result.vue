@@ -1,9 +1,9 @@
 <template>
 	<div id="result">
-	<header class="result-title"><h3>支付结果</h3><a href="#" class="result-finish">完成</a></header>
+	<header class="result-title"><h3>支付结果</h3><a :href="url" class="result-finish">完成</a></header>
 		<div class="content">
 			<div>
-				<img src="/vue-demo/img/success.png" class="success-img">
+				<img src="/drinkOrder/img/success.png" class="success-img">
 			</div>
 			<p class="success">购买成功</p>
 			<p class="success-tip">请点击饮料机上您刚购买的饮料，祝您享用愉快!</p>
@@ -18,28 +18,23 @@
 <script>
 	module.exports = {
 		data:function(){
-			return {
-				
-				
-				
+			return {				
+				sn:"",
+				url:""
 			}
 		},
-		methods:{
-			
-			
-			
+		methods:{			
+			ready:function(){
+				this.sn = this.$route.params.sn;
+				this.url = "#/?sn="+this.sn;
+			},
 			refresh:function(){
 				
-			}
-			
-		},
-		filters:{
-			//过滤器
-			
+			}			
 		},
 		created:function(){
 			//在实例创建之后同步调用Ajax
-			
+			this.ready();
 		}
 	}
 	

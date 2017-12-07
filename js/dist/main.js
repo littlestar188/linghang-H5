@@ -24594,7 +24594,7 @@ var Component = __webpack_require__(2)(
   /* cssModules */
   null
 )
-Component.options.__file = "F:\\wamp\\www\\vue-demo\\js\\components\\homeIndex.vue"
+Component.options.__file = "F:\\wamp\\www\\drinkOrder\\js\\components\\homeIndex.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] homeIndex.vue: functional components are not supported with templates, they should use render functions.")}
 
@@ -24605,9 +24605,9 @@ if (false) {(function () {
   if (!hotAPI.compatible) return
   module.hot.accept()
   if (!module.hot.data) {
-    hotAPI.createRecord("data-v-aa58156e", Component.options)
+    hotAPI.createRecord("data-v-6a232cd6", Component.options)
   } else {
-    hotAPI.reload("data-v-aa58156e", Component.options)
+    hotAPI.reload("data-v-6a232cd6", Component.options)
   }
 })()}
 
@@ -24625,13 +24625,13 @@ var content = __webpack_require__(18);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(1)("cc300efa", content, false);
+var update = __webpack_require__(1)("44fb4c8a", content, false);
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
  if(!content.locals) {
-   module.hot.accept("!!./../../node_modules/css-loader/index.js!./../../node_modules/vue-loader/lib/style-rewriter.js?id=data-v-aa58156e!./../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./homeIndex.vue", function() {
-     var newContent = require("!!./../../node_modules/css-loader/index.js!./../../node_modules/vue-loader/lib/style-rewriter.js?id=data-v-aa58156e!./../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./homeIndex.vue");
+   module.hot.accept("!!./../../node_modules/css-loader/index.js!./../../node_modules/vue-loader/lib/style-rewriter.js?id=data-v-6a232cd6!./../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./homeIndex.vue", function() {
+     var newContent = require("!!./../../node_modules/css-loader/index.js!./../../node_modules/vue-loader/lib/style-rewriter.js?id=data-v-6a232cd6!./../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./homeIndex.vue");
      if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
      update(newContent);
    });
@@ -24649,7 +24649,7 @@ exports = module.exports = __webpack_require__(0)();
 
 
 // module
-exports.push([module.i, "\n.modal-bg{\n        position:absolute;\n        top:0;\n        z-index:99;\n        height:100%;\n        width:100%;\n       - background-color:#000;\n        -opacity:0.8;\n}\n.deviceBaseInfo {\n\t\tposition:fixed;\n\t\tz-index:9999;\n\t\ttop:0;\n\t\twidth: 100%;\n\t    -height:7rem;\n\t    padding:0 1rem;\n\t    font-weight: lighter;\n\t    text-align: left;\n\t    background: rgb(71,71,71);   \n\t    color: #fff;\n\t    box-sizing: border-box;\n}\n.deviceBaseInfo .info-header{\n\t    height: 1.95rem;\n        line-height: 1.95rem;\n}\n.deviceBaseInfo .info-content{\n        overflow:hidden;\n\t   - height:6rem;\n\t    font-size:0.6rem;\n\t    padding-bottom:0.5rem;\n}\n.deviceBaseInfo .info-content li{\n\t    width: 100%;\n\t    overflow: hidden;\n        margin-right: 1rem;\n        padding:0.3rem 0;\n}\n.deviceBaseInfo .info-content .tle{\n\t    float:left;\n}\n.deviceBaseInfo .info-content .con{\n        float:right;\n}\n.deviceBaseInfo .drop-down{\n\t\tposition: absolute;\n\t    top: 0.5rem;\n\t    right: 1rem;\n\t    width: 0.8rem;\n\t    height: 0.8rem;\n\t    background: url(/vue-demo/img/drop_down.png) no-repeat center;\n\t    background-size: 100% 100%;\n}\n.deviceBaseInfo .drop-up{\n    \t\tposition: absolute;\n    \t    top: 0.5rem;\n    \t    right: 1rem;\n    \t    width: 0.8rem;\n    \t    height: 0.8rem;\n    \t    background: url(/vue-demo/img/drop_up.png) no-repeat center;\n    \t    background-size: 100% 100%;\n}\n.content{\n\t\tpadding-top: 2.5rem;\n    \t-background-color: #eee;\n}\n.tip{\n\t\theight: 1.5rem;\n    \tline-height: 1.5rem;\n    \tpadding:0.2rem 0;\n    \tcolor:#444;\n\t\ttext-align:center;\n\t\tbackground-color: #fff;\n\t\tborder-top: 1px solid #eee; \n\t\tborder-bottom: 1px solid #eee;\n}\n.goodsCon {\n\t\ttext-align:center;\n\t\tpadding-bottom:2.5rem;\n\t\tbackground-color: #fff;\n}\n.goods-item {\t\t\n\t\tborder-bottom: 1px solid #eee;\n\t    padding: 0 0.75rem;\n\t    display: flex;\n}\n.goods-item .goods-picture {\n\t\tfloat: left;\n\t    width: 2.8rem;\n\t    height: 2.8rem;\n\t    margin: 0.55rem 0.75rem 0.55rem 0;\n\t    flex: 1;\n}\n.goods-item .goods-desc{\n\t\tfloat: left;\n\t    height: 100%;\n\t    padding-top: 0.2rem;\n\t    flex: 4;\n\t    position: relative;\n}\n.goods-item .goods-desc .goods-name {\n\t\tfont-size: 0.685rem;   \n    \tfont-weight: normal;\n\t\t-line-height:1.1rem;\n\t\ttext-align: left;\n\t\tpadding:0.55rem 0;\n        width: 10.8rem;\n        white-space: nowrap;\n        text-overflow: ellipsis;\n        overflow: hidden;\n}\n.goods-item .goods-spec>div{\n\t\theight:100%;\n}\n.goods-item .goods-spec .money{\n\t\tposition:absolute;\n\t\tleft:0;\n\t\ttop:0.3rem;\n}\n\t/* .goods-item .goods-spec .single-price{\n\t\tdisplay:flex;\n\t\tjustify-content: space-between;\n\t} */\n\t/* .goods-item .goods-spec .price-flag{\n\t\tfont-size:0.5rem;\n\t} */\n.goods-item .goods-desc .goods-spec{\n\t\tposition: absolute;\n\t    top: 2rem;\n\t    right: 0;\n\t    width:100%;\n\t    height:100%;\n}\n.goods-item .goods-desc .goods-spec .spec-item{\n\t\tposition: absolute;\n    \tright: 0;\n\t\tfont-size: 0.55rem;\n\t    background-color: #fff;\n\t    border: 1px solid #ddd;\n\t    border-radius: 2px;\n\t    display: inline-block;\n\t    padding: 0.25rem 0.65rem;\n\t    margin:0 0.1rem;\n}\n.goods-item .goods-desc .goods-spec .spec-item:active{\n\t\t-background-color:#eee;\n\t\t-color:#fff;\n}\n\t/*.goods-item .goods-desc .goods-spec .spec-item:hover,*/\n.goods-item .goods-desc .goods-spec .spec-item.active{\n\t\tbackground-color:#D8232A;\n\t\tcolor:#fff;\n}\n#buy .totalPrice{\n        justify-content: space-between;\n        color: /* #D8232A */#000;\n        font-size: 0.85rem;\n        width: 18%;\n        float: left;\n        height: 2.2rem;\n        line-height: 2.2rem;\n        margin-left: 0.3rem;\n}\n#buy.active .totalPrice{\n        color:#D8232A;\n}\n#buy a.cart{\n    \tfloat: right;\n        width: 4.25rem;\n        height: 2.2rem;\n        line-height: 2.2rem;\n        padding: 0 0.2rem;\n        text-align: center;\n        text-decoration: none;\n        color: #fff;\n        background-color: #ccc;\n}\n#buy.active a.cart{\n        background-color:#D8232A\n}\n\n", ""]);
+exports.push([module.i, "\n.modal-bg{\n        position:absolute;\n        top:0;\n        z-index:99;\n        height:100%;\n        width:100%;\n        -background-color:#000;\n        -opacity:0.8;\n}\n.deviceBaseInfo {\n\t\tposition:fixed;\n\t\tz-index:9999;\n\t\ttop:0;\n\t\twidth: 100%;\n\t    -height:7rem;\n\t    padding:0 1rem;\n\t    font-weight: lighter;\n\t    text-align: left;\n\t    background: rgb(71,71,71);   \n\t    color: #fff;\n\t    box-sizing: border-box;\n}\n.deviceBaseInfo .info-header{\n\t    height: 1.95rem;\n        line-height: 1.95rem;\n}\n.deviceBaseInfo .info-content{\n        overflow:hidden;\n\t   - height:6rem;\n\t    font-size:0.6rem;\n\t    padding-bottom:0.5rem;\n}\n.deviceBaseInfo .info-content li{\n\t    width: 100%;\n\t    overflow: hidden;\n        margin-right: 1rem;\n        padding:0.3rem 0;\n}\n.deviceBaseInfo .info-content .tle{\n\t    float:left;\n}\n.deviceBaseInfo .info-content .con{\n        float:right;\n}\n.deviceBaseInfo .drop-down{\n\t\tposition: absolute;\n\t    top: 0.5rem;\n\t    right: 1rem;\n\t    width: 0.8rem;\n\t    height: 0.8rem;\n\t    background: url(/drinkOrder/img/drop_down.png) no-repeat center;\n\t    background-size: 100% 100%;\n}\n.deviceBaseInfo .drop-up{\n    \t\tposition: absolute;\n    \t    top: 0.5rem;\n    \t    right: 1rem;\n    \t    width: 0.8rem;\n    \t    height: 0.8rem;\n    \t    background: url(/drinkOrder/img/drop_up.png) no-repeat center;\n    \t    background-size: 100% 100%;\n}\n.content{\n\t\tpadding-top: 2.5rem;\n    \t-background-color: #eee;\n}\n.tip{\n\t\theight: 1.5rem;\n    \tline-height: 1.5rem;\n    \tpadding:0.2rem 0;\n    \tcolor:#444;\n\t\ttext-align:center;\n\t\tbackground-color: #fff;\n\t\tborder-top: 1px solid #eee; \n\t\tborder-bottom: 1px solid #eee;\n}\n.goodsCon {\n\t\ttext-align:center;\n\t\tpadding-bottom:2.5rem;\n\t\tbackground-color: #fff;\n}\n.goods-item {\t\t\n\t\tborder-bottom: 1px solid #eee;\n\t    padding: 0 0.75rem;\n\t    display: flex;\n}\n.goods-item .goods-picture {\n\t\tfloat: left;\n\t    width: 2.8rem;\n\t    height: 2.8rem;\n\t    margin: 0.55rem 0.75rem 0.55rem 0;\n\t    flex: 1;\n}\n.goods-item .goods-desc{\n\t\tfloat: left;\n\t    height: 100%;\n\t    padding-top: 0.2rem;\n\t    flex: 4;\n\t    position: relative;\n}\n.goods-item .goods-desc .goods-name {\n\t\tfont-size: 0.685rem;   \n    \tfont-weight: normal;\n\t\t-line-height:1.1rem;\n\t\ttext-align: left;\n\t\tpadding:0.55rem 0;\n        width: 10.8rem;\n        white-space: nowrap;\n        text-overflow: ellipsis;\n        overflow: hidden;\n}\n.goods-item .goods-spec>div{\n\t\theight:100%;\n}\n.goods-item .goods-spec .money{\n\t\tposition:absolute;\n\t\tleft:0;\n\t\ttop:0.3rem;\n}\n\t/* .goods-item .goods-spec .single-price{\n\t\tdisplay:flex;\n\t\tjustify-content: space-between;\n\t} */\n\t/* .goods-item .goods-spec .price-flag{\n\t\tfont-size:0.5rem;\n\t} */\n.goods-item .goods-desc .goods-spec{\n\t\tposition: absolute;\n\t    top: 2rem;\n\t    right: 0;\n\t    width:100%;\n\t    height:100%;\n}\n.goods-item .goods-desc .goods-spec .spec-item{\n\t\tposition: absolute;\n    \tright: 0;\n\t\tfont-size: 0.55rem;\n\t    background-color: #fff;\n\t    border: 1px solid #ddd;\n\t    border-radius: 2px;\n\t    display: inline-block;\n\t    padding: 0.25rem 0.65rem;\n\t    margin:0 0.1rem;\n}\n.goods-item .goods-desc .goods-spec .spec-item:active{\n\t\t-background-color:#eee;\n\t\t-color:#fff;\n}\n\t/*.goods-item .goods-desc .goods-spec .spec-item:hover,*/\n.goods-item .goods-desc .goods-spec .spec-item.active{\n\t\tbackground-color:#D8232A;\n\t\tcolor:#fff;\n}\n#buy .totalPrice{\n        justify-content: space-between;\n        color: /* #D8232A */#000;\n        font-size: 0.85rem;\n        width: 18%;\n        float: left;\n        height: 2.2rem;\n        line-height: 2.2rem;\n        margin-left: 0.3rem;\n}\n#buy.active .totalPrice{\n        color:#D8232A;\n}\n#buy a.cart{\n    \tfloat: right;\n        width: 4.25rem;\n        height: 2.2rem;\n        line-height: 2.2rem;\n        padding: 0 0.2rem;\n        text-align: center;\n        text-decoration: none;\n        color: #fff;\n        background-color: #ccc;\n}\n#buy.active a.cart{\n        background-color:#D8232A\n}\n\n", ""]);
 
 // exports
 
@@ -24747,6 +24747,14 @@ module.exports = function listToStyles (parentId, list) {
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
 
 	module.exports = {
 		data:function(){
@@ -24760,7 +24768,12 @@ module.exports = function listToStyles (parentId, list) {
                 right:3,
                 top:0,
 
-                sn:"ff556yyuidde",
+                sn:"",
+                online:"",
+                asked_false:false,
+                asked_true:false,
+                dailyCupsNumber:"",
+                historyCupsNumber:"",
                 drinkListData:"",
 				goods:{},
 				drinkList:{},
@@ -24789,91 +24802,219 @@ module.exports = function listToStyles (parentId, list) {
 				}
 			}
 		},*/
-		methods:{
-			ready:function(){
-
-			},
+		methods:{			
 			getSN:function(){
+			   var href = location.href.split("?");
+			   var condition = href.slice(1,href.length);
+			   //console.log(condition,href)		  
+			   if(condition.length==0){
+			   	  alert("SN码不存在！");
+			   	  return;
+			   }else{
+			   		
+			   	 	this.sn = condition[0].split("=")[1];
+			   		console.log(href,condition,this.sn);
 
+				    this.getCupNumer();
+				   
+					//localStorage.removeItem("drinkListData");
+					/*var orignalSetItem = localStorage.setItem;
+				    localStorage.setItem = function(key,newValue){
+				        var setItemEvent = new Event("setItemEvent");
+				        setItemEvent.newValue = newValue;
+				        window.dispatchEvent(setItemEvent);
+				        orignalSetItem.apply(this,arguments);
+				    }*/
+				  this.judgeStorage("generateCode");
+		         // this.judgeStorage("drinkListData");
+
+			   };
+			   
+			},
+			onlineJudge:function(){
+				this.$http.get("/capital-controller//external/device/getDeviceOnlineStatus?sn="+this.sn+"&generateCode="+this.deviceUId)
+                    .then(function(response){
+	                    console.log(response.data.data)
+	                    this.online = response.data.online;
+	                    this.lock =  response.data.lock;
+	                    this.error = response.data.error;
+	                    if(!this.online){
+	                    	alert("该设备处于离线状态，不可操作！");
+	                    	this.asked_false=true;
+	                     	this.isActive = false;
+	                     	return;	
+	                    }else{
+	                    	if(this.error){
+	                    		alert("该设备处于离线状态，不可操作！");
+		                    	this.asked_false=true;
+		                     	this.isActive = false;
+		                     	return;	
+	                    	}else{
+	                    		if(this.lock){
+	                    			alert("该设备处于离线状态，不可操作！");
+			                    	this.asked_false=true;
+			                     	this.isActive = false;
+			                     	return;	
+	                    		}
+	                    	}
+	                    };
+                                        
+                });
+			},
+			onlineJudge_ask:function(){
+				
+				this.$http.get("/capital-controller//external/device/getDeviceOnlineStatus?sn="+this.sn+"&generateCode="+this.deviceUId)
+                    .then(function(response){
+	                    console.log(response.data.data)
+	                    this.online = response.data.online;
+	                    this.lock =  response.data.lock;
+	                    this.error = response.data.error;
+	                    if(this.asked_false == false && this.online==false){
+	                    	this.forbid();
+	                    	return;	
+	                    };
+	                    if(this.asked_false == true && this.asked_true == false && this.online==true){
+	                    	if(this.error == true){
+	                    		this.forbid();
+	                    		return;	
+	                    	}else{
+	                    		if(this.lock == true){
+	                    			this.forbid();
+	                    			return;
+	                    		}else{
+	                    			this.allow();
+	                    			return;
+	                    		}
+	                    	};
+	                                       	
+	                    };                    
+                });
 			},
 			createUID:function(){			
                 this.$http.get("/drinkOrder-controller/api/drinkOrder/generateCode")
                     .then(function(response){
-                     this.deviceUId = response.data.data;                    
-                })
+                     this.deviceUId = response.data.data;
+                     this.setStorage("generateCode",response.data.data);
+                     this.judgeStorage("generateCode");                     
+                });
+            },
+            getCupNumer:function(){
+            	this.$http.get("/drinkOrder-controller/api/drinkOrder/getDrinksOrdersNumberBySN?deviceSN="+this.sn
+                ).then(function(response){
+                   //console.log(response.data);
+                   if(response.data.success == true){
+                   		this.dailyCupsNumber = response.data.data.daily;
+                   		this.historyCupsNumber =  response.data.data.total;
+                   		//console.log(this.dailyCupsNumber,this.historyCupsNumber)                   		
+                   }else{
+                   		alert(response.data.msg);
+                   		return;
+                   };
+                   
+             	})
             },			
 			getDataGood:function() {
-               this.$http.get("/capital-controller/api/device/getDeviceDrinkList?sn="+this.sn
+			  			   
+               this.$http.get("/capital-controller/external/device/getDeviceDrinkList?sn="+this.sn
                ).then(function(response){
                    console.log(response.data);
-                   this.goods = response.data.data;
-                   this.setStorage("drinkListData",response.data.data);
-                   this.goodsHandle(this.goods);
-                   // console.log(this.goods)
+                   if(response.data.success == true){
+                   		this.goods = response.data.data.drinks;
+                   		this.online =  response.data.data.online;
+                   		//this.setStorage("drinkListData",response.data.data.drinks);
+                  	 	this.goodsHandle(this.goods);
+                   		console.log(this.goods);
+                   }else{
+                   		alert(response.data.msg);
+                   		return;
+                   }
+                   
              	})
 			},
 			goodsHandle:function(){
 				var self = this;
 
                 this.drinkCups = [];
-              
-                this.goods.forEach(function(item){
-                    self.drinkCups = JSON.parse(item.cups)
-                    //console.log(self.drinkCups)
-                    self.activeButton.push({
-                    	smallActive:false,
-                    	bigActive:false
-                    })
-                })    
+              	console.log(this.goods)
+              	if(this.goods){
+              		this.goods.forEach(function(item){
+	                    self.drinkCups = JSON.parse(item.cups)
+	                    //console.log(self.drinkCups)
+	                    self.activeButton.push({
+	                    	smallActive:false,
+	                    	bigActive:false
+	                    })
+	                })  
+              	}else{
+              		alert("该设备不存在商品！");
+              		return;
+              	}
+                  
 			},
 			choseone:function(obj,drinkObj,index,eq){
-				this.listinit=1;
-				//console.log(obj,drinkObj)
-				this.linum=index;
-				this.buttonnum=eq;
-				
-				this.totalPriceNum = parseFloat(obj.price).toFixed(2);
-				this.drinkCode = obj.code;
-				this.drinkId = drinkObj.id;
-				this.isActive = true;				
+				if(this.online){
+					this.listinit=1;
+					//console.log(obj,drinkObj)
+					this.linum=index;
+					this.buttonnum=eq;
+					
+					this.totalPriceNum = parseFloat(obj.price).toFixed(2);
+					this.drinkCode = obj.code;
+					this.drinkId = drinkObj.id;
+					this.isActive = true;	
+				}			
 			},			
             createOrder:function(isActive){
             	console.log("createOrder"+this.deviceUId)
-                //if(isActive){
-                 this.$http.post("/drinkOrder-controller/api/drinkOrder/order",{},{headers:{'Content-Type': 'application/x-www-form-urlencoded'}, params:{
-					"sn":this.sn,
-					"uid":this.deviceUId,
-					"drinkId":this.drinkId,
-					"drinkCode":this.drinkCode}}
-				
-				).then(function(response){
-					console.log(response.data.data)
-					var orderOne = response.data.data;
-                    this.$router.push({
-                    	name:'router1',
-                    	params:{
-	                    	deviceUId:orderOne.uId,
-	                    	sn:orderOne.deviceSN,
-	                    	drinkId:orderOne.drinkId,
-	                    	drinkCode:orderOne.drinkCode,
-	                    	drinkName:orderOne.drinkName,
-	                    	//drinkCup:orderOne.drinkCup,
-	                    	drinkPrice:orderOne.drinkPrice
-                    	}
-                    }) ;                  
-                });	
+                if(this.online&&isActive){
+	                this.$http.post("/drinkOrder-controller/api/drinkOrder/order",{},{headers:{'Content-Type': 'application/x-www-form-urlencoded'}, params:{
+						"sn":this.sn,
+						"uid":this.deviceUId,
+						"drinkId":this.drinkId,
+						"drinkCode":this.drinkCode}}
+					
+					).then(function(response){
+						console.log(response.data.data)
+						var orderOne = response.data.data;
+	                    this.$router.push({
+	                    	name:'router1',
+	                    	params:{
+		                    	deviceUId:orderOne.uId,
+		                    	sn:orderOne.deviceSN,
+		                    	drinkId:orderOne.drinkId,
+		                    	drinkCode:orderOne.drinkCode,
+		                    	drinkName:orderOne.drinkName,
+		                    	//drinkCup:orderOne.drinkCup,
+		                    	drinkPrice:orderOne.drinkPrice
+	                    	}
+	                    }) ;                  
+	                });	
                 
-               // }
+             	}
             },
-            setStorage:function(name,data){
+            allow:function(){
+            	alert("该设备处于在线状态，可操作！");
+            	this.asked_true = true;
+            	this.asked_false = false;
+            	this.listinit=0;
+            	this.linum=-1;
+    			this.buttonnum=-1;
+            },
+            forbid:function(){
+            	alert("该设备处于离线状态，不可操作！");
+            	this.asked_false = true;
+            	this.asked_true = false;
+            	this.isActive = false;
+            },
+            setStorage:function(name,data,event){
                 var value = typeof(data) == "object" ? JSON.stringify(data):data;
-                	console.log('set localStorage----')
-                	if(window.localStorage){
-                		localStorage.setItem(name,value);
-                	}else{
-                		alert('浏览器不支持localStorage');
-                		return
-                	}
+            	console.log('set localStorage----')
+            	if(window.localStorage){
+            		localStorage.setItem(name,value);
+            	}else{
+            		alert('浏览器不支持localStorage');
+            		return
+            	}
             },
             getStorage:function(name){
                 if(! window.localStorage){
@@ -24887,44 +25028,71 @@ module.exports = function listToStyles (parentId, list) {
                 }
             },
             judgeStorage:function(name){
-                 
-                if(this.getStorage("drinkListData")){
-                    this.goods = JSON.parse(this.getStorage("drinkListData"));
+
+            	//console.log(this.getStorage("drinkListData"))
+            	console.log("code-----"+this.getStorage("generateCode"));
+
+               // var data =  this.getStorage("drinkListData");
+                var code =  this.getStorage("generateCode");
+
+              /*if(data && data!== undefined && data !=null){
+                	  if (window.addEventListener) {  
+					  window.addEventListener("storage",function(e){
+					  	console.log(e.key)
+					  }, false);  
+					} else {  
+					  window.attachEvent("onstorage",function(e){
+					  	console.log(e.key)
+					  });  
+					};
+                    this.goods = JSON.parse(data);
                     this.goodsHandle();
+                    return;
                 }else{
                     this.getDataGood();
+                    return;               
+                };*/
+
+                if(code && code != undefined && code !=null){
+                	
+                	this.deviceUId = code;               	
+		            this.onlineJudge();
+		            this.getDataGood();
+            	 	//轮询 判断设备状态
+			    	setInterval(this.onlineJudge_ask,5000);
+			    	return;	
+		                         	
+                }else{
+                	this.createUID();
+                	return;                
                 };
             
             },	
 			refresh:function(){
-
 				location.reload();
 			}
 			
 		},
 		filters:{
-			//过滤器
-            cupFilter:function(value){
-                if(value == "小"){
-                    return "小杯";
-                };
-                if(value == "大"){
-                    return "大杯";
-                };
-                if(value =="中"){
-                    return "中杯";
-                }
+			//过滤器 
+            onlineFilter:function(value){
 
-
+            	switch(value){
+            		case true:
+            			return "在线";
+            			break;
+            		case false:
+            			return "离线";
+            			break;
+            	};
             }
 		},
 		created:function(){
 			//在实例创建之后同步调用Ajax
 
 			//this.getDataGood();
-			this.createUID();
-			//localStorage.removeItem("drinkListData");
-            this.judgeStorage("drinkListData");
+			this.getSN();
+			
 		}
 	}
 	
@@ -24962,11 +25130,19 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     staticClass: "tle"
   }, [_vm._v("SN码")]), _vm._v(" "), _c('span', {
     staticClass: "con"
-  }, [_vm._v("10398034355676793889XXXX")])]), _vm._v(" "), _c('li', [_c('span', {
+  }, [_vm._v(_vm._s(_vm.sn))])]), _vm._v(" "), _c('li', [_c('span', {
     staticClass: "tle"
-  }, [_vm._v("SN码")]), _vm._v(" "), _c('span', {
+  }, [_vm._v("是否在线")]), _vm._v(" "), _c('span', {
     staticClass: "con"
-  }, [_vm._v("10398034355676793889XXXX")])])]) : _vm._e()]), _vm._v(" "), _c('div', {
+  }, [_vm._v(_vm._s(_vm._f("onlineFilter")(_vm.online)))])]), _vm._v(" "), _c('li', [_c('span', {
+    staticClass: "tle"
+  }, [_vm._v("当天出杯数量")]), _vm._v(" "), _c('span', {
+    staticClass: "con"
+  }, [_vm._v(_vm._s(_vm.dailyCupsNumber))])]), _vm._v(" "), _c('li', [_c('span', {
+    staticClass: "tle"
+  }, [_vm._v("历史出杯数量")]), _vm._v(" "), _c('span', {
+    staticClass: "con"
+  }, [_vm._v(_vm._s(_vm.historyCupsNumber))])])]) : _vm._e()]), _vm._v(" "), _c('div', {
     staticClass: "clear"
   })], 1), _vm._v(" "), _c('div', {
     staticClass: "content"
@@ -24980,7 +25156,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     }, [_c('img', {
       staticClass: "goods-picture",
       attrs: {
-        "src": "http://192.168.1.98/vue-demo/img/coffe.png"
+        "src": "/drinkOrder/img/coffe.png"
       }
     }), _vm._v(" "), _c('div', {
       staticClass: "goods-desc"
@@ -25004,7 +25180,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
             _vm.choseone(d, o, index, eq)
           }
         }
-      }, [_vm._v(_vm._s(_vm._f("cupFilter")(d.name)))]), _vm._v(" "), _c('span', {
+      }, [_vm._v(_vm._s(d.name))]), _vm._v(" "), _c('span', {
         directives: [{
           name: "show",
           rawName: "v-show",
@@ -25056,7 +25232,7 @@ module.exports.render._withStripped = true
 if (false) {
   module.hot.accept()
   if (module.hot.data) {
-     require("vue-hot-reload-api").rerender("data-v-aa58156e", module.exports)
+     require("vue-hot-reload-api").rerender("data-v-6a232cd6", module.exports)
   }
 }
 
@@ -25078,7 +25254,7 @@ var Component = __webpack_require__(2)(
   /* cssModules */
   null
 )
-Component.options.__file = "F:\\wamp\\www\\vue-demo\\js\\components\\result.vue"
+Component.options.__file = "F:\\wamp\\www\\drinkOrder\\js\\components\\result.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] result.vue: functional components are not supported with templates, they should use render functions.")}
 
@@ -25089,9 +25265,9 @@ if (false) {(function () {
   if (!hotAPI.compatible) return
   module.hot.accept()
   if (!module.hot.data) {
-    hotAPI.createRecord("data-v-6c76d7f7", Component.options)
+    hotAPI.createRecord("data-v-02cda72b", Component.options)
   } else {
-    hotAPI.reload("data-v-6c76d7f7", Component.options)
+    hotAPI.reload("data-v-02cda72b", Component.options)
   }
 })()}
 
@@ -25109,13 +25285,13 @@ var content = __webpack_require__(24);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(1)("718ab79b", content, false);
+var update = __webpack_require__(1)("073ef018", content, false);
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
  if(!content.locals) {
-   module.hot.accept("!!./../../node_modules/css-loader/index.js!./../../node_modules/vue-loader/lib/style-rewriter.js?id=data-v-6c76d7f7!./../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./result.vue", function() {
-     var newContent = require("!!./../../node_modules/css-loader/index.js!./../../node_modules/vue-loader/lib/style-rewriter.js?id=data-v-6c76d7f7!./../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./result.vue");
+   module.hot.accept("!!./../../node_modules/css-loader/index.js!./../../node_modules/vue-loader/lib/style-rewriter.js?id=data-v-02cda72b!./../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./result.vue", function() {
+     var newContent = require("!!./../../node_modules/css-loader/index.js!./../../node_modules/vue-loader/lib/style-rewriter.js?id=data-v-02cda72b!./../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./result.vue");
      if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
      update(newContent);
    });
@@ -25162,28 +25338,23 @@ exports.push([module.i, "\n#result{\n\t\ttext-align:center;\n}\n#result .result-
 
 module.exports = {
 	data:function(){
-		return {
-			
-			
-			
+		return {				
+			sn:"",
+			url:""
 		}
 	},
-	methods:{
-		
-		
-		
+	methods:{			
+		ready:function(){
+			this.sn = this.$route.params.sn;
+			this.url = "#/?sn="+this.sn;
+		},
 		refresh:function(){
 			
-		}
-		
-	},
-	filters:{
-		//过滤器
-		
+		}			
 	},
 	created:function(){
 		//在实例创建之后同步调用Ajax
-		
+		this.ready();
 	}
 }
 
@@ -25195,8 +25366,6 @@ module.exports = {
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _vm._m(0)
-},staticRenderFns: [function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('div', {
     attrs: {
       "id": "result"
@@ -25206,30 +25375,34 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
   }, [_c('h3', [_vm._v("支付结果")]), _c('a', {
     staticClass: "result-finish",
     attrs: {
-      "href": "#"
+      "href": _vm.url
     }
-  }, [_vm._v("完成")])]), _vm._v(" "), _c('div', {
+  }, [_vm._v("完成")])]), _vm._v(" "), _vm._m(0), _vm._v(" "), _vm._m(1)])
+},staticRenderFns: [function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('div', {
     staticClass: "content"
   }, [_c('div', [_c('img', {
     staticClass: "success-img",
     attrs: {
-      "src": "/vue-demo/img/success.png"
+      "src": "/drinkOrder/img/success.png"
     }
   })]), _vm._v(" "), _c('p', {
     staticClass: "success"
   }, [_vm._v("购买成功")]), _vm._v(" "), _c('p', {
     staticClass: "success-tip"
-  }, [_vm._v("请点击饮料机上您刚购买的饮料，祝您享用愉快!")])]), _vm._v(" "), _c('div', {
+  }, [_vm._v("请点击饮料机上您刚购买的饮料，祝您享用愉快!")])])
+},function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('div', {
     attrs: {
       "id": "version"
     }
-  }, [_c('p', [_vm._v("领航制造 品质保障")]), _vm._v(" "), _c('p', [_vm._v("Copyright  2001-2017 linghang")])])])
+  }, [_c('p', [_vm._v("领航制造 品质保障")]), _vm._v(" "), _c('p', [_vm._v("Copyright  2001-2017 linghang")])])
 }]}
 module.exports.render._withStripped = true
 if (false) {
   module.hot.accept()
   if (module.hot.data) {
-     require("vue-hot-reload-api").rerender("data-v-6c76d7f7", module.exports)
+     require("vue-hot-reload-api").rerender("data-v-02cda72b", module.exports)
   }
 }
 
@@ -25251,7 +25424,7 @@ var Component = __webpack_require__(2)(
   /* cssModules */
   null
 )
-Component.options.__file = "F:\\wamp\\www\\vue-demo\\js\\components\\cart.vue"
+Component.options.__file = "F:\\wamp\\www\\drinkOrder\\js\\components\\cart.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] cart.vue: functional components are not supported with templates, they should use render functions.")}
 
@@ -25262,9 +25435,9 @@ if (false) {(function () {
   if (!hotAPI.compatible) return
   module.hot.accept()
   if (!module.hot.data) {
-    hotAPI.createRecord("data-v-72234c0c", Component.options)
+    hotAPI.createRecord("data-v-595133a4", Component.options)
   } else {
-    hotAPI.reload("data-v-72234c0c", Component.options)
+    hotAPI.reload("data-v-595133a4", Component.options)
   }
 })()}
 
@@ -25282,13 +25455,13 @@ var content = __webpack_require__(29);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(1)("700ca274", content, false);
+var update = __webpack_require__(1)("747639db", content, false);
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
  if(!content.locals) {
-   module.hot.accept("!!./../../node_modules/css-loader/index.js!./../../node_modules/vue-loader/lib/style-rewriter.js?id=data-v-72234c0c!./../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./cart.vue", function() {
-     var newContent = require("!!./../../node_modules/css-loader/index.js!./../../node_modules/vue-loader/lib/style-rewriter.js?id=data-v-72234c0c!./../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./cart.vue");
+   module.hot.accept("!!./../../node_modules/css-loader/index.js!./../../node_modules/vue-loader/lib/style-rewriter.js?id=data-v-595133a4!./../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./cart.vue", function() {
+     var newContent = require("!!./../../node_modules/css-loader/index.js!./../../node_modules/vue-loader/lib/style-rewriter.js?id=data-v-595133a4!./../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./cart.vue");
      if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
      update(newContent);
    });
@@ -25306,7 +25479,7 @@ exports = module.exports = __webpack_require__(0)();
 
 
 // module
-exports.push([module.i, "\n#pay{\n\t\ttext-align:center;\n\t\tbackground-color:#D8232A;\n}\n#cart .cart-title{\n\t\tbackground-color:#fff;\n\t\tpadding:0.5rem 0;\n\t\ttext-align:center;\n}\n#cart .cart-title h3{\n\t\tdisplay:inline;\n}\n#cart .content{\n\t\tpadding-top:0;\n\t\tpadding-bottom:1rem;\n}\n#cart .content .triangle{\n\t\tposition: relative;\n\t    top: 0rem;\n\t    height: 0.47rem;\n\t    background: #F4F4F4 url(/vue-demo/img/triangle.png);\n\t    /* background-size: 50%; */\n}\n#cart .content .order-content{\n\t\tbackground-color:#fff;\n\t\tborder-top:1px solid #eee;\n\t\tpadding: 0.6rem 0.8rem;\n}\n#cart .content .order-content .con-item{\n\t\tpadding: 0.2rem 0;\n}\n#cart .content .order-content .con-item label{\n\t\tmargin-right:0.2rem;\n}\n#cart .content .order-content .order-spec{\n\t\tcolor:#999;\n}\n#cart .payment{\n\t\t-margin-top: 0.5rem;\n\t\tbackground-color:#fff;\n}\n#cart .payment-tip{\n\t\theight: 1.5rem;\n\t    line-height: 1.5rem;\t\t\n\t\tcolor:#666;\n\t\ttext-align:left;\n\t\tpadding:0.2rem 0.6rem;\n\t\tbackground-color: #F4F4F4;\n}\n#cart .payment-item{\n\t\tdisplay:flex;\n\t\tpadding: 0.4rem;\n}\n#cart .payment-item .left-con{\n\t\tdisplay:flex;\n\t\tflex:7;\n}\n#cart .payment-item .left-con .left-con-img{\n\t\tflex:1;\n\t    height: 2.4rem;\n}\n#cart .payment-item .left-con .left-con-img.zhifubao{\n\t\tbackground: url(/vue-demo/img/zhifubao.png) no-repeat center; \n\t\tbackground-size: 100%;\n}\n#cart .payment-item .left-con .left-con-img.weixin{\n\t\tbackground: url(/vue-demo/img/weixin.png) no-repeat center;\n\t\tbackground-size: 100%;\n}\n#cart .payment-item .left-con .left-con-txt{\n\t\tflex:5;\n\t\tmargin-left:0.4rem;\n}\n#cart .payment-item .left-con .left-con-txt p{\n    \tpadding: 0.1rem;\n}\n#cart .payment-item .left-con .left-con-txt .txt-title{\n\t\tfont-size:0.6rem;\n}\n#cart .payment-item .left-con .left-con-txt .txt-con{\n\t\tfont-size: 0.5rem;\n    \tcolor: #999;\n}\n#cart .payment-item .right-con{\n\t\tflex:1;\t\n\t\theight:2rem;\n}\n#cart .payment-item .right-con.selected{\n\t\tbackground: url(/vue-demo/img/selected.png) no-repeat center;\n\t\tbackground-size: 60%;\n}\n#cart .payment-item .right-con.unselected{\n\t\tbackground: url(/vue-demo/img/unselected.png) no-repeat center;\n\t\tbackground-size: 60%;\n}\n", ""]);
+exports.push([module.i, "\n#pay{\n\t\ttext-align:center;\n\t\tbackground-color:#D8232A;\n}\n#cart .cart-title{\n\t\tbackground-color:#fff;\n\t\tpadding:0.5rem 0;\n\t\ttext-align:center;\n}\n#cart .cart-title h3{\n\t\tdisplay:inline;\n}\n#cart .content{\n\t\tpadding-top:0;\n\t\tpadding-bottom:1rem;\n}\n#cart .content .triangle{\n\t\tposition: relative;\n\t    top: 0rem;\n\t    height: 0.47rem;\n\t    background: #F4F4F4 url(/drinkOrder/img/triangle.png);\n\t    /* background-size: 50%; */\n}\n#cart .content .order-content{\n\t\tbackground-color:#fff;\n\t\tborder-top:1px solid #eee;\n\t\tpadding: 0.6rem 0.8rem;\n}\n#cart .content .order-content .con-item{\n\t\tpadding: 0.2rem 0;\n}\n#cart .content .order-content .con-item label{\n\t\tmargin-right:0.2rem;\n}\n#cart .content .order-content .order-spec{\n\t\tcolor:#999;\n}\n#cart .payment{\n\t\t-margin-top: 0.5rem;\n\t\tbackground-color:#fff;\n}\n#cart .payment-tip{\n\t\theight: 1.5rem;\n\t    line-height: 1.5rem;\t\t\n\t\tcolor:#666;\n\t\ttext-align:left;\n\t\tpadding:0.2rem 0.6rem;\n\t\tbackground-color: #F4F4F4;\n}\n#cart .payment-item{\n\t\tdisplay:flex;\n\t\tpadding: 0.4rem;\n}\n#cart .payment-item .left-con{\n\t\tdisplay:flex;\n\t\tflex:7;\n}\n#cart .payment-item .left-con .left-con-img{\n\t\tflex:1;\n\t    height: 2.4rem;\n}\n#cart .payment-item .left-con .left-con-img.zhifubao{\n\t\tbackground: url(/drinkOrder/img/zhifubao.png) no-repeat center; \n\t\tbackground-size: 100%;\n}\n#cart .payment-item .left-con .left-con-img.weixin{\n\t\tbackground: url(/drinkOrder/img/weixin.png) no-repeat center;\n\t\tbackground-size: 100%;\n}\n#cart .payment-item .left-con .left-con-txt{\n\t\tflex:5; \n\t\tmargin-left:0.4rem;\n}\n#cart .payment-item .left-con .left-con-txt p{\n    \tpadding: 0.1rem;\n}\n#cart .payment-item .left-con .left-con-txt .txt-title{\n\t\tfont-size:0.6rem;\n}\n#cart .payment-item .left-con .left-con-txt .txt-con{\n\t\tfont-size: 0.5rem;\n    \tcolor: #999;\n}\n#cart .payment-item .right-con{\n\t\tflex:1;\t\n\t\theight:2rem;\n}\n#cart .payment-item .right-con.selected{\n\t\tbackground: url(/drinkOrder/img/selected.png) no-repeat center;\n\t\tbackground-size: 60%;\n}\n#cart .payment-item .right-con.unselected{\n\t\tbackground: url(/drinkOrder/img/unselected.png) no-repeat center;\n\t\tbackground-size: 60%;\n}\n@media only screen and (-webkit-min-device-pixel-ratio:3),\n\tonly screen and (min--moz-device-pixel-ratio:3),\n\tonly screen and (-o-min-device-pixel-ratio:3/1),\n\tonly screen and (min-device-pixel-ratio:3){\n#cart .payment-item .left-con .left-con-img.zhifubao{\n\t\t\tbackground: url(/drinkOrder/img/zhifubao@3x.png) no-repeat center; \n\t\t\tbackground-size: 100%;\n}\n#cart .payment-item .left-con .left-con-img.weixin{\n\t\t\tbackground: url(/drinkOrder/img/weixin@3x.png) no-repeat center;\n\t\t\tbackground-size: 100%;\n}\n#cart .payment-item .right-con.selected{\n\t\t\tbackground: url(/drinkOrder/img/selected@3x.png) no-repeat center;\n\t\t\tbackground-size: 60%;\n}\n#cart .payment-item .right-con.unselected{\n\t\t\tbackground: url(/drinkOrder/img/unselected@3x.png) no-repeat center;\n\t\t\tbackground-size: 60%;\n}\n} \n", ""]);
 
 // exports
 
@@ -25511,7 +25684,7 @@ module.exports.render._withStripped = true
 if (false) {
   module.hot.accept()
   if (module.hot.data) {
-     require("vue-hot-reload-api").rerender("data-v-72234c0c", module.exports)
+     require("vue-hot-reload-api").rerender("data-v-595133a4", module.exports)
   }
 }
 
@@ -25533,7 +25706,7 @@ var Component = __webpack_require__(2)(
   /* cssModules */
   null
 )
-Component.options.__file = "F:\\wamp\\www\\vue-demo\\js\\components\\orderList.vue"
+Component.options.__file = "F:\\wamp\\www\\drinkOrder\\js\\components\\orderList.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] orderList.vue: functional components are not supported with templates, they should use render functions.")}
 
@@ -25544,9 +25717,9 @@ if (false) {(function () {
   if (!hotAPI.compatible) return
   module.hot.accept()
   if (!module.hot.data) {
-    hotAPI.createRecord("data-v-1eac3ea2", Component.options)
+    hotAPI.createRecord("data-v-3ec6b2ee", Component.options)
   } else {
-    hotAPI.reload("data-v-1eac3ea2", Component.options)
+    hotAPI.reload("data-v-3ec6b2ee", Component.options)
   }
 })()}
 
@@ -25564,13 +25737,13 @@ var content = __webpack_require__(34);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(1)("11ecf9f2", content, false);
+var update = __webpack_require__(1)("42e2f08b", content, false);
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
  if(!content.locals) {
-   module.hot.accept("!!./../../node_modules/css-loader/index.js!./../../node_modules/vue-loader/lib/style-rewriter.js?id=data-v-1eac3ea2!./../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./orderList.vue", function() {
-     var newContent = require("!!./../../node_modules/css-loader/index.js!./../../node_modules/vue-loader/lib/style-rewriter.js?id=data-v-1eac3ea2!./../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./orderList.vue");
+   module.hot.accept("!!./../../node_modules/css-loader/index.js!./../../node_modules/vue-loader/lib/style-rewriter.js?id=data-v-3ec6b2ee!./../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./orderList.vue", function() {
+     var newContent = require("!!./../../node_modules/css-loader/index.js!./../../node_modules/vue-loader/lib/style-rewriter.js?id=data-v-3ec6b2ee!./../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./orderList.vue");
      if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
      update(newContent);
    });
@@ -25712,7 +25885,7 @@ module.exports.render._withStripped = true
 if (false) {
   module.hot.accept()
   if (module.hot.data) {
-     require("vue-hot-reload-api").rerender("data-v-1eac3ea2", module.exports)
+     require("vue-hot-reload-api").rerender("data-v-3ec6b2ee", module.exports)
   }
 }
 

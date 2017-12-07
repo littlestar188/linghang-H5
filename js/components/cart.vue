@@ -122,7 +122,7 @@
 		position: relative;
 	    top: 0rem;
 	    height: 0.47rem;
-	    background: #F4F4F4 url(/vue-demo/img/triangle.png);
+	    background: #F4F4F4 url(/drinkOrder/img/triangle.png);
 	    /* background-size: 50%; */
 	}
 	#cart .content .order-content{
@@ -164,15 +164,16 @@
 	    height: 2.4rem;	       
 	}
 	#cart .payment-item .left-con .left-con-img.zhifubao{
-		background: url(/vue-demo/img/zhifubao.png) no-repeat center; 
+		background: url(/drinkOrder/img/zhifubao.png) no-repeat center; 
 		background-size: 100%;	   	   
 	}
+	
 	#cart .payment-item .left-con .left-con-img.weixin{
-		background: url(/vue-demo/img/weixin.png) no-repeat center;
+		background: url(/drinkOrder/img/weixin.png) no-repeat center;
 		background-size: 100%;		   
 	}
 	#cart .payment-item .left-con .left-con-txt{
-		flex:5;
+		flex:5; 
 		margin-left:0.4rem;
 	}
 	#cart .payment-item .left-con .left-con-txt p{
@@ -190,11 +191,32 @@
 		height:2rem;		    	
 	}
 	#cart .payment-item .right-con.selected{
-		background: url(/vue-demo/img/selected.png) no-repeat center;
+		background: url(/drinkOrder/img/selected.png) no-repeat center;
 		background-size: 60%;
 	}
 	#cart .payment-item .right-con.unselected{
-		background: url(/vue-demo/img/unselected.png) no-repeat center;
+		background: url(/drinkOrder/img/unselected.png) no-repeat center;
 		background-size: 60%;
 	}
+	@media only screen and (-webkit-min-device-pixel-ratio:3),
+	only screen and (min--moz-device-pixel-ratio:3),
+	only screen and (-o-min-device-pixel-ratio:3/1),
+	only screen and (min-device-pixel-ratio:3){
+		#cart .payment-item .left-con .left-con-img.zhifubao{
+			background: url(/drinkOrder/img/zhifubao@3x.png) no-repeat center; 
+			background-size: 100%;	   	   
+		}
+		#cart .payment-item .left-con .left-con-img.weixin{
+			background: url(/drinkOrder/img/weixin@3x.png) no-repeat center;
+			background-size: 100%;		   
+		}
+		#cart .payment-item .right-con.selected{
+			background: url(/drinkOrder/img/selected@3x.png) no-repeat center;
+			background-size: 60%;
+		}
+		#cart .payment-item .right-con.unselected{
+			background: url(/drinkOrder/img/unselected@3x.png) no-repeat center;
+			background-size: 60%;
+		}
+	} 
 </style>
