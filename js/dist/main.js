@@ -19230,21 +19230,26 @@ var homeIndex = __webpack_require__ (16);
 var result = __webpack_require__ (22);
 var cart = __webpack_require__ (27);
 var order = __webpack_require__ (32);
+var waiting = __webpack_require__ (37);
 
 /*创建路由*/
 var router = new VueRouter({
   routes:[
   	// {path:'/',redirect:"/home"},//重定向
     {path:'/',component:homeIndex},    
-  	{path:'/result',component:result},
-  	{path:'/cart',component:cart},
+  	{name:"router2",path:'/result',component:result},
+  	{name:"router1",path:'/cart',component:cart},
     {path:'/order',component:order},
-    {name:"router1",path:"/cart",component:result}
+    {path:'/waiting',component:waiting}
+    /*{name:"router1",path:"/",component:result}*/
     //{name:"router2",path:"/result",component:result}
   ]
 })
 
 new Vue({
+  // components:{
+  //   "app-header":header
+  // },
   router
 }).$mount('#app');
 
@@ -24772,6 +24777,10 @@ module.exports = function listToStyles (parentId, list) {
                 online:"",
                 asked_false:false,
                 asked_true:false,
+                asked_error:false,
+                asked_error_false:false,
+                asked_used:false,
+                asked_used_false:false,
                 dailyCupsNumber:"",
                 historyCupsNumber:"",
                 drinkListData:"",
@@ -24832,29 +24841,34 @@ module.exports = function listToStyles (parentId, list) {
 			   
 			},
 			onlineJudge:function(){
-				this.$http.get("/capital-controller//external/device/getDeviceOnlineStatus?sn="+this.sn+"&generateCode="+this.deviceUId)
+				var that = this;
+				this.$http.get("/capital-controller/external/device/getDeviceOnlineStatus?sn="+this.sn+"&generateCode="+this.deviceUId)
                     .then(function(response){
 	                    console.log(response.data.data)
-	                    this.online = response.data.online;
-	                    this.lock =  response.data.lock;
-	                    this.error = response.data.error;
-	                    if(!this.online){
+	                    that.online = response.data.data.online;
+	                    that.lock =  response.data.data.lock;
+	                    that.error = response.data.data.error;
+	                    if(that.online == false){
 	                    	alert("该设备处于离线状态，不可操作！");
-	                    	this.asked_false=true;
-	                     	this.isActive = false;
+	                    	that.asked_false=true;
+	                     	that.isActive = false;
 	                     	return;	
 	                    }else{
-	                    	if(this.error){
-	                    		alert("该设备处于离线状态，不可操作！");
-		                    	this.asked_false=true;
-		                     	this.isActive = false;
+	                    	if(that.error == true){
+	                    		alert("该设备处于故障状态，不可操作！");
+		                    	that.asked_error=true;
+		                    	that.asked_error_false=false;
+		                     	that.isActive = false;
 		                     	return;	
 	                    	}else{
-	                    		if(this.lock){
-	                    			alert("该设备处于离线状态，不可操作！");
-			                    	this.asked_false=true;
-			                     	this.isActive = false;
+	                    		if(that.lock == true){
+	                    			alert("该设备处于占用状态，不可操作！");
+			                    	that.asked_used=false;
+			                    	that.asked_used_false = true;
+			                     	that.isActive = false;
 			                     	return;	
+	                    		}else{
+	                    			that.asked_true = true;
 	                    		}
 	                    	}
 	                    };
@@ -24862,49 +24876,103 @@ module.exports = function listToStyles (parentId, list) {
                 });
 			},
 			onlineJudge_ask:function(){
-				
-				this.$http.get("/capital-controller//external/device/getDeviceOnlineStatus?sn="+this.sn+"&generateCode="+this.deviceUId)
+				var that = this;
+				this.$http.get("/capital-controller/external/device/getDeviceOnlineStatus?sn="+this.sn+"&generateCode="+this.deviceUId)
                     .then(function(response){
 	                    console.log(response.data.data)
-	                    this.online = response.data.online;
-	                    this.lock =  response.data.lock;
-	                    this.error = response.data.error;
-	                    if(this.asked_false == false && this.online==false){
-	                    	this.forbid();
-	                    	return;	
-	                    };
-	                    if(this.asked_false == true && this.asked_true == false && this.online==true){
-	                    	if(this.error == true){
-	                    		this.forbid();
-	                    		return;	
-	                    	}else{
-	                    		if(this.lock == true){
-	                    			this.forbid();
-	                    			return;
-	                    		}else{
-	                    			this.allow();
-	                    			return;
-	                    		}
-	                    	};
+	                    that.online = response.data.data.online;
+	                    that.lock =  response.data.data.lock;
+	                    that.error = response.data.data.error; 
+	                    
+	                    if(that.online == true){
+
+	                    	if(that.error == true && that.asked_error == true){
+	                    		return;
+	                    	}
+	                    	if(that.lock == true && that.asked_used_false == true){
+	                    		return;
+	                    	}
+	                    	if(that.error == true && that.asked_error == false){
+	                    		alert('设备故障，不可操作！');
+	                    		
+	                    		that.asked_error = true;
+	                    		that.isActive = false;
+	                    		that.asked_false = true;
+	                    		that.asked_error_false = false;
+	                    		that.asked_true = false;
+	                    		return;
+	                    	}
+
+	                    	if(that.error == false && that.asked_error_false == false && that.asked_error == true){
+	                    		alert('设备正常，可操作！');
+	                    		that.asked_error = false;
+	                    		that.isActive = false;
+	                    		that.asked_false = false;
+	                    		that.asked_error = false;
+	                    		that.asked_error_false = true;
+	                    		that.asked_true = true;
+	                    		that.asked_false = false;
+	                    		return;
+	                    	}
+	                    	
+	                    	if(that.lock == true && that.asked_used_false == false && that.asked_used == false){
+	                    		alert('设备被占用，不可操作！');
+	                    		that.asked_used = false;
+	                    		that.isActive = false;
+	                    		that.asked_used_false = true;
+	                    		that.asked_true = false;
+	                    		return;
+	                    	}
+
+	                    	if(that.lock == false && that.asked_used == false && that.asked_true == false){
+	                    		alert('设备正常，可操作！');
+	                    		that.asked_used = true;
+	                    		that.isActive = true;
+	                    		that.asked_used_false = false;
+	                    		that.asked_true = true;
+	                    		return;
+	                    	}
+	                    	
+	                    	if(that.asked_true == false){
+	                    		alert('设备已上线，可操作！');
+	                    		that.asked_true = true;
+	                    		that.asked_false = false;
+	                    		that.asked_error = false;
+	                    		that.asked_used = false;
+	                    		//that.isActive = true;
+	                    		return;
+	                    	}
+	                    }else{
+	                    	if(that.asked_false == false){
+	                    		alert('设备已离线，不可操作！');
+	                    		that.asked_false = true;
+	                    		that.isActive = false;
+	                    		that.asked_true = false;
+	                    		that.asked_error = false;                    		
+	                    		return;
+	                    	}
+	                    }
 	                                       	
-	                    };                    
+	                                    
                 });
 			},
-			createUID:function(){			
-                this.$http.get("/drinkOrder-controller/api/drinkOrder/generateCode")
+			createUID:function(){	
+				var that = this;		
+                this.$http.get("/drinkOrder-controller/external/drinkOrder/generateCode")
                     .then(function(response){
-                     this.deviceUId = response.data.data;
-                     this.setStorage("generateCode",response.data.data);
-                     this.judgeStorage("generateCode");                     
+                     that.deviceUId = response.data.data;
+                     that.setStorage("generateCode",response.data.data);
+                     that.judgeStorage("generateCode");                     
                 });
             },
             getCupNumer:function(){
-            	this.$http.get("/drinkOrder-controller/api/drinkOrder/getDrinksOrdersNumberBySN?deviceSN="+this.sn
+            	var that = this;
+            	this.$http.get("/drinkOrder-controller/external/drinkOrder/getDrinksOrdersNumberBySN?deviceSN="+this.sn
                 ).then(function(response){
                    //console.log(response.data);
                    if(response.data.success == true){
-                   		this.dailyCupsNumber = response.data.data.daily;
-                   		this.historyCupsNumber =  response.data.data.total;
+                   		that.dailyCupsNumber = response.data.data.daily;
+                   		that.historyCupsNumber =  response.data.data.total;
                    		//console.log(this.dailyCupsNumber,this.historyCupsNumber)                   		
                    }else{
                    		alert(response.data.msg);
@@ -24914,16 +24982,16 @@ module.exports = function listToStyles (parentId, list) {
              	})
             },			
 			getDataGood:function() {
-			  			   
+			   var that = this;				   
                this.$http.get("/capital-controller/external/device/getDeviceDrinkList?sn="+this.sn
                ).then(function(response){
                    console.log(response.data);
                    if(response.data.success == true){
-                   		this.goods = response.data.data.drinks;
-                   		this.online =  response.data.data.online;
+                   		that.goods = response.data.data.drinks;
+                   		that.online =  response.data.data.online;
                    		//this.setStorage("drinkListData",response.data.data.drinks);
-                  	 	this.goodsHandle(this.goods);
-                   		console.log(this.goods);
+                  	 	that.goodsHandle(that.goods);
+                   		console.log(that.goods);
                    }else{
                    		alert(response.data.msg);
                    		return;
@@ -24952,7 +25020,7 @@ module.exports = function listToStyles (parentId, list) {
                   
 			},
 			choseone:function(obj,drinkObj,index,eq){
-				if(this.online){
+				if(this.online && !this.error && !this.lock){
 					this.listinit=1;
 					//console.log(obj,drinkObj)
 					this.linum=index;
@@ -24965,18 +25033,19 @@ module.exports = function listToStyles (parentId, list) {
 				}			
 			},			
             createOrder:function(isActive){
-            	console.log("createOrder"+this.deviceUId)
+            	console.log("createOrder"+this.deviceUId,this.deviceUId)
+            	var that = this;
                 if(this.online&&isActive){
-	                this.$http.post("/drinkOrder-controller/api/drinkOrder/order",{},{headers:{'Content-Type': 'application/x-www-form-urlencoded'}, params:{
-						"sn":this.sn,
-						"uid":this.deviceUId,
-						"drinkId":this.drinkId,
-						"drinkCode":this.drinkCode}}
+	                this.$http.post("/drinkOrder-controller/external/drinkOrder/order",{},{headers:{'Content-Type': 'application/x-www-form-urlencoded'}, params:{
+						"sn":that.sn,
+						"uid":that.deviceUId,
+						"drinkId":that.drinkId,
+						"drinkCode":that.drinkCode}}
 					
 					).then(function(response){
 						console.log(response.data.data)
 						var orderOne = response.data.data;
-	                    this.$router.push({
+	                    that.$router.push({
 	                    	name:'router1',
 	                    	params:{
 		                    	deviceUId:orderOne.uId,
@@ -24984,8 +25053,13 @@ module.exports = function listToStyles (parentId, list) {
 		                    	drinkId:orderOne.drinkId,
 		                    	drinkCode:orderOne.drinkCode,
 		                    	drinkName:orderOne.drinkName,
-		                    	//drinkCup:orderOne.drinkCup,
+		                    	payOrderNo:orderOne.payOrderNo,
+		                    	orderTime:orderOne.orderTime,
+		                    	drinkCup:JSON.parse(orderOne.drinkInfo).name,
 		                    	drinkPrice:orderOne.drinkPrice
+	                    	},
+	                    	query:{
+	                    		sn:that.sn
 	                    	}
 	                    }) ;                  
 	                });	
@@ -25000,12 +25074,12 @@ module.exports = function listToStyles (parentId, list) {
             	this.linum=-1;
     			this.buttonnum=-1;
             },
-            forbid:function(){
+            /*forbid:function(){
             	alert("该设备处于离线状态，不可操作！");
             	this.asked_false = true;
             	this.asked_true = false;
             	this.isActive = false;
-            },
+            },*/
             setStorage:function(name,data,event){
                 var value = typeof(data) == "object" ? JSON.stringify(data):data;
             	console.log('set localStorage----')
@@ -25059,7 +25133,7 @@ module.exports = function listToStyles (parentId, list) {
 		            this.onlineJudge();
 		            this.getDataGood();
             	 	//轮询 判断设备状态
-			    	setInterval(this.onlineJudge_ask,5000);
+			    	//setInterval(this.onlineJudge_ask,5000);
 			    	return;	
 		                         	
                 }else{
@@ -25347,6 +25421,7 @@ module.exports = {
 		ready:function(){
 			this.sn = this.$route.params.sn;
 			this.url = "#/?sn="+this.sn;
+			console.log(this.sn,this.url)
 		},
 		refresh:function(){
 			
@@ -25479,7 +25554,7 @@ exports = module.exports = __webpack_require__(0)();
 
 
 // module
-exports.push([module.i, "\n#pay{\n\t\ttext-align:center;\n\t\tbackground-color:#D8232A;\n}\n#cart .cart-title{\n\t\tbackground-color:#fff;\n\t\tpadding:0.5rem 0;\n\t\ttext-align:center;\n}\n#cart .cart-title h3{\n\t\tdisplay:inline;\n}\n#cart .content{\n\t\tpadding-top:0;\n\t\tpadding-bottom:1rem;\n}\n#cart .content .triangle{\n\t\tposition: relative;\n\t    top: 0rem;\n\t    height: 0.47rem;\n\t    background: #F4F4F4 url(/drinkOrder/img/triangle.png);\n\t    /* background-size: 50%; */\n}\n#cart .content .order-content{\n\t\tbackground-color:#fff;\n\t\tborder-top:1px solid #eee;\n\t\tpadding: 0.6rem 0.8rem;\n}\n#cart .content .order-content .con-item{\n\t\tpadding: 0.2rem 0;\n}\n#cart .content .order-content .con-item label{\n\t\tmargin-right:0.2rem;\n}\n#cart .content .order-content .order-spec{\n\t\tcolor:#999;\n}\n#cart .payment{\n\t\t-margin-top: 0.5rem;\n\t\tbackground-color:#fff;\n}\n#cart .payment-tip{\n\t\theight: 1.5rem;\n\t    line-height: 1.5rem;\t\t\n\t\tcolor:#666;\n\t\ttext-align:left;\n\t\tpadding:0.2rem 0.6rem;\n\t\tbackground-color: #F4F4F4;\n}\n#cart .payment-item{\n\t\tdisplay:flex;\n\t\tpadding: 0.4rem;\n}\n#cart .payment-item .left-con{\n\t\tdisplay:flex;\n\t\tflex:7;\n}\n#cart .payment-item .left-con .left-con-img{\n\t\tflex:1;\n\t    height: 2.4rem;\n}\n#cart .payment-item .left-con .left-con-img.zhifubao{\n\t\tbackground: url(/drinkOrder/img/zhifubao.png) no-repeat center; \n\t\tbackground-size: 100%;\n}\n#cart .payment-item .left-con .left-con-img.weixin{\n\t\tbackground: url(/drinkOrder/img/weixin.png) no-repeat center;\n\t\tbackground-size: 100%;\n}\n#cart .payment-item .left-con .left-con-txt{\n\t\tflex:5; \n\t\tmargin-left:0.4rem;\n}\n#cart .payment-item .left-con .left-con-txt p{\n    \tpadding: 0.1rem;\n}\n#cart .payment-item .left-con .left-con-txt .txt-title{\n\t\tfont-size:0.6rem;\n}\n#cart .payment-item .left-con .left-con-txt .txt-con{\n\t\tfont-size: 0.5rem;\n    \tcolor: #999;\n}\n#cart .payment-item .right-con{\n\t\tflex:1;\t\n\t\theight:2rem;\n}\n#cart .payment-item .right-con.selected{\n\t\tbackground: url(/drinkOrder/img/selected.png) no-repeat center;\n\t\tbackground-size: 60%;\n}\n#cart .payment-item .right-con.unselected{\n\t\tbackground: url(/drinkOrder/img/unselected.png) no-repeat center;\n\t\tbackground-size: 60%;\n}\n@media only screen and (-webkit-min-device-pixel-ratio:3),\n\tonly screen and (min--moz-device-pixel-ratio:3),\n\tonly screen and (-o-min-device-pixel-ratio:3/1),\n\tonly screen and (min-device-pixel-ratio:3){\n#cart .payment-item .left-con .left-con-img.zhifubao{\n\t\t\tbackground: url(/drinkOrder/img/zhifubao@3x.png) no-repeat center; \n\t\t\tbackground-size: 100%;\n}\n#cart .payment-item .left-con .left-con-img.weixin{\n\t\t\tbackground: url(/drinkOrder/img/weixin@3x.png) no-repeat center;\n\t\t\tbackground-size: 100%;\n}\n#cart .payment-item .right-con.selected{\n\t\t\tbackground: url(/drinkOrder/img/selected@3x.png) no-repeat center;\n\t\t\tbackground-size: 60%;\n}\n#cart .payment-item .right-con.unselected{\n\t\t\tbackground: url(/drinkOrder/img/unselected@3x.png) no-repeat center;\n\t\t\tbackground-size: 60%;\n}\n} \n", ""]);
+exports.push([module.i, "\n#pay{\n\t\ttext-align:center;\n\t\tbackground-color:#D8232A;\n}\n#cart .cart-title{\n\t\tbackground-color:#fff;\n\t\tpadding:0.5rem 0;\n\t\ttext-align:center;\n}\n#cart .cart-title h3{\n\t\tdisplay:inline;\n}\n#cart .content{\n\t\tpadding-top:0;\n\t\tpadding-bottom:1rem;\n}\n#cart .content .triangle{\n\t\tposition: relative;\n\t    top: 0rem;\n\t    height: 0.47rem;\n\t    background: #F4F4F4 url(/drinkOrder/img/triangle.png);\n\t    /* background-size: 50%; */\n}\n#cart .content .order-content{\n\t\tbackground-color:#fff;\n\t\tborder-top:1px solid #eee;\n\t\tpadding: 0.6rem 0.8rem;\n}\n#cart .content .order-content .con-item{\n\t\tpadding: 0.2rem 0;\n}\n#cart .content .order-content .con-item label{\n\t\tmargin-right:0.2rem;\n}\n#cart .content .order-content .order-spec{\n\t\tcolor:#999;\n}\n#cart .payment{\n\t\t-margin-top: 0.5rem;\n\t\tbackground-color:#fff;\n}\n#cart .payment-tip{\n\t\theight: 1.5rem;\n\t    line-height: 1.5rem;\t\t\n\t\tcolor:#666;\n\t\ttext-align:left;\n\t\tpadding:0.2rem 0.6rem;\n\t\tbackground-color: #F4F4F4;\n}\n#cart .payment-item{\n\t\tdisplay:flex;\n\t\tpadding: 0.4rem;\n}\n#cart .orderNumber{\n\t\tfont-size:0.55rem;\n}\n#cart .payment-item .left-con{\n\t\tdisplay:flex;\n\t\tflex:7;\n}\n#cart .payment-item .left-con .left-con-img{\n\t\tflex:1;\n\t    height: 2.4rem;\n}\n\t/* #cart .payment-item .left-con .left-con-img.zhifubao{\n\t\tbackground: url(/drinkOrder/img/zhifubao.png) no-repeat center; \n\t\tbackground-size: 100%;\t   \t   \n\t}\n\t\n\t#cart .payment-item .left-con .left-con-img.weixin{\n\t\tbackground: url(/drinkOrder/img/weixin.png) no-repeat center;\n\t\tbackground-size: 100%;\t\t   \n\t} */\n#cart .payment-item .left-con .left-con-txt{\n\t\tflex:5; \n\t\tmargin-left:0.4rem;\n}\n#cart .payment-item .left-con .left-con-txt p{\n    \tpadding: 0.1rem;\n}\n#cart .payment-item .left-con .left-con-txt .txt-title{\n\t\tfont-size:0.6rem;\n}\n#cart .payment-item .left-con .left-con-txt .txt-con{\n\t\tfont-size: 0.5rem;\n    \tcolor: #999;\n}\n#cart .payment-item .right-con{\n\t\tflex:1;\t\n\t\theight:2rem;\n}\n\t/* #cart .payment-item .right-con.selected{\n\t\tbackground: url(/drinkOrder/img/selected.png) no-repeat center;\n\t\tbackground-size: 60%;\n\t}\n\t#cart .payment-item .right-con.unselected{\n\t\tbackground: url(/drinkOrder/img/unselected.png) no-repeat center;\n\t\tbackground-size: 60%;\n\t} */\n@media only screen and (-webkit-min-device-pixel-ratio:2),\n\tonly screen and (min--moz-device-pixel-ratio:2),\n\tonly screen and (-o-min-device-pixel-ratio:2/1),\n\tonly screen and (min-device-pixel-ratio:2){\n#cart .payment-item .left-con .left-con-img.zhifubao{\n\t\t\tbackground: url(/drinkOrder/img/zhifubao.png) no-repeat center; \n\t\t\tbackground-size: 100%;\n}\n#cart .payment-item .left-con .left-con-img.weixin{\n\t\t\tbackground: url(/drinkOrder/img/weixin.png) no-repeat center;\n\t\t\tbackground-size: 100%;\n}\n#cart .payment-item .right-con.selected{\n\t\t\tbackground: url(/drinkOrder/img/selected.png) no-repeat center;\n\t\t\tbackground-size: 50%;\n}\n#cart .payment-item .right-con.unselected{\n\t\t\tbackground: url(/drinkOrder/img/unselected.png) no-repeat center;\n\t\t\tbackground-size: 50%;\n}\n}\n@media only screen and (-webkit-min-device-pixel-ratio:3),\n\tonly screen and (min--moz-device-pixel-ratio:3),\n\tonly screen and (-o-min-device-pixel-ratio:3/1),\n\tonly screen and (min-device-pixel-ratio:3){\n#cart .payment-item .left-con .left-con-img.zhifubao{\n\t\t\tbackground: url(/drinkOrder/img/zhifubao@3x.png) no-repeat center; \n\t\t\tbackground-size: 100%;\n}\n#cart .payment-item .left-con .left-con-img.weixin{\n\t\t\tbackground: url(/drinkOrder/img/weixin@3x.png) no-repeat center;\n\t\t\tbackground-size: 100%;\n}\n#cart .payment-item .right-con.selected{\n\t\t\tbackground: url(/drinkOrder/img/selected@3x.png) no-repeat center;\n\t\t\tbackground-size: 50%;\n}\n#cart .payment-item .right-con.unselected{\n\t\t\tbackground: url(/drinkOrder/img/unselected@3x.png) no-repeat center;\n\t\t\tbackground-size: 50%;\n}\n} \n", ""]);
 
 // exports
 
@@ -25488,6 +25563,14 @@ exports.push([module.i, "\n#pay{\n\t\ttext-align:center;\n\t\tbackground-color:#
 /* 30 */
 /***/ (function(module, exports) {
 
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -25548,8 +25631,11 @@ exports.push([module.i, "\n#pay{\n\t\ttext-align:center;\n\t\tbackground-color:#
 				oneName:"",
 				oneCup:"",
 				onePrice:"",
+				oneOrderNo:"",
+				oneOrderTime:"",
 				deviceUId:"",
-				sn:""	
+				sn:"",
+				payType:10	
 			}
 		},
 
@@ -25559,20 +25645,69 @@ exports.push([module.i, "\n#pay{\n\t\ttext-align:center;\n\t\tbackground-color:#
                 this.deviceUId=this.$route.params.deviceUId;
                 this.sn = this.$route.params.sn;
                 this.oneName = this.$route.params.drinkName;
-               // this.oneCup = "("+this.$route.params.drinkCup+")";
+                this.oneOrderNo = this.$route.params.payOrderNo;
+                this.oneOrderTime=this.$route.params.orderTime;
+                this.oneCup = "("+this.$route.params.drinkCup+")";
                 this.onePrice = parseFloat(this.$route.params.drinkPrice).toFixed(2);
 			},
 			select:function(index){
                 console.log(this.isActive)
 
                 if(this.isActive){
+                	this.payType =10;
                     this.isActive = false;
-
+                    	
                 }else{
+                	this.payType =20;
                     this.isActive = true;
+                    
                 }
+                console.log(this.payType)
+            },
+            payOrder:function(){
+            	var that = this;
+            	this.$http.post("/drinkOrder-controller/external/drinkOrder/payOrder",{},{headers:{'Content-Type': 'application/x-www-form-urlencoded'}, params:{
+							"orderNo":that.oneOrderNo,
+							"body":that.oneName,
+							"payType":that.payType
+							}
+						}).then(function(response){
+						console.log(response.data.data)
 
-            }
+						if(response.data.status==10000){
+			            	var data = response.data.data;
+			            	console.log(data.appId)
+			            		//that.weixinpay(data.appId,data.nonceStr,data.package,data.paySign,data.signType,data.timeStamp);
+			            		
+			            }else{
+			            	alert(response.data.msg);	
+			            }    
+	                });	
+            },
+            weixinpay:function(appId,nonceStr,package,paySign,signType,timeStamp){
+				var that = this;
+				WeixinJSBridge.invoke(
+        		'getBrandWCPayRequest', {
+            	"appId":appId,     //公众号名称，由商户传入     
+            	"timeStamp":timeStamp,         //时间戳，自1970年以来的秒数     
+            	"nonceStr":nonceStr, //随机串     
+            	"package":package,     
+            	"signType":signType,         //微信签名方式：     
+            	"paySign":paySign //微信签名 
+       			 },function(res){     
+           			 if(res.err_msg == "get_brand_wcpay_request:ok" ) {
+           			 	/*this.$router.push({
+	                    	name:'router2',
+	                    	query:{
+	                    		sn:this.sn,
+	                    		opendId:this.openId
+	                    	}
+			            }) */
+			            window.location = "https://linghang-test.yunext.com/drinkOrder/#/waiting?sn="+that.sn+"&openId="+that.openId;
+           			 } // 使用以上方式判断前端返回,微信团队郑重提示：res.err_msg将在用户支付成功后返回    ok，但并不保证它绝对可靠。 
+			    });  
+			
+			}
 
             
             			
@@ -25606,6 +25741,10 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     staticClass: "order-content"
   }, [_c('li', {
     staticClass: "con-item"
+  }, [_c('label', [_vm._v("订单编号:")]), _vm._v(" "), _c('span', {
+    staticClass: "orderNumber"
+  }, [_vm._v(_vm._s(_vm.oneOrderNo))])]), _vm._v(" "), _c('li', {
+    staticClass: "con-item"
   }, [_c('label', [_vm._v("订单名称:")]), _vm._v(" "), _c('span', [_vm._v(_vm._s(_vm.oneName) + " "), _c('i', {
     staticClass: "order-spec"
   }, [_vm._v(_vm._s(_vm.oneCup))])])]), _vm._v(" "), _c('li', {
@@ -25614,7 +25753,9 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     staticClass: "money"
   }, [_c('span', [_c('i', {
     staticClass: "price-flag"
-  }, [_vm._v("￥")]), _vm._v(_vm._s(_vm.onePrice))])])])]), _vm._v(" "), _c('div', {
+  }, [_vm._v("￥")]), _vm._v(_vm._s(_vm.onePrice))])])]), _vm._v(" "), _c('li', {
+    staticClass: "con-item"
+  }, [_c('label', [_vm._v("下单时间:")]), _vm._v(" "), _c('span', [_vm._v(_vm._s(_vm.oneOrderTime))])])]), _vm._v(" "), _c('div', {
     staticClass: "triangle"
   }), _vm._v(" "), _c('div', {
     staticClass: "payment"
@@ -25640,7 +25781,20 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
         _vm.select()
       }
     }
-  })])])])]), _vm._v(" "), _vm._m(3)])
+  })])])])]), _vm._v(" "), _c('div', {
+    attrs: {
+      "id": "pay"
+    },
+    on: {
+      "click": function($event) {
+        _vm.payOrder()
+      }
+    }
+  }, [_c('a', {
+    attrs: {
+      "href": "#/result"
+    }
+  }, [_vm._v("确认支付")])])])
 },staticRenderFns: [function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('header', {
     staticClass: "cart-title"
@@ -25669,16 +25823,6 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
   }, [_vm._v("微信")]), _vm._v(" "), _c('p', {
     staticClass: "txt-con"
   }, [_vm._v("微信安全支付")])])])
-},function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('div', {
-    attrs: {
-      "id": "pay"
-    }
-  }, [_c('a', {
-    attrs: {
-      "href": "#/result"
-    }
-  }, [_vm._v("确认支付")])])
 }]}
 module.exports.render._withStripped = true
 if (false) {
@@ -25761,7 +25905,7 @@ exports = module.exports = __webpack_require__(0)();
 
 
 // module
-exports.push([module.i, "\n#pay{\n\t\ttext-align:center;\n\t\tbackground-color:#D8232A;\n}\n#cart .cart-title{\n\t\tbackground-color:#fff;\n\t\tpadding:0.5rem 0;\n\t\ttext-align:center;\n}\n#cart .cart-title h3{\n\t\tdisplay:inline;\n}\n#cart .content{\n\t\tpadding-top:0;\n\t\tpadding-bottom:1rem;\n}\n#cart .content .triangle{\n\t\tposition: relative;\n\t    top: 0rem;\n\t    height: 0.47rem;\n\t    background: #F4F4F4 url(/vue-demo/img/triangle.png);\n\t    /* background-size: 50%; */\n}\n#cart .content .order-content{\n\t\tbackground-color:#fff;\n\t\tborder-top:1px solid #eee;\n\t\tpadding: 0.6rem 0.8rem;\n}\n#cart .content .order-content .con-item{\n\t\tpadding: 0.2rem 0;\n}\n#cart .content .order-content .con-item label{\n\t\tmargin-right:0.2rem;\n}\n#cart .content .order-content .order-spec{\n\t\tcolor:#999;\n}\n#cart .payment{\n\t\t-margin-top: 0.5rem;\n\t\tbackground-color:#fff;\n}\n#cart .payment-tip{\n\t\theight: 1.5rem;\n\t    line-height: 1.5rem;\t\t\n\t\tcolor:#666;\n\t\ttext-align:left;\n\t\tpadding:0.2rem 0.6rem;\n\t\tbackground-color: #F4F4F4;\n}\n#cart .payment-item{\n\t\tdisplay:flex;\n\t\tpadding: 0.4rem;\n}\n#cart .payment-item .left-con{\n\t\tdisplay:flex;\n\t\tflex:7;\n}\n#cart .payment-item .left-con .left-con-img{\n\t\tflex:1;\n\t    height: 2.4rem;\n}\n#cart .payment-item .left-con .left-con-img.zhifubao{\n\t\tbackground: url(/vue-demo/img/zhifubao.png) no-repeat center; \n\t\tbackground-size: 100%;\n}\n#cart .payment-item .left-con .left-con-img.weixin{\n\t\tbackground: url(/vue-demo/img/weixin.png) no-repeat center;\n\t\tbackground-size: 100%;\n}\n#cart .payment-item .left-con .left-con-txt{\n\t\tflex:5;\n\t\tmargin-left:0.4rem;\n}\n#cart .payment-item .left-con .left-con-txt p{\n    \tpadding: 0.1rem;\n}\n#cart .payment-item .left-con .left-con-txt .txt-title{\n\t\tfont-size:0.6rem;\n}\n#cart .payment-item .left-con .left-con-txt .txt-con{\n\t\tfont-size: 0.5rem;\n    \tcolor: #999;\n}\n#cart .payment-item .right-con{\n\t\tflex:1;\t\n\t\theight:2rem;\n}\n#cart .payment-item .right-con.selected{\n\t\tbackground: url(/vue-demo/img/selected.png) no-repeat center;\n\t\tbackground-size: 60%;\n}\n#cart .payment-item .right-con.unselected{\n\t\tbackground: url(/vue-demo/img/unselected.png) no-repeat center;\n\t\tbackground-size: 60%;\n}\n", ""]);
+exports.push([module.i, "\n.order-tab{\n\tdisplay:flex;\n}\n.order-tab li{\n\tflex:1;\n\tpadding:0.2rem 0;\n\ttext-align:center;\n}\n.order-tab li.active{\n\tbackground-color:#D8232A;\n\tcolor:#fff;\n}\n.order-option-btns{\n\ttext-align:right;\n}\nbutton.option-btn{\n\tborder: none;\n    background-color: #ccc;\t   \n    border-radius: 0.1rem;\n    color:#444;\n}\nbutton.option-btn a{\n\tdisplay: block;\n\tpadding: 0.2rem;\t\t\n\tcolor:#444;\n}\nbutton.option-btn.btn-pay{\n\tborder: 1px solid #D8232A;\n}\nbutton.option-btn.btn-cancel{\n\tborder: 1px solid #ccc;\n}\nbutton.option-btn.btn-pay a{\n\tcolor: #fff;\n\tbackground-color:#D8232A;\n}\n\n", ""]);
 
 // exports
 
@@ -25801,13 +25945,32 @@ exports.push([module.i, "\n#pay{\n\t\ttext-align:center;\n\t\tbackground-color:#
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 	module.exports = {
 		data:function(){
 			return {
 				isActive:true,
 				selectedClass:"selected",
-				unselectedClass:"unselected"
+				unselectedClass:"unselected",
+				tabsParams:["未支付","待支付","已支付"],
+				nowIndex:0
 			}
 		},
 		methods:{
@@ -25822,7 +25985,10 @@ exports.push([module.i, "\n#pay{\n\t\ttext-align:center;\n\t\tbackground-color:#
                     this.isActive = true;
                 }
 
-            }
+            },
+            toggleTabs:function(index){
+            	this.nowIndex=index;
+        	}
 			
 			
 		},
@@ -25845,19 +26011,54 @@ exports.push([module.i, "\n#pay{\n\t\ttext-align:center;\n\t\tbackground-color:#
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _vm._m(0)
-},staticRenderFns: [function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('div', {
     attrs: {
       "id": "cart"
     }
-  }, [_c('header', {
-    staticClass: "cart-title"
-  }, [_c('h3', [_vm._v("支付列表")])]), _vm._v(" "), _c('div', [_c('ul', {
+  }, [_vm._m(0), _vm._v(" "), _c('div', [_c('ul', {
     staticClass: "order-tab"
-  })]), _vm._v(" "), _c('div', {
+  }, _vm._l((_vm.tabsParams), function(item, index) {
+    return _c('li', {
+      class: {
+        active: index == _vm.nowIndex
+      },
+      on: {
+        "click": function($event) {
+          _vm.toggleTabs(index)
+        }
+      }
+    }, [_vm._v(_vm._s(item))])
+  }))]), _vm._v(" "), _c('div', {
+    directives: [{
+      name: "show",
+      rawName: "v-show",
+      value: (_vm.nowIndex === 0),
+      expression: "nowIndex===0"
+    }],
     staticClass: "content"
-  }, [_c('ul', {
+  }, [_vm._m(1)]), _vm._v(" "), _c('div', {
+    directives: [{
+      name: "show",
+      rawName: "v-show",
+      value: (_vm.nowIndex === 1),
+      expression: "nowIndex===1"
+    }],
+    staticClass: "content"
+  }, [_vm._m(2)]), _vm._v(" "), _c('div', {
+    directives: [{
+      name: "show",
+      rawName: "v-show",
+      value: (_vm.nowIndex === 2),
+      expression: "nowIndex===2"
+    }],
+    staticClass: "content"
+  })])
+},staticRenderFns: [function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('header', {
+    staticClass: "cart-title"
+  }, [_c('h3', [_vm._v("支付列表")])])
+},function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('ul', {
     staticClass: "order-content"
   }, [_c('li', {
     staticClass: "con-item"
@@ -25872,20 +26073,211 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
   }, [_vm._v("￥")]), _vm._v("12.00")])])]), _vm._v(" "), _c('li', {
     staticClass: "order-option-btns"
   }, [_c('button', {
-    staticClass: "option-btn"
+    staticClass: "option-btn btn-pay"
   }, [_c('a', {
     attrs: {
-      "href": "#/cart"
+      "href": "#"
     }
   }, [_vm._v("确认支付")])]), _vm._v(" "), _c('button', {
-    staticClass: "option-btn"
-  }, [_vm._v("取消订单")])])])])])
+    staticClass: "option-btn btn-cancel"
+  }, [_c('a', {
+    attrs: {
+      "href": "#"
+    }
+  }, [_vm._v("取消订单")])])])])
+},function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('ul', {
+    staticClass: "order-content"
+  }, [_c('li', {
+    staticClass: "con-item"
+  }, [_c('label', [_vm._v("订单名称:")]), _vm._v(" "), _c('span', [_vm._v("意式浓缩咖啡 "), _c('i', {
+    staticClass: "order-spec"
+  }, [_vm._v("(小杯)")])])]), _vm._v(" "), _c('li', {
+    staticClass: "con-item"
+  }, [_c('label', [_vm._v("订单金额:")]), _vm._v(" "), _c('span', {
+    staticClass: "money"
+  }, [_c('span', [_c('i', {
+    staticClass: "price-flag"
+  }, [_vm._v("￥")]), _vm._v("12.00")])])]), _vm._v(" "), _c('li', {
+    staticClass: "order-option-btns"
+  }, [_c('button', {
+    staticClass: "option-btn btn-pay"
+  }, [_c('a', {
+    attrs: {
+      "href": "#"
+    }
+  }, [_vm._v("确认支付")])]), _vm._v(" "), _c('button', {
+    staticClass: "option-btn btn-cancel"
+  }, [_c('a', {
+    attrs: {
+      "href": "#"
+    }
+  }, [_vm._v("取消订单")])])])])
 }]}
 module.exports.render._withStripped = true
 if (false) {
   module.hot.accept()
   if (module.hot.data) {
      require("vue-hot-reload-api").rerender("data-v-3ec6b2ee", module.exports)
+  }
+}
+
+/***/ }),
+/* 37 */
+/***/ (function(module, exports, __webpack_require__) {
+
+
+/* styles */
+__webpack_require__(38)
+
+var Component = __webpack_require__(2)(
+  /* script */
+  __webpack_require__(40),
+  /* template */
+  __webpack_require__(41),
+  /* scopeId */
+  null,
+  /* cssModules */
+  null
+)
+Component.options.__file = "F:\\wamp\\www\\drinkOrder\\js\\components\\waiting.vue"
+if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
+if (Component.options.functional) {console.error("[vue-loader] waiting.vue: functional components are not supported with templates, they should use render functions.")}
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-d48393a2", Component.options)
+  } else {
+    hotAPI.reload("data-v-d48393a2", Component.options)
+  }
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 38 */
+/***/ (function(module, exports, __webpack_require__) {
+
+// style-loader: Adds some css to the DOM by adding a <style> tag
+
+// load the styles
+var content = __webpack_require__(39);
+if(typeof content === 'string') content = [[module.i, content, '']];
+if(content.locals) module.exports = content.locals;
+// add the styles to the DOM
+var update = __webpack_require__(1)("6531a8ae", content, false);
+// Hot Module Replacement
+if(false) {
+ // When the styles change, update the <style> tags
+ if(!content.locals) {
+   module.hot.accept("!!./../../node_modules/css-loader/index.js!./../../node_modules/vue-loader/lib/style-rewriter.js?id=data-v-d48393a2!./../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./waiting.vue", function() {
+     var newContent = require("!!./../../node_modules/css-loader/index.js!./../../node_modules/vue-loader/lib/style-rewriter.js?id=data-v-d48393a2!./../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./waiting.vue");
+     if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+     update(newContent);
+   });
+ }
+ // When the module is disposed, remove the <style> tags
+ module.hot.dispose(function() { update(); });
+}
+
+/***/ }),
+/* 39 */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(0)();
+// imports
+
+
+// module
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+
+// exports
+
+
+/***/ }),
+/* 40 */
+/***/ (function(module, exports) {
+
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+module.exports = {
+	data:function(){
+		return {				
+			sn:"",
+			url:""
+		}
+	},
+	methods:{			
+		ready:function(){
+			this.sn = this.$route.params.sn;
+			this.url = "#/?sn="+this.sn;
+			console.log(this.sn,this.url)
+		},
+		refresh:function(){
+			
+		}			
+	},
+	created:function(){
+		//在实例创建之后同步调用Ajax
+		this.ready();
+	}
+}
+
+
+
+
+/***/ }),
+/* 41 */
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _vm._m(0)
+},staticRenderFns: [function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('div', {
+    attrs: {
+      "id": "result"
+    }
+  }, [_c('header', {
+    staticClass: "result-title"
+  }, [_c('h3', [_vm._v("等待支付")])]), _vm._v(" "), _c('div', {
+    staticClass: "content"
+  }, [_c('div'), _vm._v(" "), _c('p', {
+    staticClass: "success"
+  }), _vm._v(" "), _c('p', {
+    staticClass: "success-tip"
+  }, [_vm._v("等待支付...")])]), _vm._v(" "), _c('div', {
+    attrs: {
+      "id": "version"
+    }
+  }, [_c('p', [_vm._v("领航制造 品质保障")]), _vm._v(" "), _c('p', [_vm._v("Copyright  2001-2017 linghang")])])])
+}]}
+module.exports.render._withStripped = true
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+     require("vue-hot-reload-api").rerender("data-v-d48393a2", module.exports)
   }
 }
 

@@ -79,6 +79,10 @@
                 online:"",
                 asked_false:false,
                 asked_true:false,
+                asked_error:false,
+                asked_error_false:false,
+                asked_used:false,
+                asked_used_false:false,
                 dailyCupsNumber:"",
                 historyCupsNumber:"",
                 drinkListData:"",
@@ -139,29 +143,34 @@
 			   
 			},
 			onlineJudge:function(){
-				this.$http.get("/capital-controller//external/device/getDeviceOnlineStatus?sn="+this.sn+"&generateCode="+this.deviceUId)
+				var that = this;
+				this.$http.get("/capital-controller/external/device/getDeviceOnlineStatus?sn="+this.sn+"&generateCode="+this.deviceUId)
                     .then(function(response){
 	                    console.log(response.data.data)
-	                    this.online = response.data.online;
-	                    this.lock =  response.data.lock;
-	                    this.error = response.data.error;
-	                    if(!this.online){
+	                    that.online = response.data.data.online;
+	                    that.lock =  response.data.data.lock;
+	                    that.error = response.data.data.error;
+	                    if(that.online == false){
 	                    	alert("该设备处于离线状态，不可操作！");
-	                    	this.asked_false=true;
-	                     	this.isActive = false;
+	                    	that.asked_false=true;
+	                     	that.isActive = false;
 	                     	return;	
 	                    }else{
-	                    	if(this.error){
-	                    		alert("该设备处于离线状态，不可操作！");
-		                    	this.asked_false=true;
-		                     	this.isActive = false;
+	                    	if(that.error == true){
+	                    		alert("该设备处于故障状态，不可操作！");
+		                    	that.asked_error=true;
+		                    	that.asked_error_false=false;
+		                     	that.isActive = false;
 		                     	return;	
 	                    	}else{
-	                    		if(this.lock){
-	                    			alert("该设备处于离线状态，不可操作！");
-			                    	this.asked_false=true;
-			                     	this.isActive = false;
+	                    		if(that.lock == true){
+	                    			alert("该设备处于占用状态，不可操作！");
+			                    	that.asked_used=false;
+			                    	that.asked_used_false = true;
+			                     	that.isActive = false;
 			                     	return;	
+	                    		}else{
+	                    			that.asked_true = true;
 	                    		}
 	                    	}
 	                    };
@@ -169,49 +178,103 @@
                 });
 			},
 			onlineJudge_ask:function(){
-				
-				this.$http.get("/capital-controller//external/device/getDeviceOnlineStatus?sn="+this.sn+"&generateCode="+this.deviceUId)
+				var that = this;
+				this.$http.get("/capital-controller/external/device/getDeviceOnlineStatus?sn="+this.sn+"&generateCode="+this.deviceUId)
                     .then(function(response){
 	                    console.log(response.data.data)
-	                    this.online = response.data.online;
-	                    this.lock =  response.data.lock;
-	                    this.error = response.data.error;
-	                    if(this.asked_false == false && this.online==false){
-	                    	this.forbid();
-	                    	return;	
-	                    };
-	                    if(this.asked_false == true && this.asked_true == false && this.online==true){
-	                    	if(this.error == true){
-	                    		this.forbid();
-	                    		return;	
-	                    	}else{
-	                    		if(this.lock == true){
-	                    			this.forbid();
-	                    			return;
-	                    		}else{
-	                    			this.allow();
-	                    			return;
-	                    		}
-	                    	};
+	                    that.online = response.data.data.online;
+	                    that.lock =  response.data.data.lock;
+	                    that.error = response.data.data.error; 
+	                    
+	                    if(that.online == true){
+
+	                    	if(that.error == true && that.asked_error == true){
+	                    		return;
+	                    	}
+	                    	if(that.lock == true && that.asked_used_false == true){
+	                    		return;
+	                    	}
+	                    	if(that.error == true && that.asked_error == false){
+	                    		alert('设备故障，不可操作！');
+	                    		
+	                    		that.asked_error = true;
+	                    		that.isActive = false;
+	                    		that.asked_false = true;
+	                    		that.asked_error_false = false;
+	                    		that.asked_true = false;
+	                    		return;
+	                    	}
+
+	                    	if(that.error == false && that.asked_error_false == false && that.asked_error == true){
+	                    		alert('设备正常，可操作！');
+	                    		that.asked_error = false;
+	                    		that.isActive = false;
+	                    		that.asked_false = false;
+	                    		that.asked_error = false;
+	                    		that.asked_error_false = true;
+	                    		that.asked_true = true;
+	                    		that.asked_false = false;
+	                    		return;
+	                    	}
+	                    	
+	                    	if(that.lock == true && that.asked_used_false == false && that.asked_used == false){
+	                    		alert('设备被占用，不可操作！');
+	                    		that.asked_used = false;
+	                    		that.isActive = false;
+	                    		that.asked_used_false = true;
+	                    		that.asked_true = false;
+	                    		return;
+	                    	}
+
+	                    	if(that.lock == false && that.asked_used == false && that.asked_true == false){
+	                    		alert('设备正常，可操作！');
+	                    		that.asked_used = true;
+	                    		that.isActive = true;
+	                    		that.asked_used_false = false;
+	                    		that.asked_true = true;
+	                    		return;
+	                    	}
+	                    	
+	                    	if(that.asked_true == false){
+	                    		alert('设备已上线，可操作！');
+	                    		that.asked_true = true;
+	                    		that.asked_false = false;
+	                    		that.asked_error = false;
+	                    		that.asked_used = false;
+	                    		//that.isActive = true;
+	                    		return;
+	                    	}
+	                    }else{
+	                    	if(that.asked_false == false){
+	                    		alert('设备已离线，不可操作！');
+	                    		that.asked_false = true;
+	                    		that.isActive = false;
+	                    		that.asked_true = false;
+	                    		that.asked_error = false;                    		
+	                    		return;
+	                    	}
+	                    }
 	                                       	
-	                    };                    
+	                                    
                 });
 			},
-			createUID:function(){			
-                this.$http.get("/drinkOrder-controller/api/drinkOrder/generateCode")
+			createUID:function(){	
+				var that = this;		
+                this.$http.get("/drinkOrder-controller/external/drinkOrder/generateCode")
                     .then(function(response){
-                     this.deviceUId = response.data.data;
-                     this.setStorage("generateCode",response.data.data);
-                     this.judgeStorage("generateCode");                     
+                     that.deviceUId = response.data.data;
+                     that.setStorage("generateCode",response.data.data);
+                     that.judgeStorage("generateCode");                     
                 });
             },
             getCupNumer:function(){
-            	this.$http.get("/drinkOrder-controller/api/drinkOrder/getDrinksOrdersNumberBySN?deviceSN="+this.sn
+            	var that = this;
+            	this.$http.get("/drinkOrder-controller/external/drinkOrder/getDrinksOrdersNumberBySN?deviceSN="+this.sn
                 ).then(function(response){
                    //console.log(response.data);
                    if(response.data.success == true){
-                   		this.dailyCupsNumber = response.data.data.daily;
-                   		this.historyCupsNumber =  response.data.data.total;
+                   		that.dailyCupsNumber = response.data.data.daily;
+                   		that.historyCupsNumber =  response.data.data.total;
                    		//console.log(this.dailyCupsNumber,this.historyCupsNumber)                   		
                    }else{
                    		alert(response.data.msg);
@@ -221,16 +284,16 @@
              	})
             },			
 			getDataGood:function() {
-			  			   
+			   var that = this;				   
                this.$http.get("/capital-controller/external/device/getDeviceDrinkList?sn="+this.sn
                ).then(function(response){
                    console.log(response.data);
                    if(response.data.success == true){
-                   		this.goods = response.data.data.drinks;
-                   		this.online =  response.data.data.online;
+                   		that.goods = response.data.data.drinks;
+                   		that.online =  response.data.data.online;
                    		//this.setStorage("drinkListData",response.data.data.drinks);
-                  	 	this.goodsHandle(this.goods);
-                   		console.log(this.goods);
+                  	 	that.goodsHandle(that.goods);
+                   		console.log(that.goods);
                    }else{
                    		alert(response.data.msg);
                    		return;
@@ -259,7 +322,7 @@
                   
 			},
 			choseone:function(obj,drinkObj,index,eq){
-				if(this.online){
+				if(this.online && !this.error && !this.lock){
 					this.listinit=1;
 					//console.log(obj,drinkObj)
 					this.linum=index;
@@ -272,18 +335,19 @@
 				}			
 			},			
             createOrder:function(isActive){
-            	console.log("createOrder"+this.deviceUId)
+            	console.log("createOrder"+this.deviceUId,this.deviceUId)
+            	var that = this;
                 if(this.online&&isActive){
-	                this.$http.post("/drinkOrder-controller/api/drinkOrder/order",{},{headers:{'Content-Type': 'application/x-www-form-urlencoded'}, params:{
-						"sn":this.sn,
-						"uid":this.deviceUId,
-						"drinkId":this.drinkId,
-						"drinkCode":this.drinkCode}}
+	                this.$http.post("/drinkOrder-controller/external/drinkOrder/order",{},{headers:{'Content-Type': 'application/x-www-form-urlencoded'}, params:{
+						"sn":that.sn,
+						"uid":that.deviceUId,
+						"drinkId":that.drinkId,
+						"drinkCode":that.drinkCode}}
 					
 					).then(function(response){
 						console.log(response.data.data)
 						var orderOne = response.data.data;
-	                    this.$router.push({
+	                    that.$router.push({
 	                    	name:'router1',
 	                    	params:{
 		                    	deviceUId:orderOne.uId,
@@ -291,8 +355,13 @@
 		                    	drinkId:orderOne.drinkId,
 		                    	drinkCode:orderOne.drinkCode,
 		                    	drinkName:orderOne.drinkName,
-		                    	//drinkCup:orderOne.drinkCup,
+		                    	payOrderNo:orderOne.payOrderNo,
+		                    	orderTime:orderOne.orderTime,
+		                    	drinkCup:JSON.parse(orderOne.drinkInfo).name,
 		                    	drinkPrice:orderOne.drinkPrice
+	                    	},
+	                    	query:{
+	                    		sn:that.sn
 	                    	}
 	                    }) ;                  
 	                });	
@@ -307,12 +376,12 @@
             	this.linum=-1;
     			this.buttonnum=-1;
             },
-            forbid:function(){
+            /*forbid:function(){
             	alert("该设备处于离线状态，不可操作！");
             	this.asked_false = true;
             	this.asked_true = false;
             	this.isActive = false;
-            },
+            },*/
             setStorage:function(name,data,event){
                 var value = typeof(data) == "object" ? JSON.stringify(data):data;
             	console.log('set localStorage----')
@@ -366,7 +435,7 @@
 		            this.onlineJudge();
 		            this.getDataGood();
             	 	//轮询 判断设备状态
-			    	setInterval(this.onlineJudge_ask,5000);
+			    	//setInterval(this.onlineJudge_ask,5000);
 			    	return;	
 		                         	
                 }else{

@@ -21,21 +21,26 @@ var homeIndex = require ("../js/components/homeIndex.vue");
 var result = require ("../js/components/result.vue");
 var cart = require ("../js/components/cart.vue");
 var order = require ("../js/components/orderList.vue");
+var waiting = require ("../js/components/waiting.vue");
 
 /*创建路由*/
 var router = new VueRouter({
   routes:[
   	// {path:'/',redirect:"/home"},//重定向
     {path:'/',component:homeIndex},    
-  	{path:'/result',component:result},
-  	{path:'/cart',component:cart},
+  	{name:"router2",path:'/result',component:result},
+  	{name:"router1",path:'/cart',component:cart},
     {path:'/order',component:order},
-    {name:"router1",path:"/cart",component:result}
+    {path:'/waiting',component:waiting}
+    /*{name:"router1",path:"/",component:result}*/
     //{name:"router2",path:"/result",component:result}
   ]
 })
 
 new Vue({
+  // components:{
+  //   "app-header":header
+  // },
   router
 }).$mount('#app');
 

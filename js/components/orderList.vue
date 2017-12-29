@@ -3,10 +3,10 @@
 		<header class="cart-title"><h3>支付列表</h3></header>
 		<div>
 		    <ul class="order-tab">
-
+		    	<li v-for="(item,index) in tabsParams" @click="toggleTabs(index)" :class="{active:index==nowIndex}">{{item}}</li>		    	
 		    </ul>
 		</div>
-		<div class="content">
+		<div class="content" v-show="nowIndex===0">
 			<ul class="order-content">
                 <li class="con-item">
                     <label>订单名称:</label>
@@ -19,13 +19,30 @@
                     </span>
                 </li>
                 <li class="order-option-btns">
-                    <button class="option-btn"><a href="#/cart">确认支付</a></button>
-                    <button class="option-btn">取消订单</button>
+                    <button class="option-btn btn-pay"><a href="#">确认支付</a></button>
+                    <button class="option-btn btn-cancel"><a href="#">取消订单</a></button>
                 </li>
-			</ul>
-
-
+			</ul>		
 		</div>
+		<div class="content" v-show="nowIndex===1">
+			<ul class="order-content">
+                <li class="con-item">
+                    <label>订单名称:</label>
+                    <span>意式浓缩咖啡&nbsp;<i class="order-spec">(小杯)</i></span>
+                </li>
+                <li class="con-item">
+                    <label>订单金额:</label>
+                    <span class="money">
+                        <span><i class="price-flag">￥</i>12.00</span>
+                    </span>
+                </li>
+                <li class="order-option-btns">
+                    <button class="option-btn btn-pay"><a href="#">确认支付</a></button>
+                    <button class="option-btn btn-cancel"><a href="#">取消订单</a></button>
+                </li>
+			</ul>		
+		</div>
+		<div class="content" v-show="nowIndex===2"></div>
 	</div>
 	
 </template>
@@ -35,7 +52,9 @@
 			return {
 				isActive:true,
 				selectedClass:"selected",
-				unselectedClass:"unselected"
+				unselectedClass:"unselected",
+				tabsParams:["未支付","待支付","已支付"],
+				nowIndex:0
 			}
 		},
 		methods:{
@@ -50,7 +69,10 @@
                     this.isActive = true;
                 }
 
-            }
+            },
+            toggleTabs:function(index){
+            	this.nowIndex=index;
+        	}
 			
 			
 		},
@@ -69,99 +91,43 @@
 </script>
 
 <style>
-	#pay{
+	.order-tab{
+		display:flex;
+	}
+	.order-tab li{
+		flex:1;
+		padding:0.2rem 0;
 		text-align:center;
+		
+	}
+	.order-tab li.active{
+		background-color:#D8232A;
+		color:#fff;
+	}
+	
+	.order-option-btns{
+		text-align:right;
+	}
+	button.option-btn{
+		border: none;
+	    background-color: #ccc;	   
+	    border-radius: 0.1rem;
+	    color:#444;
+	}
+	button.option-btn a{
+		display: block;
+		padding: 0.2rem;		
+		color:#444;
+	}
+	button.option-btn.btn-pay{
+		border: 1px solid #D8232A;		
+	}
+	button.option-btn.btn-cancel{
+		border: 1px solid #ccc;
+	}
+	button.option-btn.btn-pay a{
+		color: #fff;
 		background-color:#D8232A;
 	}
-	#cart .cart-title{
-		background-color:#fff;
-		padding:0.5rem 0;
-		text-align:center;
-	}
-	#cart .cart-title h3{
-		display:inline;
-	}
-	#cart .content{
-		padding-top:0;
-		padding-bottom:1rem;
-	}
-	#cart .content .triangle{
-		position: relative;
-	    top: 0rem;
-	    height: 0.47rem;
-	    background: #F4F4F4 url(/vue-demo/img/triangle.png);
-	    /* background-size: 50%; */
-	}
-	#cart .content .order-content{
-		background-color:#fff;
-		border-top:1px solid #eee;
-		padding: 0.6rem 0.8rem;
-	}
-	#cart .content .order-content .con-item{
-		padding: 0.2rem 0;
-	}
-	#cart .content .order-content .con-item label{
-		margin-right:0.2rem;
-	}
-	#cart .content .order-content .order-spec{
-		color:#999;
-	}
-	#cart .payment{
-		-margin-top: 0.5rem;
-		background-color:#fff;
-	}
-	#cart .payment-tip{
-		height: 1.5rem;
-	    line-height: 1.5rem;		
-		color:#666;
-		text-align:left;
-		padding:0.2rem 0.6rem;
-		background-color: #F4F4F4;
-	}
-	#cart .payment-item{
-		display:flex;
-		padding: 0.4rem;
-	}
-	#cart .payment-item .left-con{
-		display:flex;
-		flex:7;
-	}
-	#cart .payment-item .left-con .left-con-img{
-		flex:1;
-	    height: 2.4rem;	       
-	}
-	#cart .payment-item .left-con .left-con-img.zhifubao{
-		background: url(/vue-demo/img/zhifubao.png) no-repeat center; 
-		background-size: 100%;	   	   
-	}
-	#cart .payment-item .left-con .left-con-img.weixin{
-		background: url(/vue-demo/img/weixin.png) no-repeat center;
-		background-size: 100%;		   
-	}
-	#cart .payment-item .left-con .left-con-txt{
-		flex:5;
-		margin-left:0.4rem;
-	}
-	#cart .payment-item .left-con .left-con-txt p{
-    	padding: 0.1rem;
-	}
-	#cart .payment-item .left-con .left-con-txt .txt-title{
-		font-size:0.6rem;
-	}
-	#cart .payment-item .left-con .left-con-txt .txt-con{
-		font-size: 0.5rem;
-    	color: #999;
-	}
-	#cart .payment-item .right-con{
-		flex:1;	
-		height:2rem;		    	
-	}
-	#cart .payment-item .right-con.selected{
-		background: url(/vue-demo/img/selected.png) no-repeat center;
-		background-size: 60%;
-	}
-	#cart .payment-item .right-con.unselected{
-		background: url(/vue-demo/img/unselected.png) no-repeat center;
-		background-size: 60%;
-	}
+	
 </style>

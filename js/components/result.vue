@@ -27,6 +27,7 @@
 			ready:function(){
 				this.sn = this.$route.params.sn;
 				this.url = "#/?sn="+this.sn;
+				console.log(this.sn,this.url)
 			},
 			refresh:function(){
 				
