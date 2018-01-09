@@ -50,7 +50,7 @@
 			</div>	
 		</div>
 		<div id="pay" @click="payOrder()">
-			<a href="#/result">确认支付</a>
+			<a>确认支付</a>
 		</div>	
 	</div>
 	
@@ -69,6 +69,7 @@
 				oneOrderNo:"",
 				oneOrderTime:"",
 				deviceUId:"",
+				openId:"",
 				sn:"",
 				payType:10	
 			}
@@ -109,13 +110,14 @@
 						}).then(function(response){
 						console.log(response.data.data)
 
-						if(response.data.status==10000){
+						if(response.data.success==true){
 			            	var data = response.data.data;
 			            	console.log(data.appId)
-			            		//that.weixinpay(data.appId,data.nonceStr,data.package,data.paySign,data.signType,data.timeStamp);
+			            		that.weixinpay(data.appId,data.nonceStr,data.package,data.paySign,data.signType,data.timeStamp);
 			            		
 			            }else{
-			            	alert(response.data.msg);	
+			            	alert(response.data.msg);
+			            	return	
 			            }    
 	                });	
             },
@@ -138,7 +140,7 @@
 	                    		opendId:this.openId
 	                    	}
 			            }) */
-			            window.location = "https://linghang-test.yunext.com/drinkOrder/#/waiting?sn="+that.sn+"&openId="+that.openId;
+			            window.location = "http://linghang-test.yunext.com/drinkOrder/#/result?sn="+that.sn+"&openId="+that.$route.query.openId+"&dirinkOrderNo="+that.oneOrderNo;
            			 } // 使用以上方式判断前端返回,微信团队郑重提示：res.err_msg将在用户支付成功后返回    ok，但并不保证它绝对可靠。 
 			    });  
 			

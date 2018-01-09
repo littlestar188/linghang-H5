@@ -19237,7 +19237,7 @@ var router = new VueRouter({
   routes:[
   	// {path:'/',redirect:"/home"},//重定向
     {path:'/',component:homeIndex},    
-  	{name:"router2",path:'/result',component:result},
+  	{path:'/result',component:result},
   	{name:"router1",path:'/cart',component:cart},
     {path:'/order',component:order},
     {path:'/waiting',component:waiting}
@@ -19247,9 +19247,79 @@ var router = new VueRouter({
 })
 
 new Vue({
+  /*methods:{
+      handleHrefPart:function(){
+        var href = location.href.split("?");
+          var condition = href.slice(1,href.length);
+
+          var cond = condition[0].split("&");
+          console.log(cond)
+
+          var arr = []; 
+          for(var i=0;i<cond.length;i++){
+            var name = cond[i].split("=")[0];
+            var value = cond[i].split("=")[1];
+            arr.push(value)         
+          }
+          return arr; 
+      },
+      decode:function(input){
+           // private property
+           console.log("parent component ----" +input)
+        _keyStr = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=";
+    
+        var output = "";
+          var chr1, chr2, chr3;
+          var enc1, enc2, enc3, enc4;
+          var i = 0;
+          input = input.replace(/[^A-Za-z0-9\+\/\=]/g, "");
+          while (i < input.length) {
+              enc1 = _keyStr.indexOf(input.charAt(i++));
+              enc2 = _keyStr.indexOf(input.charAt(i++));
+              enc3 = _keyStr.indexOf(input.charAt(i++));
+              enc4 = _keyStr.indexOf(input.charAt(i++));
+              chr1 = (enc1 << 2) | (enc2 >> 4);
+              chr2 = ((enc2 & 15) << 4) | (enc3 >> 2);
+              chr3 = ((enc3 & 3) << 6) | enc4;
+              output = output + String.fromCharCode(chr1);
+              if (enc3 != 64) {
+                  output = output + String.fromCharCode(chr2);
+              }
+              if (enc4 != 64) {
+                  output = output + String.fromCharCode(chr3);
+              }
+          }
+          output = this._utf8_decode(output);
+          return output;
+
+      },
+      _utf8_decode:function(utftext){
+        var string = "";
+          var i = 0;
+          var c = c1 = c2 = 0;
+          while ( i < utftext.length ) {
+              c = utftext.charCodeAt(i);
+              if (c < 128) {
+                  string += String.fromCharCode(c);
+                  i++;
+              } else if((c > 191) && (c < 224)) {
+                  c2 = utftext.charCodeAt(i+1);
+                  string += String.fromCharCode(((c & 31) << 6) | (c2 & 63));
+                  i += 2;
+              } else {
+                  c2 = utftext.charCodeAt(i+1);
+                  c3 = utftext.charCodeAt(i+2);
+                  string += String.fromCharCode(((c & 15) << 12) | ((c2 & 63) << 6) | (c3 & 63));
+                  i += 3;
+              }
+          }
+          return string;
+      }
+  },
+  
   // components:{
   //   "app-header":header
-  // },
+  // },*/
   router
 }).$mount('#app');
 
@@ -24774,13 +24844,18 @@ module.exports = function listToStyles (parentId, list) {
                 top:0,
 
                 sn:"",
+                openId:"",
+                encodeOpenId:"",
                 online:"",
+                deviceLock:"",
                 asked_false:false,
                 asked_true:false,
                 asked_error:false,
                 asked_error_false:false,
                 asked_used:false,
                 asked_used_false:false,
+                asked_deviceLock:false,
+                asked_deviceLock_false:false,
                 dailyCupsNumber:"",
                 historyCupsNumber:"",
                 drinkListData:"",
@@ -24803,15 +24878,61 @@ module.exports = function listToStyles (parentId, list) {
 
 			}
 		},
-		/*computed:{
-			buttonState:function(index){
-				console.log(index)
-				return {
-					active:false
+		methods:{
+			init:function(){
+				var that =this;
+				var returnFlag = this.handleHref();
+				console.log("init---"+returnFlag,this.sn)
+				if(returnFlag){
+				    this.getCupNumer();
+				    this.judgeStorage("generateCode");
+				}else{
+				    this.$http.get("/capital-controller/external/device/getDeviceDrinkList?sn="+this.sn).then(function(response){
+				      window.location = response.data.data.redirectUrl;
+				      console.log(response.data.data.redirectUrl)
+				      that.getCupNumer();
+				      that.judgeStorage("generateCode");
+				      //this.handleStateRouter(response.data.status);
+				    })
+				    
 				}
-			}
-		},*/
-		methods:{			
+			},
+			handleHref:function(){
+		    
+		        var arr = [];
+		        var href = location.href.split("?");      
+		        var condition = href.slice(1,href.length);
+		     
+			    if(condition.length<0){
+			        alert("SN码不存在！");
+			        return;
+			    }else{
+			        this.sn = condition[0].split("=")[1];
+			        
+			    }
+		      
+		        console.log(condition[0].toString().indexOf("&")>0)
+		        if(condition[0].indexOf("&")>0){
+		        cond = condition[0].split("&");           
+		        for(var i=0;i<cond.length;i++){
+		            var name = cond[i].split("=")[0];
+		            var value = cond[i].split("=")[1];
+		            arr.push(value)         
+		        }
+		        this.sn = arr[0];
+		       
+		        this.encodeOpenId = arr[1];
+		        this.openId = this.decode(decodeURIComponent(arr[1]))/*this.decode(decodeURIComponent(arr[1]))*/;
+		        
+		        console.log("index-----"+decodeURIComponent(arr[1]))
+		        
+		        console.log(this.openId)
+		        	return true;
+		        }else{
+		        	return false;                   
+		        }
+		                     
+		  	},			
 			getSN:function(){
 			   var href = location.href.split("?");
 			   var condition = href.slice(1,href.length);
@@ -24848,30 +24969,42 @@ module.exports = function listToStyles (parentId, list) {
 	                    that.online = response.data.data.online;
 	                    that.lock =  response.data.data.lock;
 	                    that.error = response.data.data.error;
-	                    if(that.online == false){
-	                    	alert("该设备处于离线状态，不可操作！");
-	                    	that.asked_false=true;
-	                     	that.isActive = false;
-	                     	return;	
-	                    }else{
-	                    	if(that.error == true){
-	                    		alert("该设备处于故障状态，不可操作！");
-		                    	that.asked_error=true;
-		                    	that.asked_error_false=false;
+	                    that.deviceLock = response.data.data.deviceLock;
+	                    if(that.deviceLock == false){   
+	                    	that.asked_deviceLock = false;
+	                    	that.asked_deviceLock_false = true;                 
+		                    if(that.online == false){
+		                    	alert("该设备处于离线状态，不可操作！");
+		                    	that.asked_false=true;
 		                     	that.isActive = false;
 		                     	return;	
-	                    	}else{
-	                    		if(that.lock == true){
-	                    			alert("该设备处于占用状态，不可操作！");
-			                    	that.asked_used=false;
-			                    	that.asked_used_false = true;
+		                    }else{
+		                    	if(that.error == true){
+		                    		alert("该设备处于故障状态，不可操作！");
+			                    	that.asked_error=true;
+			                    	that.asked_error_false=false;
 			                     	that.isActive = false;
 			                     	return;	
-	                    		}else{
-	                    			that.asked_true = true;
-	                    		}
-	                    	}
-	                    };
+		                    	}else{
+		                    		if(that.lock == true){
+		                    			alert("该设备处于占用状态，不可操作！");
+				                    	that.asked_used=false;
+				                    	that.asked_used_false = true;
+				                     	that.isActive = false;
+				                     	return;	
+		                    		}else{
+		                    			that.asked_true = true;
+		                    		}
+		                    	}
+		                    }
+
+	                    }else{
+	                    	alert("该设备处于锁定状态，不可操作！");
+	                    	that.isActive = false;
+	                    	that.asked_deviceLock = true;
+	                    	that.asked_deviceLock_false = false;
+	                     	return;	
+	                    }
                                         
                 });
 			},
@@ -24882,76 +25015,92 @@ module.exports = function listToStyles (parentId, list) {
 	                    console.log(response.data.data)
 	                    that.online = response.data.data.online;
 	                    that.lock =  response.data.data.lock;
-	                    that.error = response.data.data.error; 
-	                    
-	                    if(that.online == true){
+	                    that.error = response.data.data.error;
+	                    that.deviceLock = response.data.data.deviceLock; 
+	                    if(that.deviceLock == false && that.asked_deviceLock == true){
+	                    	alert('设备解锁，可操作！');
+	                    	that.asked_deviceLock= false;
+	                    	that.asked_deviceLock_false = true;
+	                    	that.isActive = true;
+	                    	return;	
+	                   		
+		                    if(that.online == true){
 
-	                    	if(that.error == true && that.asked_error == true){
-	                    		return;
-	                    	}
-	                    	if(that.lock == true && that.asked_used_false == true){
-	                    		return;
-	                    	}
-	                    	if(that.error == true && that.asked_error == false){
-	                    		alert('设备故障，不可操作！');
-	                    		
-	                    		that.asked_error = true;
-	                    		that.isActive = false;
-	                    		that.asked_false = true;
-	                    		that.asked_error_false = false;
-	                    		that.asked_true = false;
-	                    		return;
-	                    	}
+		                    	if(that.error == true && that.asked_error == true){
+		                    		return;
+		                    	}
+		                    	if(that.lock == true && that.asked_used_false == true){
+		                    		return;
+		                    	}
+		                    	if(that.error == true && that.asked_error == false){
+		                    		alert('设备故障，不可操作！');
+		                    		
+		                    		that.asked_error = true;
+		                    		that.isActive = false;
+		                    		that.asked_false = true;
+		                    		that.asked_error_false = false;
+		                    		that.asked_true = false;
+		                    		return;
+		                    	}
 
-	                    	if(that.error == false && that.asked_error_false == false && that.asked_error == true){
-	                    		alert('设备正常，可操作！');
-	                    		that.asked_error = false;
-	                    		that.isActive = false;
-	                    		that.asked_false = false;
-	                    		that.asked_error = false;
-	                    		that.asked_error_false = true;
-	                    		that.asked_true = true;
-	                    		that.asked_false = false;
-	                    		return;
-	                    	}
-	                    	
-	                    	if(that.lock == true && that.asked_used_false == false && that.asked_used == false){
-	                    		alert('设备被占用，不可操作！');
-	                    		that.asked_used = false;
-	                    		that.isActive = false;
-	                    		that.asked_used_false = true;
-	                    		that.asked_true = false;
-	                    		return;
-	                    	}
+		                    	if(that.error == false && that.asked_error_false == false && that.asked_error == true){
+		                    		alert('设备正常，可操作！');
+		                    		that.asked_error = false;
+		                    		that.isActive = false;
+		                    		that.asked_false = false;
+		                    		that.asked_error = false;
+		                    		that.asked_error_false = true;
+		                    		that.asked_true = true;
+		                    		that.asked_false = false;
+		                    		return;
+		                    	}
+		                    	
+		                    	if(that.lock == true && that.asked_used_false == false && that.asked_used == false){
+		                    		alert('设备被占用，不可操作！');
+		                    		that.asked_used = false;
+		                    		that.isActive = false;
+		                    		that.asked_used_false = true;
+		                    		that.asked_true = false;
+		                    		return;
+		                    	}
 
-	                    	if(that.lock == false && that.asked_used == false && that.asked_true == false){
-	                    		alert('设备正常，可操作！');
-	                    		that.asked_used = true;
-	                    		that.isActive = true;
-	                    		that.asked_used_false = false;
-	                    		that.asked_true = true;
-	                    		return;
-	                    	}
-	                    	
-	                    	if(that.asked_true == false){
-	                    		alert('设备已上线，可操作！');
-	                    		that.asked_true = true;
-	                    		that.asked_false = false;
-	                    		that.asked_error = false;
-	                    		that.asked_used = false;
-	                    		//that.isActive = true;
-	                    		return;
-	                    	}
-	                    }else{
-	                    	if(that.asked_false == false){
-	                    		alert('设备已离线，不可操作！');
-	                    		that.asked_false = true;
-	                    		that.isActive = false;
-	                    		that.asked_true = false;
-	                    		that.asked_error = false;                    		
-	                    		return;
-	                    	}
-	                    }
+		                    	if(that.lock == false && that.asked_used == false && that.asked_true == false){
+		                    		alert('设备正常，可操作！');
+		                    		that.asked_used = true;
+		                    		that.isActive = true;
+		                    		that.asked_used_false = false;
+		                    		that.asked_true = true;
+		                    		return;
+		                    	}
+		                    	
+		                    	if(that.asked_true == false){
+		                    		alert('设备已上线，可操作！');
+		                    		that.asked_true = true;
+		                    		that.asked_false = false;
+		                    		that.asked_error = false;
+		                    		that.asked_used = false;
+		                    		//that.isActive = true;
+		                    		return;
+		                    	}
+		                    }else{
+		                    	if(that.asked_false == false){
+		                    		alert('设备已离线，不可操作！');
+		                    		that.asked_false = true;
+		                    		that.isActive = false;
+		                    		that.asked_true = false;
+		                    		that.asked_error = false;                    		
+		                    		return;
+		                    	}
+		                    }
+	                	}
+
+	                	if(that.deviceLock == true && that.asked_deviceLock_false == true){
+	                		alert("该设备处于锁定状态，不可操作！");
+	                    	that.isActive = false;
+	                    	that.asked_deviceLock = true;
+	                    	that.asked_deviceLock_false = false;
+	                     	return;		
+	                	}
 	                                       	
 	                                    
                 });
@@ -24967,6 +25116,7 @@ module.exports = function listToStyles (parentId, list) {
             },
             getCupNumer:function(){
             	var that = this;
+            	console.log("getCupNumer"+this.sn)
             	this.$http.get("/drinkOrder-controller/external/drinkOrder/getDrinksOrdersNumberBySN?deviceSN="+this.sn
                 ).then(function(response){
                    //console.log(response.data);
@@ -25020,48 +25170,60 @@ module.exports = function listToStyles (parentId, list) {
                   
 			},
 			choseone:function(obj,drinkObj,index,eq){
-				if(this.online && !this.error && !this.lock){
-					this.listinit=1;
-					//console.log(obj,drinkObj)
-					this.linum=index;
-					this.buttonnum=eq;
-					
-					this.totalPriceNum = parseFloat(obj.price).toFixed(2);
-					this.drinkCode = obj.code;
-					this.drinkId = drinkObj.id;
-					this.isActive = true;	
-				}			
+				console.log(!(this.online && !this.error && !this.lock && !this.deviceLock))
+				if(this.deviceLock == false){
+					if(this.online && !this.error && !this.lock ){
+						this.listinit=1;
+						//console.log(obj,drinkObj)
+						this.linum=index;
+						this.buttonnum=eq;
+						
+						this.totalPriceNum = parseFloat(obj.price).toFixed(2);
+						this.drinkCode = obj.code;
+						this.drinkId = drinkObj.id;
+						this.isActive = true;	
+					}		
+				}else{
+					this.isActive = false;
+				}
+						
 			},			
             createOrder:function(isActive){
-            	console.log("createOrder"+this.deviceUId,this.deviceUId)
+            	console.log("createOrder"+this.deviceUId,this.openId)
             	var that = this;
                 if(this.online&&isActive){
 	                this.$http.post("/drinkOrder-controller/external/drinkOrder/order",{},{headers:{'Content-Type': 'application/x-www-form-urlencoded'}, params:{
 						"sn":that.sn,
-						"uid":that.deviceUId,
+						"uid":that.openId/*that.deviceUId*/,
 						"drinkId":that.drinkId,
-						"drinkCode":that.drinkCode}}
-					
-					).then(function(response){
+						"drinkCode":that.drinkCode}
+					}).then(function(response){
 						console.log(response.data.data)
-						var orderOne = response.data.data;
-	                    that.$router.push({
-	                    	name:'router1',
-	                    	params:{
-		                    	deviceUId:orderOne.uId,
-		                    	sn:orderOne.deviceSN,
-		                    	drinkId:orderOne.drinkId,
-		                    	drinkCode:orderOne.drinkCode,
-		                    	drinkName:orderOne.drinkName,
-		                    	payOrderNo:orderOne.payOrderNo,
-		                    	orderTime:orderOne.orderTime,
-		                    	drinkCup:JSON.parse(orderOne.drinkInfo).name,
-		                    	drinkPrice:orderOne.drinkPrice
-	                    	},
-	                    	query:{
-	                    		sn:that.sn
-	                    	}
-	                    }) ;                  
+						if(response.data.success == true){
+							var orderOne = response.data.data;
+		                    that.$router.push({
+		                    	name:'router1',
+		                    	params:{
+			                    	//deviceUId:orderOne.uId,
+			                    	openId:that.openId,
+			                    	sn:orderOne.deviceSN,
+			                    	drinkId:orderOne.drinkId,
+			                    	drinkCode:orderOne.drinkCode,
+			                    	drinkName:orderOne.drinkName,
+			                    	payOrderNo:orderOne.payOrderNo,
+			                    	orderTime:orderOne.orderTime,
+			                    	drinkCup:JSON.parse(orderOne.drinkInfo).name,
+			                    	drinkPrice:orderOne.drinkPrice
+		                    	},
+		                    	query:{
+		                    		sn:that.sn,
+		                    		openId:that.encodeOpenId
+		                    	}
+		                    }) ; 
+	                    }else{
+	                    	alert(response.data.msg);
+                   			return;
+	                    }                 
 	                });	
                 
              	}
@@ -25133,7 +25295,7 @@ module.exports = function listToStyles (parentId, list) {
 		            this.onlineJudge();
 		            this.getDataGood();
             	 	//轮询 判断设备状态
-			    	//setInterval(this.onlineJudge_ask,5000);
+			    	setInterval(this.onlineJudge_ask,5000);
 			    	return;	
 		                         	
                 }else{
@@ -25141,12 +25303,67 @@ module.exports = function listToStyles (parentId, list) {
                 	return;                
                 };
             
-            },	
-			refresh:function(){
-				location.reload();
-			}
+            },
+            decode:function(input){
+                 // private property
+                 console.log("parent component ----" +input)
+              _keyStr = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=";
+            
+              var output = "";
+                var chr1, chr2, chr3;
+                var enc1, enc2, enc3, enc4;
+                var i = 0;
+                input = input.replace(/[^A-Za-z0-9\+\/\=]/g, "");
+                while (i < input.length) {
+                    enc1 = _keyStr.indexOf(input.charAt(i++));
+                    enc2 = _keyStr.indexOf(input.charAt(i++));
+                    enc3 = _keyStr.indexOf(input.charAt(i++));
+                    enc4 = _keyStr.indexOf(input.charAt(i++));
+                    chr1 = (enc1 << 2) | (enc2 >> 4);
+                    chr2 = ((enc2 & 15) << 4) | (enc3 >> 2);
+                    chr3 = ((enc3 & 3) << 6) | enc4;
+                    output = output + String.fromCharCode(chr1);
+                    if (enc3 != 64) {
+                        output = output + String.fromCharCode(chr2);
+                    }
+                    if (enc4 != 64) {
+                        output = output + String.fromCharCode(chr3);
+                    }
+                }
+                output = this._utf8_decode(output);
+                return output;
+
+            },
+            _utf8_decode:function(utftext){
+              var string = "";
+                var i = 0;
+                var c = c1 = c2 = 0;
+                while ( i < utftext.length ) {
+                    c = utftext.charCodeAt(i);
+                    if (c < 128) {
+                        string += String.fromCharCode(c);
+                        i++;
+                    } else if((c > 191) && (c < 224)) {
+                        c2 = utftext.charCodeAt(i+1);
+                        string += String.fromCharCode(((c & 31) << 6) | (c2 & 63));
+                        i += 2;
+                    } else {
+                        c2 = utftext.charCodeAt(i+1);
+                        c3 = utftext.charCodeAt(i+2);
+                        string += String.fromCharCode(((c & 15) << 12) | ((c2 & 63) << 6) | (c3 & 63));
+                        i += 3;
+                    }
+                }
+                return string;
+            },
+            refresh:function(){
+				//location.reload();
+				//this.encodeOpenId = decodeURIComponent(this.$emit("refreshURIcode",decodeURIComponent(this.openId)));
+			},	
+			
 			
 		},
+		
 		filters:{
 			//过滤器 
             onlineFilter:function(value){
@@ -25165,7 +25382,7 @@ module.exports = function listToStyles (parentId, list) {
 			//在实例创建之后同步调用Ajax
 
 			//this.getDataGood();
-			this.getSN();
+			this.init();
 			
 		}
 	}
@@ -25410,30 +25627,85 @@ exports.push([module.i, "\n#result{\n\t\ttext-align:center;\n}\n#result .result-
 //
 //
 
-module.exports = {
-	data:function(){
-		return {				
-			sn:"",
-			url:""
-		}
-	},
-	methods:{			
-		ready:function(){
-			this.sn = this.$route.params.sn;
-			this.url = "#/?sn="+this.sn;
-			console.log(this.sn,this.url)
+	module.exports = {
+		data:function(){
+			return {				
+				sn:"",
+				url:"",
+				openId:"",
+				state:"",
+				drinkOrderNo:"",
+				stateContent:""
+			}
 		},
-		refresh:function(){
-			
-		}			
-	},
-	created:function(){
-		//在实例创建之后同步调用Ajax
-		this.ready();
+		methods:{			
+			ready:function(){
+				//console.log(this.sn,this.url)
+				var href = location.href.split("?");      
+		        var condition = href.slice(1,href.length);
+		       	        
+		        this.sn = condition[0].split("&")[0].split("=")[1];
+		        this.openId = condition[0].split("&")[1].split("=")[1];
+		        this.drinkOrderNo= condition[0].split("&")[2].split("=")[1];
+				this.url = "#/?sn="+this.sn+"&openId="+decodeURIComponent(this.openId)+"&drinkOrderNo="+ this.drinkOrderNo;	
+				console.log(href,condition,this.drinkOrderNo)
+				this.orderState();
+				setInterval(this.order_ask,5000);
+			},
+			orderState:function(){
+				var that = this;
+				this.$http.get("/drinkOrder-controller/external/drinkOrder/getDrinkOrderResult?orderNo="+this.drinkOrderNo)
+                    .then(function(response){
+	                    that.state = response.data.data;/*console.log(response.data.data);*/
+	                    that.stateContent = this.stateFilter(response.data.data);                                       
+                });
+			},
+			order_ask:function(){
+				var that = this;
+				this.$http.get("/drinkOrder-controller/external/drinkOrder/getDrinkOrderResult?orderNo="+this.drinkOrderNo)
+                    .then(function(response){
+	                    that.state = response.data.data;/*console.log(response.data.data);*/
+	                    that.stateContent = this.stateFilter(response.data.data);                                       
+                });
+			},
+			stateFilter:function(value){
+				var filterValue = "";
+				    if(value != "" || value != undefined){
+				        switch(value){
+				            case 1:
+				                filterValue ="订单已创建";
+				                break;
+				            case  2:
+				                filterValue = "订单已支付";
+				                break;
+				            case 3:
+				                filterValue ="正在出杯中...";
+				                break;
+				            case  4:
+				                filterValue = "购买成功";
+				                break;
+				            case 9:
+				                filterValue ="订单已取消";
+				                break;
+				            case  99:
+				                filterValue = "出杯错误";
+				                break;
+
+				        };
+				    };
+				    return filterValue;
+			},
+			refresh:function(){
+				
+			}			
+		},
+		created:function(){
+			//在实例创建之后同步调用Ajax
+			this.ready();
+		}
 	}
-}
-
-
+	
+	
 
 
 /***/ }),
@@ -25452,20 +25724,26 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     attrs: {
       "href": _vm.url
     }
-  }, [_vm._v("完成")])]), _vm._v(" "), _vm._m(0), _vm._v(" "), _vm._m(1)])
-},staticRenderFns: [function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('div', {
+  }, [_vm._v("完成")])]), _vm._v(" "), _c('div', {
     staticClass: "content"
-  }, [_c('div', [_c('img', {
+  }, [_vm._m(0), _vm._v(" "), _c('p', {
+    staticClass: "success"
+  }, [_vm._v(_vm._s(_vm.stateContent))]), _vm._v(" "), _c('p', {
+    directives: [{
+      name: "show",
+      rawName: "v-show",
+      value: (_vm.state == 2),
+      expression: "state==2"
+    }],
+    staticClass: "success-tip"
+  }, [_vm._v("请点击饮料机上您刚购买的饮料，祝您享用愉快!")])]), _vm._v(" "), _vm._m(1)])
+},staticRenderFns: [function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('div', [_c('img', {
     staticClass: "success-img",
     attrs: {
       "src": "/drinkOrder/img/success.png"
     }
-  })]), _vm._v(" "), _c('p', {
-    staticClass: "success"
-  }, [_vm._v("购买成功")]), _vm._v(" "), _c('p', {
-    staticClass: "success-tip"
-  }, [_vm._v("请点击饮料机上您刚购买的饮料，祝您享用愉快!")])])
+  })])
 },function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('div', {
     attrs: {
@@ -25634,6 +25912,7 @@ exports.push([module.i, "\n#pay{\n\t\ttext-align:center;\n\t\tbackground-color:#
 				oneOrderNo:"",
 				oneOrderTime:"",
 				deviceUId:"",
+				openId:"",
 				sn:"",
 				payType:10	
 			}
@@ -25674,13 +25953,14 @@ exports.push([module.i, "\n#pay{\n\t\ttext-align:center;\n\t\tbackground-color:#
 						}).then(function(response){
 						console.log(response.data.data)
 
-						if(response.data.status==10000){
+						if(response.data.success==true){
 			            	var data = response.data.data;
 			            	console.log(data.appId)
-			            		//that.weixinpay(data.appId,data.nonceStr,data.package,data.paySign,data.signType,data.timeStamp);
+			            		that.weixinpay(data.appId,data.nonceStr,data.package,data.paySign,data.signType,data.timeStamp);
 			            		
 			            }else{
-			            	alert(response.data.msg);	
+			            	alert(response.data.msg);
+			            	return	
 			            }    
 	                });	
             },
@@ -25703,7 +25983,7 @@ exports.push([module.i, "\n#pay{\n\t\ttext-align:center;\n\t\tbackground-color:#
 	                    		opendId:this.openId
 	                    	}
 			            }) */
-			            window.location = "https://linghang-test.yunext.com/drinkOrder/#/waiting?sn="+that.sn+"&openId="+that.openId;
+			            window.location = "http://linghang-test.yunext.com/drinkOrder/#/result?sn="+that.sn+"&openId="+that.$route.query.openId+"&dirinkOrderNo="+that.oneOrderNo;
            			 } // 使用以上方式判断前端返回,微信团队郑重提示：res.err_msg将在用户支付成功后返回    ok，但并不保证它绝对可靠。 
 			    });  
 			
@@ -25790,11 +26070,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
         _vm.payOrder()
       }
     }
-  }, [_c('a', {
-    attrs: {
-      "href": "#/result"
-    }
-  }, [_vm._v("确认支付")])])])
+  }, [_c('a', [_vm._v("确认支付")])])])
 },staticRenderFns: [function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('header', {
     staticClass: "cart-title"
@@ -26195,7 +26471,7 @@ exports = module.exports = __webpack_require__(0)();
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -26222,30 +26498,92 @@ exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\
 //
 //
 
-module.exports = {
-	data:function(){
-		return {				
-			sn:"",
-			url:""
-		}
-	},
-	methods:{			
-		ready:function(){
-			this.sn = this.$route.params.sn;
-			this.url = "#/?sn="+this.sn;
-			console.log(this.sn,this.url)
+	module.exports = {
+		data:function(){
+			return {				
+				sn:"",
+				url:"",
+				openId:"",
+				drinkOrderNo:"",
+				stateContent:""
+
+			}
 		},
-		refresh:function(){
-			
-		}			
-	},
-	created:function(){
-		//在实例创建之后同步调用Ajax
-		this.ready();
+		methods:{			
+			ready:function(){
+				// this.sn = this.$route.params.sn;
+				// this.url = "#/?sn="+this.sn;
+				var href = location.href.split("?");      
+		        var condition = href.slice(1,href.length);
+		        this.drinkOrderNo= condition[0].split("&")[2].split("=")[1];	
+				console.log(href,condition,this.drinkOrderNo)
+				this.order_ask();
+				//setInterval(this.order_ask,5000);
+			},
+			order_ask:function(){
+				var that = this;
+				this.$http.get("/drinkOrder-controller/external/drinkOrder/getDrinkOrderResult?orderNo="+this.drinkOrderNo)
+                    .then(function(response){
+	                    console.log(response.data.data);
+	                    that.stateContent = this.stateFilter(response.data.data);
+	                    
+                                        
+                });
+			},
+			stateFilter:function(value){
+				var filterValue = "";
+				    if(value != "" || value != undefined){
+				        switch(value){
+				            case 1:
+				                filterValue ="订单已创建";
+				                break;
+				            case  2:
+				                filterValue = "订单已支付";
+				                break;
+				            case 3:
+				                filterValue ="正在出杯中...";
+				                break;
+				            case  4:
+				                filterValue = "订单已完成";
+				                this.$router.push({
+				                      name:'router2',
+				                      query:{
+				                        sn:this.sn,
+				                        openId:decodeURIComponent(this.encodeOenId),
+				                        drinkOrderNo:this.drinkOrderNo
+				                      }/*,
+				                      params:{
+				                          sn:this.sn,
+				                          status:unifyStatus,
+				                          handleOpenId:this.openId
+				                      }*/
+				                  });
+				                break;
+				            case 9:
+				                filterValue ="订单已取消";
+				                break;
+				            case  99:
+				                filterValue = "出杯错误";
+				                break;
+
+				        };
+				    };
+				    return filterValue;
+			},
+			refresh:function(){
+				
+			}			
+		},
+		reload:function(){
+			//this.getOpenId = decodeURIComponent(this.$route.params.handleOpenId)||decodeURIComponent(this.decode(decodeURIComponent(this.openId)));
+		},
+		created:function(){
+			//在实例创建之后同步调用Ajax
+			//this.ready();
+		}
 	}
-}
-
-
+	
+	
 
 
 /***/ }),
@@ -26253,25 +26591,27 @@ module.exports = {
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _vm._m(0)
-},staticRenderFns: [function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('div', {
     attrs: {
       "id": "result"
     }
-  }, [_c('header', {
-    staticClass: "result-title"
-  }, [_c('h3', [_vm._v("等待支付")])]), _vm._v(" "), _c('div', {
+  }, [_vm._m(0), _vm._v(" "), _c('div', {
     staticClass: "content"
   }, [_c('div'), _vm._v(" "), _c('p', {
     staticClass: "success"
   }), _vm._v(" "), _c('p', {
     staticClass: "success-tip"
-  }, [_vm._v("等待支付...")])]), _vm._v(" "), _c('div', {
+  }, [_vm._v(_vm._s(_vm.stateContent))])]), _vm._v(" "), _vm._m(1)])
+},staticRenderFns: [function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('header', {
+    staticClass: "result-title"
+  }, [_c('h3', [_vm._v("等待出杯")])])
+},function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('div', {
     attrs: {
       "id": "version"
     }
-  }, [_c('p', [_vm._v("领航制造 品质保障")]), _vm._v(" "), _c('p', [_vm._v("Copyright  2001-2017 linghang")])])])
+  }, [_c('p', [_vm._v("领航制造 品质保障")]), _vm._v(" "), _c('p', [_vm._v("Copyright  2001-2017 linghang")])])
 }]}
 module.exports.render._withStripped = true
 if (false) {
